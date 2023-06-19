@@ -42,7 +42,7 @@ class MapelRepository implements MapelInterface {
         $payloadList = array(
           'message' => 'success',
           'code'    => 200,
-          'data'    => $this->mapelModel->whereId($id)->first()
+          'data'    => $data
         );
       } else {
         $payloadList = array(

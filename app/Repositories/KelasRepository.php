@@ -2,17 +2,17 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\JabatanInterface;
-use App\Models\JabatanModel;
+use App\Interfaces\KelasInterface;
+use App\Models\KelasModel;
 use Carbon\Carbon;
 
-class JabatanRepository implements JabatanInterface {
+class KelasRepository implements KelasInterface {
   
-  private JabatanModel $jabatanModel;
+  private KelasModel $kelasModel;
 
-  public function __construct(JabatanModel $jabatanModel)
+  public function __construct(KelasModel $kelasModel)
   {
-    $this->jabatanModel = $jabatanModel;
+    $this->kelasModel = $kelasModel;
   }
 
   public function getAllPayload()
@@ -21,7 +21,7 @@ class JabatanRepository implements JabatanInterface {
       $payloadList = array(
         'message' => 'success',
         'code'    => 200,
-        'data'    => $this->jabatanModel->all()
+        'data'    => $this->kelasModel->joinList()->get()
       );
     } catch (\Throwable $th) {
       $payloadList = array(
@@ -36,7 +36,7 @@ class JabatanRepository implements JabatanInterface {
   public function getPayloadById($id)
   {
     try {
-      $data = $this->jabatanModel->whereId($id)->first();
+      $data = $this->kelasModel->where('kelas.id', $id)->joinList()->first();
 
       if ($data) {
         $payloadList = array(
@@ -73,7 +73,7 @@ class JabatanRepository implements JabatanInterface {
           $payloadList = array(
             'message' => 'success',
             'code'    => 200,
-            'data'    => $this->jabatanModel->whereId($id)->update($payload)
+            'data'    => $this->kelasModel->whereId($id)->update($payload)
           );
         } else {
           $payloadList = $status;
@@ -86,7 +86,7 @@ class JabatanRepository implements JabatanInterface {
         $payloadList = array(
           'message' => 'success',
           'code'    => 200,
-          'data'    => $this->jabatanModel->create($payload)
+          'data'    => $this->kelasModel->create($payload)
         );
       }
       
@@ -109,7 +109,7 @@ class JabatanRepository implements JabatanInterface {
         $payloadList = array(
           'message' => 'success',
           'code'    => 200,
-          'data'    => $this->jabatanModel->whereId($id)->delete()
+          'data'    => $this->kelasModel->whereId($id)->delete()
         );
       } else {
         $payloadList = $data;

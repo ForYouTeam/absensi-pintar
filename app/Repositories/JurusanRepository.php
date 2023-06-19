@@ -42,7 +42,7 @@ class JurusanRepository implements JurusanInterface {
         $payloadList = array(
           'message' => 'success',
           'code'    => 200,
-          'data'    => $this->jurusanModel->whereId($id)->first()
+          'data'    => $data
         );
       } else {
         $payloadList = array(
