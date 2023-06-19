@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
@@ -34,3 +35,11 @@ Route::prefix('v1/kelas')->controller(KelasController::class)->group(function ()
 	Route::post ('/'     , 'upsertPayloadData' );
 	Route::delete  ('/{id}' , 'deletePayloadData' );
 });
+
+Route::prefix('v1/guru')->controller(GuruController::class)->group(function () {
+	Route::get  ('/'     , 'getPayloadData'    );
+	Route::get  ('/{id}' , 'getPayloadDataId'  );
+	Route::post ('/'     , 'upsertPayloadData' );
+	Route::delete  ('/{id}' , 'deletePayloadData' );
+});
+

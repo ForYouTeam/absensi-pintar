@@ -23,4 +23,25 @@ class GuruModel extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function scopejoinList($query)
+    {
+        return $query
+        ->leftJoin('jabatan as model_a', 'guru.jabatan_id', '=', 'model_a.id')
+        ->leftJoin('mapel as model_b', 'guru.mapel_id', '=', 'model_b.id')
+        ->select(
+            'guru.id',
+            'guru.nip',
+            'guru.nama',
+            'guru.sex',
+            'guru.agama',
+            'guru.status',
+            'guru.jabatan_id',
+            'model_a.nama_jabatan as jabatan',
+            'guru.mapel_id',
+            'model_b.nama_mapel as mapel',
+            'guru.created_at',
+            'guru.updated_at',
+        );
+    }
 }
