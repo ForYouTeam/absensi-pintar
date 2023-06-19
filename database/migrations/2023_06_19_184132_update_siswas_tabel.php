@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKelasTable extends Migration
+class UpdateSiswasTabel extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateKelasTable extends Migration
      */
     public function up()
     {
-        Schema::create('kelas', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_kelas');
-            $table->string("level");
-            $table->foreignId('jurusan_id')->constrained('jurusan');
-            $table->timestamps();
+        Schema::table('siswa', function (Blueprint $table) {
+            $table->string('rfid')->after('jurusan_id');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateKelasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelas');
+        Schema::table('siswa', function (Blueprint $table) {
+            //
+        });
     }
 }
