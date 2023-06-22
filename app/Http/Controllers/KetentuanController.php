@@ -14,6 +14,12 @@ class KetentuanController extends Controller
 		$this->ketentuanRepo = $ketentuanRepo;
 	}
 
+	public function getView() 
+	{
+		$data = $this->ketentuanRepo->getAllPayload();
+		return view('Data.Ketentuan')->with('data', $data['data']);
+	}
+
 	public function getPayloadData()
 	{
 		$payload = $this->ketentuanRepo->getAllPayload();
@@ -30,7 +36,7 @@ class KetentuanController extends Controller
 	public function upsertPayloadData(Request $request)
 	{
 		$id = $request->id | null;
-		$payload = $this->ketentuanRepo->upsertPayload($id, $request->all());
+		$payload = $this->ketentuanRepo->upsertPayload($id, $request->except('_token'));
 
 		return response()->json($payload, $payload['code']);
 	}

@@ -14,6 +14,12 @@ class MapelController extends Controller
 		$this->mapelRepo = $mapelRepo;
 	}
 
+	public function getView()
+	{
+		$data = $this->mapelRepo->getAllPayload();
+		return view('Data.Mapel')->with('data', $data['data']);
+	}
+
 	public function getPayloadData()
 	{
 		$payload = $this->mapelRepo->getAllPayload();
@@ -30,7 +36,7 @@ class MapelController extends Controller
 	public function upsertPayloadData(Request $request)
 	{
 		$id = $request->id | null;
-		$payload = $this->mapelRepo->upsertPayload($id, $request->all());
+		$payload = $this->mapelRepo->upsertPayload($id, $request->except('_token'));
 
 		return response()->json($payload, $payload['code']);
 	}

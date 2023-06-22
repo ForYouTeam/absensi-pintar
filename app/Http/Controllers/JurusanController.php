@@ -14,6 +14,13 @@ class JurusanController extends Controller
 		$this->jurusanRepo = $jurusanRepo;
 	}
 
+	public function getView()
+	{
+		
+		$data = $this->jurusanRepo->getAllPayload();
+		return view('Data.Jurusan')->with('data', $data['data']);
+	}
+
 	public function getPayloadData()
 	{
 		$payload = $this->jurusanRepo->getAllPayload();
@@ -30,7 +37,7 @@ class JurusanController extends Controller
 	public function upsertPayloadData(Request $request)
 	{
 		$id = $request->id | null;
-		$payload = $this->jurusanRepo->upsertPayload($id, $request->all());
+		$payload = $this->jurusanRepo->upsertPayload($id, $request->except('_token'));
 
 		return response()->json($payload, $payload['code']);
 	}

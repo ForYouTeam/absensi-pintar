@@ -14,6 +14,12 @@ class JabatanController extends Controller
 		$this->jabatanRepo = $jabatanRepo;
 	}
 
+	public function getView()
+	{
+		$data = $this->jabatanRepo->getAllPayload();
+		return view('Data.Jabatan')->with('data', $data['data']);
+	}
+
 	public function getPayloadData()
 	{
 		$payload = $this->jabatanRepo->getAllPayload();
@@ -30,7 +36,7 @@ class JabatanController extends Controller
 	public function upsertPayloadData(Request $request)
 	{
 		$id = $request->id | null;
-		$payload = $this->jabatanRepo->upsertPayload($id, $request->all());
+		$payload = $this->jabatanRepo->upsertPayload($id, $request->except('_token'));
 
 		return response()->json($payload, $payload['code']);
 	}

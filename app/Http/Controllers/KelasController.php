@@ -2,16 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\JurusanInterface;
 use App\Interfaces\KelasInterface;
+use App\Models\JurusanModel;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
 {
-    private KelasInterface $kelasRepo;
+	private KelasInterface $kelasRepo;
+	private JurusanInterface $jurusanRepo;
 
-	public function __construct(KelasInterface $kelasRepo)
+	public function __construct(KelasInterface $kelasRepo, JurusanInterface $jurusanRepo)
 	{
 		$this->kelasRepo = $kelasRepo;
+		$this->jurusanRepo = $jurusanRepo;
+	}
+
+	public function getView()
+	{
+		$dataJurusan = $this->jurusanRepo->getAllPayload();
+		$data = $this->kelasRepo->getAllPayload();
+		return view('Data.Kelas')->with(['data' => $data['data'], 'dataJurusan' => $dataJurusan['data']]);
 	}
 
 	public function getPayloadData()
@@ -30,7 +41,7 @@ class KelasController extends Controller
 	public function upsertPayloadData(Request $request)
 	{
 		$id = $request->id | null;
-		$payload = $this->kelasRepo->upsertPayload($id, $request->all());
+		$payload = $this->kelasRepo->upsertPayload($id, $request->except('_token'));
 
 		return response()->json($payload, $payload['code']);
 	}

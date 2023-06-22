@@ -8,6 +8,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('skelton.Base');
+        return view('Admin.Dashboard');
     }
 }
