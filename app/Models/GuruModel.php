@@ -37,6 +37,7 @@ class GuruModel extends Model
             'guru.agama',
             'guru.status',
             'guru.jabatan_id',
+            'guru.golongan',
             'model_a.nama_jabatan as jabatan',
             'guru.mapel_id',
             'model_b.nama_mapel as mapel',
