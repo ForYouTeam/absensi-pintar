@@ -128,12 +128,16 @@
                           @endforeach
                     </select>
                 </div>
-                <div class="col-12">
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="modalEditUserFirstName">rfid</label>
+                    <input type="text" id="rfid" name="rfid" class="form-control mb-5" placeholder="Masukan Golongan" />
+                </div>
+                <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserFirstName">Foto</label>
                     <input type="file" id="foto" name="foto" class="form-control mb-5" placeholder="Masukan Golongan" />
                 </div>
                 <div class="col-12 text-center">
-                  <button type="button" id="btn-simpan" class="btn btn-label-primary me-sm-3 me-1">Submit</button>
+                  <button type="button" id="btn-simpan" class="btn btn-primary me-sm-3 me-1">Submit</button>
                   <button type="reset" class="btn btn-label-danger" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                 </div>
               </form>
@@ -178,6 +182,8 @@
                 $('#golongan').val(res.data.golongan);
                 $('#jabatan_id').val(res.data.jabatan_id);
                 $('#mapel_id').val(res.data.mapel_id);
+                $('#rfid').val(res.data.rfid);
+                $('#foto').val(res.data.foto);
             })
         });
 
