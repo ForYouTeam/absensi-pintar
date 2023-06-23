@@ -22,6 +22,7 @@ class SiswaModel extends Model
         'kelas_id',
         'jurusan_id',
         'rfid',
+        'foto',
         'created_at',
         'updated_at'
     ];
@@ -46,6 +47,7 @@ class SiswaModel extends Model
             'siswa.jurusan_id',
             'model_b.nama_jurusan as jurusan',
             'siswa.rfid',
+            'siswa.foto',
             'siswa.created_at',
             'siswa.updated_at',
         );

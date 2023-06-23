@@ -6,10 +6,11 @@ use App\Interfaces\GuruInterface;
 use App\Interfaces\JabatanInterface;
 use App\Interfaces\MapelInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class GuruController extends Controller
 {
-    private GuruInterface $guruRepo;
+	private GuruInterface $guruRepo;
 	private JabatanInterface $jabatanRepo;
 	private MapelInterface $mapelRepo;
 
@@ -20,7 +21,7 @@ class GuruController extends Controller
 		$this->mapelRepo = $mapelRepo;
 	}
 
-	public function getView() 
+	public function getView()
 	{
 		$guru = $this->guruRepo->getAllPayload();
 		$mapel = $this->mapelRepo->getAllPayload();
@@ -48,8 +49,21 @@ class GuruController extends Controller
 
 	public function upsertPayloadData(Request $request)
 	{
+		$fileUpload = $request->file('foto');
+		$nameFile = 'photo' . $request->nip . '.' . $fileUpload->getClientOriginalExtension();
+
+		$data = $request->except('_token');
+		$data['foto'] = $nameFile;
+
 		$id = $request->id | null;
-		$payload = $this->guruRepo->upsertPayload($id, $request->except('_token'));
+		$payload = $this->guruRepo->upsertPayload($id, $data);
+
+		if ($payload) {
+			// return response()->json($request->file('foto')->getClientOriginalExtension());
+
+			$filePath = public_path('storage/guru/');
+			$fileUpload->move($filePath, $nameFile);
+		}
 
 		return response()->json($payload, $payload['code']);
 	}
@@ -57,7 +71,11 @@ class GuruController extends Controller
 
 	public function deletePayloadData($id)
 	{
+		$data = $this->guruRepo->getPayloadById($id);
 		$payload = $this->guruRepo->deletePayload($id);
+		$foto = $data['data']['foto'];
+
+		File::delete(public_path('storage/guru/' . $foto));
 
 		return response()->json($payload, $payload['code']);
 	}

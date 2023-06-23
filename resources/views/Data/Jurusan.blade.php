@@ -142,11 +142,9 @@
                                 title: 'Error',
                                 text: 'Silahkan periksa kemabli inputan anda...!',
                             });
-                            $('#addNewCCModal').modal('hide');
-
-                            $('#addNewCCModal').modal('hide');
+                            // $('#addNewCCModal').modal('hide');
                             if (errorRes.length >= 1) {
-                                $('#nama-alert').html(errorRes.data.nama_jurusan);
+                                $('#nama-alert').html(errorRes.nama_jurusan);
                             }
                         }
                 });

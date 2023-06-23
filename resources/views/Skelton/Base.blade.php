@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Absensi Pintar</title>
     
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
@@ -44,13 +44,11 @@
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
-<div class="app-brand demo ">
+  <div class="app-brand demo ">
       <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform: capitalize">Absen</span>
-    </a>
-
-    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-      <i class="bx bx-chevron-left bx-sm align-middle"></i>
-    </a>
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+          <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
   </div>
 
   <div class="menu-inner-shadow"></div>
