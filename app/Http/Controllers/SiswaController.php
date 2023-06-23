@@ -6,6 +6,7 @@ use App\Interfaces\JurusanInterface;
 use App\Interfaces\KelasInterface;
 use App\Interfaces\SiswaInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class SiswaController extends Controller
 {
@@ -20,7 +21,7 @@ class SiswaController extends Controller
 		$this->jurusanRepo = $jurusanRepo;
 	}
 
-	public function getView() 
+	public function getView()
 	{
 		$siswa = $this->siswaRepo->getAllPayload();
 		$kelas = $this->kelasRepo->getAllPayload();
@@ -48,8 +49,20 @@ class SiswaController extends Controller
 
 	public function upsertPayloadData(Request $request)
 	{
+		$fileUpload = $request->file('foto');
+		$nameFile = 'photo' . $request->nisn . '.' . $fileUpload->getClientOriginalExtension();
+
+		$data = $request->except('_token');
+		$data['foto'] = $nameFile;
+
 		$id = $request->id | null;
-		$payload = $this->siswaRepo->upsertPayload($id, $request->except('_token'));
+		$payload = $this->siswaRepo->upsertPayload($id, $data);
+
+		if ($payload) {
+
+			$filePath = public_path('storage/siswa/');
+			$fileUpload->move($filePath, $nameFile);
+		}
 
 		return response()->json($payload, $payload['code']);
 	}
@@ -57,7 +70,11 @@ class SiswaController extends Controller
 
 	public function deletePayloadData($id)
 	{
+		$data = $this->siswaRepo->getPayloadById($id);
 		$payload = $this->siswaRepo->deletePayload($id);
+		$foto = $data['data']['foto'];
+
+		File::delete(public_path('storage/siswa/' . $foto));
 
 		return response()->json($payload, $payload['code']);
 	}

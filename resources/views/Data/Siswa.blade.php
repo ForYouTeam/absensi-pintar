@@ -24,6 +24,7 @@
                                 <th>kelas</th>
                                 <th>jurusan</th>
                                 <th>rfid</th>
+                                <th>foto</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -43,6 +44,9 @@
                                     <td>{{$item['kelas']}}</td>
                                     <td>{{$item['jurusan']}}</td>
                                     <td>{{$item['rfid']}}</td>
+                                    <td style="width: 10%">
+                                        <img src="{{ asset('storage/siswa/' . $item['foto']) }}" style="width: 70%">
+                                    </td>
                                     <td style="width: 15%">
                                         <button class="editItem btn-sm btn btn-info" data-id="{{$item->id}}">Edit</button>
                                         <button id="btn-hapus" class="btn-sm btn btn-danger" data-id="{{$item->id}}">Hapus</button>
@@ -62,6 +66,7 @@
                                 <th>kelas</th>
                                 <th>jurusan</th>
                                 <th>rfid</th>
+                                <th>foto</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -81,7 +86,7 @@
                 <h3>Form Tambah Data</h3>
                 <p class="text-primary"><b>SISWA</b></p>
               </div>
-              <form id="formData" class="row g-3" onsubmit="return false">
+              <form id="formData" class="row g-3" onsubmit="return false" enctype="multipart/form-data">
                 <input type="hidden" name="id" id="id">
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="modalEditUserFirstName">nisn</label>
@@ -136,12 +141,16 @@
                         @endforeach
                    </select>
                 </div>
-                <div class="col-12 col-md-12">
+                <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserLastName">rfid</label>
                     <input type="text" id="rfid" name="rfid" class="form-control" placeholder="Contoh: 41564724827562" />
-                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="modalEditUserFirstName">Foto</label>
+                    <input type="file" id="foto" name="foto" class="form-control mb-5" placeholder="Format foto" />
+                </div>
                 <div class="col-12 text-center">
-                  <button type="submit" id="btn-simpan" class="btn btn-primary me-sm-3 me-1">Submit</button>
+                  <button type="button" id="btn-simpan" class="btn btn-primary me-sm-3 me-1">Submit</button>
                   <button type="reset" class="btn btn-label-danger" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                 </div>
               </form>
@@ -172,6 +181,7 @@
 
         $('body').on('click', '.editItem', function () {
             var _id = $(this).data('id');
+            let foto = $('#foto').prop('files')[0]
             $.get("http://127.0.0.1:8000/api/v1/siswa/" + _id, function (res) {
                 $('.modal-title').html("Form Edit Data");
                 $('#btn-simpan').val("edit-user");
@@ -188,48 +198,53 @@
                 $('#kelas_id').val(res.data.kelas_id);
                 $('#jurusan_id').val(res.data.jurusan_id);
                 $('#rfid').val(res.data.rfid);
+                $('#foto').val(res.data.foto);
             })
         });
 
         $('#btn-simpan').click(function (e) {
-            console.log($('#formData').serialize());
             e.preventDefault();
             $(this).html('Simpan');
             let submitButton = $(this).prop('disabled')
 
             if(!submitButton){
-                $(this).prop('disabled', true);
+                let foto = $('#foto').prop('files')[0]
+                let data = new FormData($('#formData')[0]);
+
                 $.ajax({
-                    data: $('#formData').serialize(),
                     url: "http://127.0.0.1:8000/api/v1/siswa",
-                    type: "POST",
-                    dataType: 'json',
-                        success: function(result) {
-                            Swal.fire({
-                                title: 'Success',
-                                text: result.message,
-                                icon: 'success',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Oke'
-                            }).then((result) => {
-                                location.reload();
-                            });
-                            $('#modal-data').modal('hide');
-                        },
-                        error: function(result) {
-                            $('#btn-simpan').prop('disabled', false);
-                            let data = result.responseJSON
-                            let errorRes = data.errors
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: 'Silahkan periksa inputan anda..!',
-                            });
-                            $('#modal-data').modal('hide');
-                            if (errorRes.length >= 1) {
-                                $('#nama-alert').html(errorRes.data.nama_jabatan);
-                            }
+                    method: "POST",
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(result) {
+                        Swal.fire({
+                            title: 'Success',
+                            text: result.message,
+                            icon: 'success',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Oke'
+                        }).then((result) => {
+                            location.reload();
+                        });
+                        $('#modal-data').modal('hide');
+                    },
+                    error: function(result) {
+                        // $('#btn-simpan').prop('disabled', false);
+                        let data = result.responseJSON
+                        let errorRes = data.errors
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Silahkan periksa kemabli inputan anda...!',
+
+                        });
+                        $('#modal-data').modal('hide');
+                        if (errorRes.length >= 1) {
+                            $('#nama-alert').html(errorRes.data.nama_jabatan);
                         }
+                    }
                 });
             }
         });
@@ -252,6 +267,7 @@
                         url: url,
                         type: 'delete',
                         success: function(result) {
+                            console.log(result);
                             let data = result.data;
                             Swal.fire({
                                 title: 'Success',

@@ -19,7 +19,9 @@ class GuruModel extends Model
         'status',
         'jabatan_id',
         'golongan',
+        'rfid',
         'mapel_id',
+        'foto',
         'created_at',
         'updated_at'
     ];
@@ -38,6 +40,8 @@ class GuruModel extends Model
             'guru.status',
             'guru.jabatan_id',
             'guru.golongan',
+            'guru.rfid',
+            'guru.foto',
             'model_a.nama_jabatan as jabatan',
             'guru.mapel_id',
             'model_b.nama_mapel as mapel',
