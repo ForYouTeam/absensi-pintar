@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GuruRequest;
 use App\Interfaces\GuruInterface;
 use App\Interfaces\JabatanInterface;
 use App\Interfaces\MapelInterface;
@@ -47,7 +48,7 @@ class GuruController extends Controller
 		return response()->json($payload, $payload['code']);
 	}
 
-	public function upsertPayloadData(Request $request)
+	public function upsertPayloadData(GuruRequest $request)
 	{
 		$fileUpload = $request->file('foto');
 		$nameFile = 'photo' . $request->nip . '.' . $fileUpload->getClientOriginalExtension();
