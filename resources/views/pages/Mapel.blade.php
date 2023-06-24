@@ -1,4 +1,4 @@
-@extends('Skelton.Base')
+@extends('skelton.Base')
 @section('title')
     Mata Pelajaran
 @endsection
@@ -11,7 +11,7 @@
                     <button id="createData" type="button" class="btn btn-secondary" style="float: right">Tambah Data</button>
                 </div>
                 <div class="card-body">
-                    <table id="example" class="table table-bordered" >
+                    <table id="table-data" class="table table-bordered" >
                         <thead>
                             <tr>
                                 <th>N0</th>
@@ -77,7 +77,7 @@
         </div>
     </div>
     {{-- End Modal --}}
-    @section('js')
+    @section('script')
     <script>
         $(document).ready(function() {
             $.ajaxSetup({
@@ -85,7 +85,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('#example').DataTable();
+            $('#table-data').DataTable();
         });
 
         $('#createData').click(function () {

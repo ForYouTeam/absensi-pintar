@@ -1,17 +1,14 @@
-@extends('Skelton.Base')
-@section('title')
-    Jabatan
-@endsection
+@extends('skelton.Base')
 @section('content')
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <h4 class="mt--5" style="float: left">Data Jabatan</h4>
-                    <button id="createData" type="button" class="btn btn-secondary" style="float: right">Tambah Data</button>
+                    <button id="createData" type="button" class="btn btn-primary" style="float: right">Tambah Data</button>
                 </div>
                 <div class="card-body">
-                    <table id="example" class="table table-bordered" >
+                    <table id="table-data" class="table table-bordered" >
                         <thead>
                             <tr>
                                 <th>N0</th>
@@ -52,7 +49,6 @@
         <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
           <div class="modal-content p-3 p-md-5">
             <div class="modal-body">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               <div class="text-center mb-4">
                 <h3 id="#modalheader" class="modal-title"></h3>
                 <p class="text-primary"><b>JABATAN</b></p>
@@ -68,8 +64,8 @@
 									<span class="text-danger small" id="nama-alert"></span>
                 </div>
                 <div class="col-12 text-center">
-                  <button type="submit" id="btn-simpan" class="btn btn-primary me-sm-3 me-1 mt-3">Submit</button>
-                  <button type="reset" class="btn btn-label-danger btn-reset mt-3" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                  <button type="submit" id="btn-simpan" class="btn btn-outline-primary me-sm-3 me-1 mt-3 mx-1">Submit</button>
+                  <button type="reset" class="btn btn-outline-danger btn-reset mt-3 mx-1" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                 </div>
               </form>
             </div>
@@ -78,7 +74,7 @@
     </div>
 {{-- End Modal --}}
 
-    @section('js')
+    @section('script')
     <script>
         let baseUrl
 
@@ -90,7 +86,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('#example').DataTable();
+            $('#table-data').DataTable();
         });
 
 

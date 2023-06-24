@@ -1,4 +1,4 @@
-@extends('Skelton.Base')
+@extends('skelton.Base')
 @section('content')
     <div class="row">
         <div class="col-lg-12">
@@ -8,7 +8,7 @@
                     <button id="createData" type="button" class="btn btn-secondary" style="float: right">Tambah Data</button>
                 </div>
                 <div class="card-body">
-                    <table id="example" class="table table-bordered" >
+                    <table id="table-data" class="table table-bordered" >
                         <thead>
                             <tr>
                                 <th>N0</th>
@@ -42,75 +42,7 @@
             </div>
         </div>
     </div>
-
-    {{-- Modal --}}
-    {{-- <div class="modal fade" id="modal-data" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-          <div class="modal-content p-3 p-md-5">
-            <div class="modal-body">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              <div class="text-center mb-4">
-                <h3 class="modal-title">Form Tambah Data</h3><hr>
-                <p><b>GURU</b></p>
-              </div>
-              <form id="formData" class="row g-3" onsubmit="return false">
-                <input type="hidden" name="id" id="id">
-                <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserFirstName">nip</label>
-                  <input type="text" id="nip" name="nip" class="form-control" placeholder="Masukan Nisn" />
-                </div>
-                <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserLastName">nama</label>
-                  <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukan Nama" />
-                </div>
-                <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserStatus">Jenis Kelamin</label>
-                    <select id="sex" name="sex" class="form-select" aria-label="Default select example">
-                        <option value="Wanita" selected>Perempuan</option>
-                        <option value="Pria" selected>Laki-Laki</option>
-                    </select>
-                </div>
-                <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserFirstName">Agama</label>
-                  <input type="text" id="agama" name="agama" class="form-control" placeholder="Tempat Lahir" />
-                </div>
-                <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserLastName">Status</label>
-                  <input type="text" id="status" name="status" class="form-control" placeholder="Tanggal Lahir" />
-                </div>
-                <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserFirstName">golongan</label>
-                  <input type="text" id="golongan" name="golongan" class="form-control" placeholder="Masukan Alamat" />
-                </div>
-                <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserStatus">Jabatan</label>
-                  <select id="jabatan_id" name="jabatan_id" class="form-select" aria-label="Default select example">
-                        <option value="" selected>-- Pilih --</option>
-                        @foreach ($jabatan as $d)
-                        <option value="{{$d->id}}">{{$d->nama_jabatan}}</option>
-                        @endforeach
-                  </select>
-                </div>
-                <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserStatus">mapel</label>
-                    <select id="mapel_id" name="mapel_id" class="form-select" aria-label="Default select example">
-                          <option value="" selected>-- Pilih --</option>
-                          @foreach ($mapel as $d)
-                          <option value="{{$d->id}}">{{$d->nama_mapel}}</option>
-                          @endforeach
-                    </select>
-                  </div>
-                <div class="col-12 text-center">
-                  <button type="submit" id="btn-simpan" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                  <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-    </div> --}}
-    {{-- End Modal --}}
-    @section('js')
+    @section('script')
     <script>
         $(document).ready(function() {
             $.ajaxSetup({
@@ -118,7 +50,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('#example').DataTable();
+            $('#table-data').DataTable();
         });
 
         $('#createData').click(function () {

@@ -1,17 +1,14 @@
-@extends('Skelton.Base')
-@section('title')
-    Guru
-@endsection
+@extends('skelton.Base')
 @section('content')
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <h4 class="mt--5" style="float: left">Data Guru</h4>
-                    <button id="createData" type="button" class="btn btn-secondary" style="float: right">Tambah Data</button>
+                    <button id="createData" type="button" class="btn btn-primary" style="float: right">Tambah Data</button>
                 </div>
                 <div class="card-body">
-                    <table id="example" class="table table-bordered" >
+                    <table id="table-data" class="table table-bordered" >
                         <thead>
                             <tr>
                                 <th>N0</th>
@@ -26,7 +23,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="td-data">
                             @php
                                 $no = 1;
                             @endphp
@@ -147,16 +144,26 @@
     </div>
 {{-- End Modal --}}
 
-    @section('js')
+    @section('script')
     <script>
+        let BaseUrl
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('#example').DataTable();
+            $('#table-data').DataTable();
+
+            BaseUrl = "{{config('app.url')}}"
         });
+
+        function successAlert() {
+            iziToast.success({
+                title  : "Berhasil",
+                message: "Data berhasil diproses"
+            })
+        }
 
         $('#createData').click(function () {
             $('.modal-title').html("Form Tambah Data");
@@ -168,7 +175,7 @@
 
         $('body').on('click', '.editItem', function () {
             var _id = $(this).data('id');
-            $.get("http://127.0.0.1:8000/api/v1/guru/" + _id, function (res) {
+            $.get( BaseUrl + "/api/v1/guru/" + _id, function (res) {
                 $('.modal-title').html("Form Edit Data");
                 $('#btn-simpan').val("edit-user");
                 $('#modal-data').modal('show');
@@ -205,17 +212,11 @@
                     contentType: false,
                     processData: false,
                     success: function(result) {
-                        console.log(result);
-                        Swal.fire({
-                            title: 'Success',
-                            text: result.message,
-                            icon: 'success',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Oke'
-                        }).then((result) => {
-                            location.reload();
-                        });
                         $('#modal-data').modal('hide');
+                        successAlert()
+                        setTimeout(() => {
+                            location.reload(); 
+                        }, 500);
                     },
                     error: function(result) {
                         // $('#btn-simpan').prop('disabled', false);

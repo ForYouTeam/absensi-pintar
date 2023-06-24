@@ -1,4 +1,4 @@
-@extends('Skelton.Base')
+@extends('skelton.Base')
 @section('title')
     Home
 @endsection
