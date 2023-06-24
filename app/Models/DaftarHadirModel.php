@@ -12,13 +12,18 @@ class DaftarHadirModel extends Model
     protected $table = "daftar_hadir";
     protected $fillable = [
         'id',
+        'gate_id',
         'siswa_id',
-        'guru_id',
-        'mapel_id',
+        'status',
         'tgl',
-        'jam_masuk',
-        'jam_keluar',
+        'start_tap',
+        'end_tap',
         'created_at',
         'updated_at'
     ];
+    
+    public function scopefilterData($query, $params)
+    {
+        
+    }
 }
