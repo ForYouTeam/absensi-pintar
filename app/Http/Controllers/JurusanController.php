@@ -18,7 +18,7 @@ class JurusanController extends Controller
 	{
 		
 		$data = $this->jurusanRepo->getAllPayload();
-		return view('Data.Jurusan')->with('data', $data['data']);
+		return view('pages.Jurusan')->with('data', $data['data']);
 	}
 
 	public function getPayloadData()

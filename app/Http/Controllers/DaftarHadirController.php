@@ -8,6 +8,6 @@ class DaftarHadirController extends Controller
 {
     public function getView() 
     {
-        return view('Data.DaftarHadir');
+        return view('pages.DaftarHadir');
     }
 }

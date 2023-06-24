@@ -27,7 +27,7 @@ class SiswaController extends Controller
 		$kelas = $this->kelasRepo->getAllPayload();
 		$jurusan = $this->jurusanRepo->getAllPayload();
 
-		return view('Data.Siswa')->with([
+		return view('pages.Siswa')->with([
 			'siswa' => $siswa['data'],
 			'kelas' => $kelas['data'],
 			'jurusan' => $jurusan['data']
