@@ -15,12 +15,10 @@ class CreateDaftarHadirsTable extends Migration
     {
         Schema::create('daftar_hadir', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('siswa_id')->constrained('siswa');
-            $table->foreignId('guru_id')->constrained('guru');
-            $table->foreignId('mapel_id')->constrained('mapel');
+            $table->foreignId('siswa_id')->constrained('siswa')->onDelete('cascade');
             $table->date('tgl');
-            $table->time('jam_masuk');
-            $table->time('jam_keluar');
+            $table->time('start_tap');
+            $table->time('end_tap');
             $table->timestamps();
         });
     }
