@@ -135,11 +135,15 @@
                     },
                     error: function(result) {
                         submitButton.prop('disabled', false);
-                        let data = result.responseJSON;
-                        let errorRes = data.errors;
-
-                        if (errorRes.length >= 1) {
-                            $('#nama-alert').html(errorRes.data.nama_jabatan);
+                        if (result.status = 422) {
+                            let data = result.responseJSON
+                            let errorRes = data.errors;
+                            if (errorRes.length >= 1) {
+                                $('#nama-alert').html(errorRes.data.nama_jabatan);
+                            }
+                        } else {
+                            let msg = 'Sedang pemeliharaan server'
+                            iziToast.error(msg)
                         }
                     }
                 });
@@ -176,12 +180,14 @@
                             });
                         },
                         error: function(result) {
-                            let data = result.responseJSON
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: data.response.message,
-                            });
+                            let msg
+                            if (result.responseJSON) {
+                                let data = result.responseJSON
+                                message  = data.message
+                            } else {
+                                msg = 'Sedang pemeliharaan server'
+                            }
+                            iziToast.error(msg)
                         }
                     });
                 }

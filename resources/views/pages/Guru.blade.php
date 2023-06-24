@@ -220,18 +220,16 @@
                     },
                     error: function(result) {
                         // $('#btn-simpan').prop('disabled', false);
-                        let data = result.responseJSON
-                        let errorRes = data.errors
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Silahkan periksa kemabli inputan anda...!',
-
-                        });
-                        $('#modal-data').modal('hide');
-                        if (errorRes.length >= 1) {
-                            $('#nama-alert').html(errorRes.data.nama_jabatan);
+                        if (result.responseJSON) {
+                            let data = result.responseJSON
+                            let errorRes = data.errors
+                            
+                            if (errorRes.length >= 1) {
+                                $('#nama-alert').html(errorRes.data.nama_jabatan);
+                            }
                         }
+
+                        iziToast.error('Periksa kembali inputan')
                     }
                 });
             }
