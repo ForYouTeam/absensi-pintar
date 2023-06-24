@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateGurusTable extends Migration
+class UpdateDaftarHadirsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class UpdateGurusTable extends Migration
      */
     public function up()
     {
-        Schema::table('guru', function (Blueprint $table) {
-            $table->string('foto')->after('mapel_id');
-            $table->string('rfid')->after('foto');
-            $table->foreignId('account')->after('rfid')->nullable()->constrained('users');
+        Schema::table('daftar_hadir', function (Blueprint $table) {
+            $table->foreignId('gate_id')->after('id')->constrained('gate')->onDelete('cascade');
+            $table->string('status')->after('siswa_id');
         });
     }
 
@@ -27,8 +26,8 @@ class UpdateGurusTable extends Migration
      */
     public function down()
     {
-        Schema::table('guru', function (Blueprint $table) {
-            //
+        Schema::table('daftar_hadir', function (Blueprint $table) {
+
         });
     }
 }
