@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JabatanRequest;
 use App\Interfaces\JabatanInterface;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class JabatanController extends Controller
 	public function getView()
 	{
 		$data = $this->jabatanRepo->getAllPayload();
-		return view('Data.Jabatan')->with('data', $data['data']);
+		return view('pages.Jabatan')->with('data', $data['data']);
 	}
 
 	public function getPayloadData()
@@ -33,7 +34,7 @@ class JabatanController extends Controller
 		return response()->json($payload, $payload['code']);
 	}
 
-	public function upsertPayloadData(Request $request)
+	public function upsertPayloadData(JabatanRequest $request)
 	{
 		$id = $request->id | null;
 		$payload = $this->jabatanRepo->upsertPayload($id, $request->except('_token'));

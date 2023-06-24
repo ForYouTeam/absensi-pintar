@@ -17,7 +17,7 @@ class KetentuanController extends Controller
 	public function getView() 
 	{
 		$data = $this->ketentuanRepo->getAllPayload();
-		return view('Data.Ketentuan')->with('data', $data['data']);
+		return view('pages.Ketentuan')->with('data', $data['data']);
 	}
 
 	public function getPayloadData()

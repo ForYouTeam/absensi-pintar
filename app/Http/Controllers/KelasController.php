@@ -22,7 +22,7 @@ class KelasController extends Controller
 	{
 		$dataJurusan = $this->jurusanRepo->getAllPayload();
 		$data = $this->kelasRepo->getAllPayload();
-		return view('Data.Kelas')->with(['data' => $data['data'], 'dataJurusan' => $dataJurusan['data']]);
+		return view('pages.Kelas')->with(['data' => $data['data'], 'dataJurusan' => $dataJurusan['data']]);
 	}
 
 	public function getPayloadData()

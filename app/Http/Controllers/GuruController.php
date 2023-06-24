@@ -27,7 +27,7 @@ class GuruController extends Controller
 		$mapel = $this->mapelRepo->getAllPayload();
 		$jabatan = $this->jabatanRepo->getAllPayload();
 
-		return view('Data.Guru')->with([
+		return view('pages.Guru')->with([
 			'guru' => $guru['data'],
 			'mapel' => $mapel['data'],
 			'jabatan' => $jabatan['data']

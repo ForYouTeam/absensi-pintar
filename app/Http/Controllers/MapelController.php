@@ -17,7 +17,7 @@ class MapelController extends Controller
 	public function getView()
 	{
 		$data = $this->mapelRepo->getAllPayload();
-		return view('Data.Mapel')->with('data', $data['data']);
+		return view('pages.Mapel')->with('data', $data['data']);
 	}
 
 	public function getPayloadData()

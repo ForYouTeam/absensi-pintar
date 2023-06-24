@@ -59,13 +59,13 @@
               </div>
               <form id="formData" class="row g-3" onsubmit="return false">
                 @csrf
-                <div class="col-12">
+                <div class="col-12 my-4">
                   <label class="form-label w-100" for="modalAddCard">Nama Jabatan</label>
-                  <div class="input-group input-group-merge">
+                  <div class="input-group input-group-merge mb-2">
                     <input type="hidden" name="id" id="dataId">
                     <input id="nama_jabatan" name="nama_jabatan" class="nama_jabatan form-control credit-card-mask" type="text" placeholder="Masukan jabatan" required>
-                    <span class="text-danger" id="nama-alert"></span>
                   </div>
+									<span class="text-danger small" id="nama-alert"></span>
                 </div>
                 <div class="col-12 text-center">
                   <button type="submit" id="btn-simpan" class="btn btn-primary me-sm-3 me-1 mt-3">Submit</button>
@@ -80,7 +80,11 @@
 
     @section('js')
     <script>
+        let baseUrl
+
         $(document).ready(function() {
+            baseUrl = "{{ config('app.url') }}"
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -89,8 +93,9 @@
             $('#example').DataTable();
         });
 
+
         $('#createData').click(function () {
-            $('.modal-title').html("Form Tambah Data");
+            $('.modal-title').html("Formulir Tambah Data");
             $('#btn-simpan').val("create-Item");
             $('#id').val('');
             $('#formData').trigger("reset");
@@ -99,13 +104,12 @@
 
         $('body').on('click', '.editItem', function () {
             var _id = $(this).data('id');
-            $.get("http://127.0.0.1:8000/api/v1/jabatan/" + _id, function (res) {
-                $('.modal-title').html("Form Edit Data");
+            $.get(`${baseUrl}/api/v1/jabatan/` + _id, function (res) {
+                $('.modal-title').html("Formulir Edit Data");
                 $('#btn-simpan').val("edit-user");
                 $('#modal-data').modal('show');
                 $('#nama_jabatan').val(res.data.nama_jabatan);
                 $('#dataId').val(res.data.id);
-                console.log(res);
             })
         });
 
@@ -118,7 +122,7 @@
                 submitButton.prop('disabled', true);
                 $.ajax({
                     data: $('#formData').serialize(),
-                    url: "http://127.0.0.1:8000/api/v1/jabatan",
+                    url: `${baseUrl}/api/v1/jabatan/`,
                     type: "POST",
                     dataType: 'json',
                     success: function(result) {
@@ -137,12 +141,7 @@
                         submitButton.prop('disabled', false);
                         let data = result.responseJSON;
                         let errorRes = data.errors;
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Silahkan periksa kemabli inputan anda...!',
-                        });
-                        $('#modal-data').modal('hide');
+
                         if (errorRes.length >= 1) {
                             $('#nama-alert').html(errorRes.data.nama_jabatan);
                         }
@@ -153,7 +152,7 @@
 
         $(document).on('click', '#btn-hapus', function() {
             let _id = $(this).data('id');
-            let url = "http://127.0.0.1:8000/api/v1/jabatan/" + _id;
+            let url = `${baseUrl}/api/v1/jabatan/` + _id;
             Swal.fire({
                 title: 'Anda Yakin?',
                 text: "Data ini mungkin terhubung ke tabel yang lain!",
