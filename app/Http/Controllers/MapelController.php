@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MapelRequest;
 use App\Interfaces\MapelInterface;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class MapelController extends Controller
 		return response()->json($payload, $payload['code']);
 	}
 
-	public function upsertPayloadData(Request $request)
+	public function upsertPayloadData(MapelRequest $request)
 	{
 		$id = $request->id | null;
 		$payload = $this->mapelRepo->upsertPayload($id, $request->except('_token'));

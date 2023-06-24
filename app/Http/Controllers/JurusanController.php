@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JurusanRequest;
 use App\Interfaces\JurusanInterface;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,7 @@ class JurusanController extends Controller
 		return response()->json($payload, $payload['code']);
 	}
 
-	public function upsertPayloadData(Request $request)
+	public function upsertPayloadData(JurusanRequest $request)
 	{
 		$id = $request->id | null;
 		$payload = $this->jurusanRepo->upsertPayload($id, $request->except('_token'));

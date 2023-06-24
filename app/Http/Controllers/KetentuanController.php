@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\KetentuanRequest;
 use App\Interfaces\KetentuanInterface;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class KetentuanController extends Controller
 		return response()->json($payload, $payload['code']);
 	}
 
-	public function upsertPayloadData(Request $request)
+	public function upsertPayloadData(KetentuanRequest $request)
 	{
 		$id = $request->id | null;
 		$payload = $this->ketentuanRepo->upsertPayload($id, $request->except('_token'));
