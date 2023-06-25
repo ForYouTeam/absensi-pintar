@@ -18,9 +18,14 @@ class GateController extends Controller
 
     public function openGate(Request $request)
     {
-        $check = $this->guruRepo->getByRfid($request['rfid']);
-        if ($check['code'] !== 200) {
-            return response()->json($check, $check['code']);
+        $checkGuru = $this->guruRepo->getByRfid($request['rfid']);
+        if ($checkGuru['code'] !== 200) {
+            return response()->json($checkGuru, $checkGuru['code']);
+        }
+
+        $checkGate = $this->gateRepo->checkGate($request['rfid']);
+        if ($checkGate['code'] !== 200) {
+            return response()->json($checkGate, $checkGate['code']);
         }
 
         $gateData = array(
@@ -38,5 +43,11 @@ class GateController extends Controller
     {
         $openGate = $this->gateRepo->closeGateScanner($rfid);
         return response()->json($openGate, $openGate['code']);
+    }
+
+    public function forceCloseGate($rfid)
+    {
+        $gateData = $this->gateRepo->forceClose($rfid);
+        return response()->json($gateData, $gateData['code']);
     }
 }
