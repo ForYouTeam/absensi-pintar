@@ -11,7 +11,6 @@ class CreateGatesTable extends Migration
     {
         Schema::create('gate', function (Blueprint $table) {
             $table->id();
-            $table->string('section');
             $table->string('section')->index();
             $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
             $table->foreignId('guru_id')->constrained('guru')->onDelete('cascade');
