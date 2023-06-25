@@ -14,8 +14,7 @@
 
     <div class="app-content content">
       <div class="content-wrapper">
-        <div class="content-header row">
-        </div>
+        @yield('content-header')
         <div class="content-body"><!-- ICO Token &  Distribution-->
           @yield('content')
         </div>
