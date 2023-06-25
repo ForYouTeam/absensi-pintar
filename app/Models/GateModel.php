@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,6 +29,7 @@ class GateModel extends Model
     {
        return $query
         ->whereRaw("SUBSTRING_INDEX(section, '_', -1) = ?", [$rfid])
+        ->where('tgl', Carbon::now()->format('Y-m-d'))
         ->where('status', 0)
         ->first();
     }

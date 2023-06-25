@@ -40,7 +40,7 @@ class GateRepository implements GateInterface {
 
       $payload['section'] = $date->format('dmYHis') . "_" . $payload['rfid'];
       $payload['open'   ] = $time;
-      $payload['tgl'    ] = $date;
+      $payload['tgl'    ] = $date->format('y-m-d');
       $payload['status' ] = 0;
       $gateData = $this->gateModel->create($payload);
 
@@ -78,6 +78,33 @@ class GateRepository implements GateInterface {
         'data'    => $update
       );
 
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
+    }
+
+    return $payloadList;
+  }
+
+  public function closeAllGate()
+  {
+    try {
+      $date = Carbon::now();
+      $updateGate = array(
+        'status' => 2,
+        'close'  => $date->format('H:i:s')
+      );
+
+      $update = $this->gateModel->where('status', 0)->where('tgl', $date->format('Y-m-d'))->update($updateGate);
+
+      $payloadList = array(
+        'message' => 'success',
+        'code'    => 200,
+        'data'    => $update
+      );
+      
     } catch (\Throwable $th) {
       $payloadList = array(
         'message' => $th->getMessage(),
