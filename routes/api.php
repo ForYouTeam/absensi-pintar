@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\JurusanController;
@@ -53,6 +54,13 @@ Route::prefix('v1/siswa')->controller(SiswaController::class)->group(function ()
 });
 
 Route::prefix('v1/ketentuan')->controller(KetentuanController::class)->group(function () {
+	Route::get    ('/'     , 'getPayloadData'    );
+	Route::get    ('/{id}' , 'getPayloadDataId'  );
+	Route::post   ('/'     , 'upsertPayloadData' );
+	Route::delete ('/{id}' , 'deletePayloadData' );
+});
+
+Route::prefix('v1/akun')->controller(AkunController::class)->group(function () {
 	Route::get    ('/'     , 'getPayloadData'    );
 	Route::get    ('/{id}' , 'getPayloadDataId'  );
 	Route::post   ('/'     , 'upsertPayloadData' );
