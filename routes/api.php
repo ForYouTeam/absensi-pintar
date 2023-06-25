@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DaftarHadirController;
+use App\Http\Controllers\GateController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\JurusanController;
@@ -57,4 +59,15 @@ Route::prefix('v1/ketentuan')->controller(KetentuanController::class)->group(fun
 	Route::get    ('/{id}' , 'getPayloadDataId'  );
 	Route::post   ('/'     , 'upsertPayloadData' );
 	Route::delete ('/{id}' , 'deletePayloadData' );
+});
+
+Route::prefix('v1/gate')->controller(GateController::class)->group(function () {
+	Route::post('/open'              , 'openGate'          );
+	Route::get ('/close/{rfid}'      , 'closeGate'         );
+	Route::get ('/forceclose/{rfid}' , 'forceCloseGate'    );
+	Route::get ('/closeall'          , 'forceCloseAllGate' );
+});
+
+Route::prefix('v1/present')->controller(DaftarHadirController::class)->group(function () {
+	Route::post('/start'        , 'presentStart' );
 });

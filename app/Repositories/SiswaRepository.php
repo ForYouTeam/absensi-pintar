@@ -14,6 +14,33 @@ class SiswaRepository implements SiswaInterface {
   {
     $this->siswaModel = $siswaModel;
   }
+  
+  public function findByRfid($rfid)
+  {
+    try {
+      $payloadList = $this->siswaModel->where('rfid', $rfid)->first();
+
+      if (!$payloadList) {
+        return array(
+          'message' => 'siswa not found',
+          'code'    => 404,
+        );
+      }
+      
+      $payloadList = array(
+        'message' => 'success',
+        'code'    => 200,
+        'data'    => $payloadList
+      );
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
+    }
+
+    return $payloadList;
+  }
 
   public function getAllPayload()
   {
