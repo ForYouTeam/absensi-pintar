@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="mt--5" style="float: left">Data Siswa</h4>
-                    <button id="createData" type="button" class="btn btn-secondary" style="float: right">Tambah Data</button>
+                    <button id="createData" type="button" class="btn btn-primary" style="float: right">Tambah Data</button>
                 </div>
                 <div class="card-body">
                     <table id="table-data" class="table table-bordered" >
@@ -81,7 +81,6 @@
         <div class="modal-dialog modal-lg modal-simple modal-edit-user">
           <div class="modal-content p-3 p-md-5">
             <div class="modal-body">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               <div class="text-center mb-4">
                 <h3>Form Tambah Data</h3>
                 <p class="text-primary"><b>SISWA</b></p>
@@ -91,67 +90,79 @@
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="modalEditUserFirstName">nisn</label>
                   <input type="text" id="nisn" name="nisn" class="form-control" placeholder="Masukan Nisn" />
+                  <span class="text-danger error-msg small" id="alert-nisn"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserLastName">nama</label>
-                  <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukan Nama" />
+                    <label class="form-label" for="modalEditUserLastName">nama</label>
+                    <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukan Nama" />
+                    <span class="text-danger error-msg small" id="alert-nama"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserFirstName">tmpt lahir</label>
-                  <input type="text" id="tmpt_lahir" name="tmpt_lahir" class="form-control" placeholder="Tempat Lahir" />
+                    <label class="form-label" for="modalEditUserFirstName">tmpt lahir</label>
+                    <input type="text" id="tmpt_lahir" name="tmpt_lahir" class="form-control" placeholder="Tempat Lahir" />
+                    <span class="text-danger error-msg small" id="alert-lahir"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserLastName">tgl lahir</label>
-                  <input type="date" id="tgl_lahir" name="tgl_lahir" class="form-control" placeholder="Tanggal Lahir" />
+                    <label class="form-label" for="modalEditUserLastName">tgl lahir</label>
+                    <input type="date" id="tgl_lahir" name="tgl_lahir" class="form-control" placeholder="Tanggal Lahir" />
+                    <span class="text-danger error-msg small" id="alert-tgl"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserFirstName">alamat</label>
-                  <input type="text" id="alamat" name="alamat" class="form-control" placeholder="Masukan Alamat" />
+                    <label class="form-label" for="modalEditUserFirstName">alamat</label>
+                    <input type="text" id="alamat" name="alamat" class="form-control" placeholder="Masukan Alamat" />
+                    <span class="text-danger error-msg small" id="alert-alamat"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserLastName">no hp</label>
-                  <input type="text" id="hp" name="hp" class="form-control" placeholder="No Handpohone" />
+                    <label class="form-label" for="modalEditUserLastName">no hp</label>
+                    <input type="text" id="hp" name="hp" class="form-control" placeholder="No Handpohone" />
+                    <span class="text-danger error-msg small" id="alert-hp"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserStatus">Jenis Kelamin</label>
-                  <select id="sex" name="sex" class="form-select" aria-label="Default select example">
-                      <option value="Wanita" selected>Perempuan</option>
-                      <option value="Pria" selected>Laki-Laki</option>
-                  </select>
+                    <label class="form-label" for="modalEditUserStatus">Jenis Kelamin</label>
+                    <select id="sex" name="sex" class="form-select" aria-label="Default select example">
+                        <option value="" selected disabled>-- Pilih --</option>
+                        <option value="Wanita">Perempuan</option>
+                        <option value="Pria">Laki-Laki</option>
+                    </select>
+                    <span class="text-danger error-msg small" id="alert-sex"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserLastName">agama</label>
-                  <input type="text" id="agama" name="agama" class="form-control" placeholder="Masukan Agama" />
-                  </div>
+                    <label class="form-label" for="modalEditUserLastName">agama</label>
+                    <input type="text" id="agama" name="agama" class="form-control" placeholder="Masukan Agama" />
+                    <span class="text-danger error-msg small" id="alert-agama"></span>
+                </div>
                 <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserStatus">kelas</label>
-                  <select id="kelas_id" name="kelas_id" class="form-select" aria-label="Default select example">
-                        <option value="" selected>-- Pilih --</option>
+                    <label class="form-label" for="modalEditUserStatus">kelas</label>
+                    <select id="kelas_id" name="kelas_id" class="form-select" aria-label="Default select example">
+                        <option value="" selected disabled>-- Pilih --</option>
                         @foreach ($kelas as $d)
                         <option value="{{$d->id}}">{{$d->nama_kelas}}</option>
                         @endforeach
-                  </select>
+                    </select>
+                    <span class="text-danger error-msg small" id="alert-kelas"></span>
                 </div>
                 <div class="col-12 col-md-6">
                    <label class="form-label" for="modalEditUserStatus">jurusan</label>
                    <select id="jurusan_id" name="jurusan_id" class="form-select" aria-label="Default select example">
-                        <option value="" selected>-- Pilih --</option>
+                        <option value="" selected disabled>-- Pilih --</option>
                         @foreach ($jurusan as $d)
                         <option value="{{$d->id}}">{{$d->nama_jurusan}}</option>
                         @endforeach
-                   </select>
+                    </select>
+                    <span class="text-danger error-msg small" id="alert-jurusan"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserLastName">rfid</label>
                     <input type="text" id="rfid" name="rfid" class="form-control" placeholder="Contoh: 41564724827562" />
+                    <span class="text-danger error-msg small" id="alert-rfid"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserFirstName">Foto</label>
-                    <input type="file" id="foto" name="foto" class="form-control mb-5" placeholder="Format foto" />
+                    <input type="file" id="foto" name="foto" class="form-control" placeholder="Format foto" />
                 </div>
                 <div class="col-12 text-center">
-                  <button type="button" id="btn-simpan" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                  <button type="reset" class="btn btn-label-danger" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                  <button type="button" id="btn-simpan" class="btn btn-outline-primary my-3">Submit</button>
+                  <button type="reset" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                 </div>
               </form>
             </div>
@@ -161,8 +172,13 @@
 {{-- End Modal --}}
 
     @section('script')
+
     <script>
+        let baseUrl
+
         $(document).ready(function() {
+            baseUrl = "{{ config('app.url') }}"
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -171,34 +187,39 @@
             $('#table-data').DataTable();
         });
 
+        function clearError() {
+            $('.error-msg').html('')
+        }
+
         $('#createData').click(function () {
-            $('.modal-title').html("Form Tambah Data");
-            $('#btn-simpan').val("create-Item");
-            $('#id').val('');
-            $('#formData').trigger("reset");
-            $('#modal-data').modal('show');
+            $('.modal-title').html   ("Formulir Tambah Data");
+            $('#btn-simpan' ).val    ("create-Item"         );
+            $('#id'         ).val    (''                    );
+            $('#formData'   ).trigger("reset"               );
+            $('#modal-data' ).modal  ('show'                );
+            clearError()
         });
 
         $('body').on('click', '.editItem', function () {
             var _id = $(this).data('id');
-            let foto = $('#foto').prop('files')[0]
-            $.get("http://127.0.0.1:8000/api/v1/siswa/" + _id, function (res) {
+            $.get(`${baseUrl}/api/v1/siswa/` + _id, function (res) {
                 $('.modal-title').html("Form Edit Data");
-                $('#btn-simpan').val("edit-user");
-                $('#modal-data').modal('show');
-                $('#id').val(res.data.id);
-                $('#nisn').val(res.data.nisn);
-                $('#nama').val(res.data.nama);
-                $('#tmpt_lahir').val(res.data.tmpt_lahir);
-                $('#tgl_lahir').val(res.data.tgl_lahir);
-                $('#alamat').val(res.data.alamat);
-                $('#hp').val(res.data.hp);
-                $('#sex').val(res.data.sex);
-                $('#agama').val(res.data.agama);
-                $('#kelas_id').val(res.data.kelas_id);
-                $('#jurusan_id').val(res.data.jurusan_id);
-                $('#rfid').val(res.data.rfid);
-                $('#foto').val(res.data.foto);
+                $('#btn-simpan' ).val ("edit-user"     );
+                clearError()
+                $('#modal-data').modal('show'             );
+                $('#id'        ).val  (res.data.id        );
+                $('#nisn'      ).val  (res.data.nisn      );
+                $('#nama'      ).val  (res.data.nama      );
+                $('#tmpt_lahir').val  (res.data.tmpt_lahir);
+                $('#tgl_lahir' ).val  (res.data.tgl_lahir );
+                $('#alamat'    ).val  (res.data.alamat    );
+                $('#hp'        ).val  (res.data.hp        );
+                $('#sex'       ).val  (res.data.sex       );
+                $('#agama'     ).val  (res.data.agama     );
+                $('#kelas_id'  ).val  (res.data.kelas_id  );
+                $('#jurusan_id').val  (res.data.jurusan_id);
+                $('#rfid'      ).val  (res.data.rfid      );
+                $('#foto'      ).val  (res.data.foto      );
             })
         });
 
@@ -210,39 +231,46 @@
             if(!submitButton){
                 let foto = $('#foto').prop('files')[0]
                 let data = new FormData($('#formData')[0]);
-
                 $.ajax({
-                    url: "http://127.0.0.1:8000/api/v1/siswa",
-                    method: "POST",
-                    data: data,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
+                    url        : `${baseUrl}/api/v1/siswa/`,
+                    method     : "POST"                    ,
+                    data       : data                      ,
+                    cache      : false                     ,
+                    contentType: false                     ,
+                    processData: false                     ,
                     success: function(result) {
-                        Swal.fire({
-                            title: 'Success',
-                            text: result.message,
-                            icon: 'success',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Oke'
-                        }).then((result) => {
-                            location.reload();
-                        });
-                        $('#modal-data').modal('hide');
+                        let data = result.data;
+                            Swal.fire({
+                                title            : 'Success'                ,
+                                text             : 'Data Berhasil diproses.',
+                                icon             : 'success'                ,
+                                cancelButtonColor: '#d33'                   ,
+                                confirmButtonText: 'Oke'
+                            }).then((result) => {
+                                location.reload();
+                            });
+                            $('#modal-data').modal('hide');
                     },
                     error: function(result) {
-                        // $('#btn-simpan').prop('disabled', false);
-                        let data = result.responseJSON
-                        let errorRes = data.errors
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Silahkan periksa kemabli inputan anda...!',
-
-                        });
-                        $('#modal-data').modal('hide');
-                        if (errorRes.length >= 1) {
-                            $('#nama-alert').html(errorRes.data.nama_jabatan);
+                        if (result.status = 422) {
+                            let data = result.responseJSON
+                            let errorRes = data.errors;
+                            if (errorRes.length >= 1) {
+                                $('#alert-nisn'   ).html(errorRes.data.nisn      );
+                                $('#alert-nama'   ).html(errorRes.data.nama      );
+                                $('#alert-lahir'  ).html(errorRes.data.tmpt_lahir);
+                                $('#alert-tgl'    ).html(errorRes.data.tgl_lahir );
+                                $('#alert-alamat' ).html(errorRes.data.alamat    );
+                                $('#alert-hp'     ).html(errorRes.data.hp        );
+                                $('#alert-sex'    ).html(errorRes.data.sex       );
+                                $('#alert-agama'  ).html(errorRes.data.agama     );
+                                $('#alert-kelas'  ).html(errorRes.data.kelas_id  );
+                                $('#alert-jurusan').html(errorRes.data.jurusan_id);
+                                $('#alert-rfid'   ).html(errorRes.data.rfid      );
+                            }
+                        } else {
+                            let msg = 'Sedang pemeliharaan server'
+                            iziToast.error(msg)
                         }
                     }
                 });
@@ -251,41 +279,42 @@
 
         $(document).on('click', '#btn-hapus', function() {
             let _id = $(this).data('id');
-            let url = "http://127.0.0.1:8000/api/v1/siswa/" + _id;
+            let url = `${baseUrl}/api/v1/siswa/` + _id;
             Swal.fire({
-                title: 'Anda Yakin?',
-                text: "Data ini mungkin terhubung ke tabel yang lain!",
-                icon: 'warning',
-                showCancelButton: true,
+                title             : 'Anda Yakin?',
+                text              : "Data ini mungkin terhubung ke tabel yang lain!",
+                icon              : 'warning',
+                showCancelButton  : true,
                 confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Batal',
-                confirmButtonText: 'Hapus'
+                cancelButtonColor : '#d33',
+                cancelButtonText  : 'Batal',
+                confirmButtonText : 'Hapus'
             }).then((res) => {
                 if (res.isConfirmed) {
                     $.ajax({
                         url: url,
                         type: 'delete',
                         success: function(result) {
-                            console.log(result);
                             let data = result.data;
                             Swal.fire({
-                                title: 'Success',
-                                text: 'Data Berhasil Dihapus.',
-                                icon: 'success',
-                                cancelButtonColor: '#d33',
+                                title            : 'Success'               ,
+                                text             : 'Data Berhasil Dihapus.',
+                                icon             : 'success'               ,
+                                cancelButtonColor: '#d33'                  ,
                                 confirmButtonText: 'Oke'
                             }).then((result) => {
                                 location.reload();
                             });
                         },
                         error: function(result) {
-                            let data = result.responseJSON
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: data.response.message,
-                            });
+                            let msg
+                            if (result.responseJSON) {
+                                let data = result.responseJSON
+                                message  = data.message
+                            } else {
+                                msg = 'Sedang pemeliharaan server'
+                            }
+                            iziToast.error(msg)
                         }
                     });
                 }

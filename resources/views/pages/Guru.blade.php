@@ -1,4 +1,7 @@
 @extends('skelton.Base')
+@section('title')
+    Guru
+@endsection
 @section('content')
     <div class="row">
         <div class="col-lg-12">
@@ -72,7 +75,6 @@
         <div class="modal-dialog modal-lg modal-simple modal-edit-user">
           <div class="modal-content p-3 p-md-5">
             <div class="modal-body">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               <div class="text-center mb-4">
                 <h3 class="modal-title">Form Tambah Data</h3>
                 <p class="text-primary"><b>GURU</b></p>
@@ -83,29 +85,36 @@
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="modalEditUserFirstName">nip</label>
                   <input type="text" id="nip" name="nip" class="form-control" placeholder="Masukan Nip" />
+                  <span class="text-danger error-msg small" id="alert-nip"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserLastName">nama</label>
-                  <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukan Nama" />
+                    <label class="form-label" for="modalEditUserLastName">nama</label>
+                    <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukan Nama" />
+                    <span class="text-danger error-msg small" id="alert-nama"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserStatus">Jenis Kelamin</label>
                     <select id="sex" name="sex" class="form-select" aria-label="Default select example">
-                        <option value="Wanita" selected>Perempuan</option>
-                        <option value="Pria" selected>Laki-Laki</option>
+                        <option value="" selected disabled>-- Pilih --</option>
+                        <option value="Wanita">Perempuan</option>
+                        <option value="Pria">Laki-Laki</option>
                     </select>
+                    <span class="text-danger error-msg small" id="alert-sex"></span>
                 </div>
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="modalEditUserFirstName">Agama</label>
                   <input type="text" id="agama" name="agama" class="form-control" placeholder="Masukan Agama" />
+                  <span class="text-danger error-msg small" id="alert-agama"></span>
                 </div>
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="modalEditUserLastName">Status</label>
                   <input type="text" id="status" name="status" class="form-control" placeholder="Status" />
+                  <span class="text-danger error-msg small" id="alert-status"></span>
                 </div>
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="modalEditUserFirstName">golongan</label>
                   <input type="text" id="golongan" name="golongan" class="form-control" placeholder="Masukan Golongan" />
+                  <span class="text-danger error-msg small" id="alert-golongan"></span>
                 </div>
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="modalEditUserStatus">Jabatan</label>
@@ -115,6 +124,8 @@
                         <option value="{{$d->id}}">{{$d->nama_jabatan}}</option>
                         @endforeach
                   </select>
+                  <span class="text-danger error-msg small" id="alert-jabatan"></span>
+
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserStatus">mapel</label>
@@ -124,18 +135,20 @@
                           <option value="{{$d->id}}">{{$d->nama_mapel}}</option>
                           @endforeach
                     </select>
+                    <span class="text-danger error-msg small" id="alert-mapel"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserFirstName">rfid</label>
-                    <input type="text" id="rfid" name="rfid" class="form-control mb-5" placeholder="Masukan Golongan" />
+                    <input type="text" id="rfid" name="rfid" class="form-control mb-2" placeholder="Masukan Golongan" />
+                    <span class="text-danger error-msg small" id="alert-rfid"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserFirstName">Foto</label>
-                    <input type="file" id="foto" name="foto" class="form-control mb-5" placeholder="Masukan Golongan" />
+                    <input type="file" id="foto" name="foto" class="form-control mb-1" placeholder="Masukan Golongan" />
                 </div>
                 <div class="col-12 text-center">
-                  <button type="button" id="btn-simpan" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                  <button type="reset" class="btn btn-label-danger" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                    <button type="button" id="btn-simpan" class="btn btn-outline-primary">Submit</button>
+                    <button type="reset" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                 </div>
               </form>
             </div>
@@ -147,6 +160,7 @@
     @section('script')
     <script>
         let BaseUrl
+
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
@@ -158,39 +172,37 @@
             BaseUrl = "{{config('app.url')}}"
         });
 
-        function successAlert() {
-            iziToast.success({
-                title  : "Berhasil",
-                message: "Data berhasil diproses"
-            })
+        function clearError() {
+            $('.error-msg').html('')
         }
 
         $('#createData').click(function () {
-            $('.modal-title').html("Form Tambah Data");
-            $('#btn-simpan').val("create-Item");
-            $('#id').val('');
-            $('#formData').trigger("reset");
-            $('#modal-data').modal('show');
+            $('.modal-title').html   ("Form Tambah Data");
+            $('#btn-simpan' ).val    ("create-Item"     );
+            $('#id'         ).val    (''                );
+            $('#formData'   ).trigger("reset"           );
+            $('#modal-data' ).modal  ('show'            );
+            clearError()
         });
 
         $('body').on('click', '.editItem', function () {
             var _id = $(this).data('id');
             $.get( BaseUrl + "/api/v1/guru/" + _id, function (res) {
-                $('.modal-title').html("Form Edit Data");
-                $('#btn-simpan').val("edit-user");
-                $('#modal-data').modal('show');
-                $('#id').val(res.data.id);
-                $('#nip').val(res.data.nip);
-                $('#nama').val(res.data.nama);
-                $('#sex').val(res.data.sex);
-                $('#agama').val(res.data.agama);
-                $('#alamat').val(res.data.alamat);
-                $('#status').val(res.data.status);
-                $('#golongan').val(res.data.golongan);
-                $('#jabatan_id').val(res.data.jabatan_id);
-                $('#mapel_id').val(res.data.mapel_id);
-                $('#rfid').val(res.data.rfid);
-                $('#foto').val(res.data.foto);
+                $('.modal-title').html("Form Edit Data"   );
+                $('#btn-simpan' ).val ("edit-user"        );
+                clearError()
+                $('#modal-data').modal('show'             );
+                $('#id'        ).val  (res.data.id        );
+                $('#nip'       ).val  (res.data.nip       );
+                $('#nama'      ).val  (res.data.nama      );
+                $('#sex'       ).val  (res.data.sex       );
+                $('#agama'     ).val  (res.data.agama     );
+                $('#status'    ).val  (res.data.status    );
+                $('#golongan'  ).val  (res.data.golongan  );
+                $('#jabatan_id').val  (res.data.jabatan_id);
+                $('#mapel_id'  ).val  (res.data.mapel_id  );
+                $('#rfid'      ).val  (res.data.rfid      );
+                $('#foto'      ).val  (res.data.foto      );
             })
         });
 
@@ -203,33 +215,45 @@
                 // $(this).prop('disabled', true);
                 let foto = $('#foto').prop('files')[0]
                 let data = new FormData($('#formData')[0]);
-
                 $.ajax({
-                    url: "http://127.0.0.1:8000/api/v1/guru",
-                    method: "POST",
-                    data: data,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
+                    url        : `${BaseUrl}/api/v1/guru/`,
+                    method     : "POST"                   ,
+                    data       : data                     ,
+                    cache      : false                    ,
+                    contentType: false                    ,
+                    processData: false                    ,
                     success: function(result) {
-                        $('#modal-data').modal('hide');
-                        successAlert()
-                        setTimeout(() => {
-                            location.reload(); 
-                        }, 500);
+                        let data = result.data;
+                            Swal.fire({
+                                title            : 'Success'                ,
+                                text             : 'Data Berhasil diproses.',
+                                icon             : 'success'                ,
+                                cancelButtonColor: '#d33'                   ,
+                                confirmButtonText: 'Oke'
+                            }).then((result) => {
+                                location.reload();
+                            });
+                            $('#modal-data').modal('hide');
                     },
                     error: function(result) {
-                        // $('#btn-simpan').prop('disabled', false);
-                        if (result.responseJSON) {
+                        if (result.status = 422) {
                             let data = result.responseJSON
-                            let errorRes = data.errors
-                            
+                            let errorRes = data.errors;
                             if (errorRes.length >= 1) {
-                                $('#nama-alert').html(errorRes.data.nama_jabatan);
+                                $('#alert-nip'     ).html(errorRes.data.nip       );
+                                $('#alert-nama'    ).html(errorRes.data.nama      );
+                                $('#alert-agama'   ).html(errorRes.data.agama     );
+                                $('#alert-sex'     ).html(errorRes.data.sex       );
+                                $('#alert-status'  ).html(errorRes.data.status    );
+                                $('#alert-golongan').html(errorRes.data.golongan  );
+                                $('#alert-jabatan' ).html(errorRes.data.jabatan_id);
+                                $('#alert-mapel'   ).html(errorRes.data.mapel_id  );
+                                $('#alert-rfid'    ).html(errorRes.data.rfid      );
                             }
+                        } else {
+                            let msg = 'Sedang pemeliharaan server'
+                            iziToast.error(msg)
                         }
-
-                        iziToast.error('Periksa kembali inputan')
                     }
                 });
             }
@@ -239,14 +263,14 @@
             let _id = $(this).data('id');
             let url = "http://127.0.0.1:8000/api/v1/guru/" + _id;
             Swal.fire({
-                title: 'Anda Yakin?',
-                text: "Data ini mungkin terhubung ke tabel yang lain!",
-                icon: 'warning',
-                showCancelButton: true,
+                title             : 'Anda Yakin?',
+                text              : "Data ini mungkin terhubung ke tabel yang lain!",
+                icon              : 'warning',
+                showCancelButton  : true,
                 confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Batal',
-                confirmButtonText: 'Hapus'
+                cancelButtonColor : '#d33',
+                cancelButtonText  : 'Batal',
+                confirmButtonText : 'Hapus'
             }).then((res) => {
                 if (res.isConfirmed) {
                     $.ajax({
@@ -255,10 +279,10 @@
                         success: function(result) {
                             let data = result.data;
                             Swal.fire({
-                                title: 'Success',
-                                text: 'Data Berhasil Dihapus.',
-                                icon: 'success',
-                                cancelButtonColor: '#d33',
+                                title            : 'Success'               ,
+                                text             : 'Data Berhasil Dihapus.',
+                                icon             : 'success'               ,
+                                cancelButtonColor: '#d33'                  ,
                                 confirmButtonText: 'Oke'
                             }).then((result) => {
                                 location.reload();
@@ -267,9 +291,9 @@
                         error: function(result) {
                             let data = result.responseJSON
                             Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: data.response.message,
+                                icon : 'error'              ,
+                                title: 'Error'              ,
+                                text : data.response.message,
                             });
                         }
                     });

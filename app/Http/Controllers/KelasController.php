@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\KelasRequest;
 use App\Interfaces\JurusanInterface;
 use App\Interfaces\KelasInterface;
-use App\Models\JurusanModel;
-use Illuminate\Http\Request;
 
 class KelasController extends Controller
 {
@@ -38,7 +37,7 @@ class KelasController extends Controller
 		return response()->json($payload, $payload['code']);
 	}
 
-	public function upsertPayloadData(Request $request)
+	public function upsertPayloadData(KelasRequest $request)
 	{
 		$id = $request->id | null;
 		$payload = $this->kelasRepo->upsertPayload($id, $request->except('_token'));

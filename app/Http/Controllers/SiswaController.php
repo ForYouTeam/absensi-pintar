@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SiswaRequest;
 use App\Interfaces\JurusanInterface;
 use App\Interfaces\KelasInterface;
 use App\Interfaces\SiswaInterface;
@@ -47,7 +48,7 @@ class SiswaController extends Controller
 		return response()->json($payload, $payload['code']);
 	}
 
-	public function upsertPayloadData(Request $request)
+	public function upsertPayloadData(SiswaRequest $request)
 	{
 		$fileUpload = $request->file('foto');
 		$nameFile = 'photo' . $request->nisn . '.' . $fileUpload->getClientOriginalExtension();

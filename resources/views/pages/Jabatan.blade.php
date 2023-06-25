@@ -1,4 +1,7 @@
 @extends('skelton.Base')
+@section('title')
+    Jabatan
+@endsection
 @section('content')
     <div class="row">
         <div class="col-lg-12">
@@ -24,7 +27,7 @@
                                 <tr>
                                     <td style="width: 5%">{{$no++}}</td>
                                     <td style="width: 60%">{{ $item['nama_jabatan'] }}</td>
-                                    <td>
+                                    <td style="width: 10%">
                                         <button class="editItem btn btn-sm btn-info" data-id="{{$item->id}}">Edit</button>
                                         <button id="btn-hapus" class="btn btn-sm btn-danger" data-id="{{$item->id}}">Hapus</button>
                                     </td>
@@ -61,7 +64,7 @@
                     <input type="hidden" name="id" id="dataId">
                     <input id="nama_jabatan" name="nama_jabatan" class="nama_jabatan form-control credit-card-mask" type="text" placeholder="Masukan jabatan" required>
                   </div>
-									<span class="text-danger small" id="nama-alert"></span>
+				  <span class="text-danger small" id="nama-alert"></span>
                 </div>
                 <div class="col-12 text-center">
                   <button type="submit" id="btn-simpan" class="btn btn-outline-primary me-sm-3 me-1 mt-3 mx-1">Submit</button>
@@ -88,24 +91,25 @@
             });
             $('#table-data').DataTable();
         });
-
+        
 
         $('#createData').click(function () {
-            $('.modal-title').html("Formulir Tambah Data");
-            $('#btn-simpan').val("create-Item");
-            $('#id').val('');
-            $('#formData').trigger("reset");
-            $('#modal-data').modal('show');
+            $('.modal-title').html   ("Formulir Tambah Data");
+            $('#btn-simpan' ).val    ("create-Item"         );
+            $('#id'         ).val    (''                    );
+            $('#formData'   ).trigger("reset"               );
+            $('#modal-data' ).modal  ('show'                );
+            $('#nama-alert' ).html   (''                    );
         });
 
         $('body').on('click', '.editItem', function () {
             var _id = $(this).data('id');
             $.get(`${baseUrl}/api/v1/jabatan/` + _id, function (res) {
-                $('.modal-title').html("Formulir Edit Data");
-                $('#btn-simpan').val("edit-user");
-                $('#modal-data').modal('show');
-                $('#nama_jabatan').val(res.data.nama_jabatan);
-                $('#dataId').val(res.data.id);
+                $('.modal-title' ).html ("Formulir Edit Data" );
+                $('#btn-simpan'  ).val  ("edit-user"          );
+                $('#modal-data'  ).modal('show'               );
+                $('#nama_jabatan').val  (res.data.nama_jabatan);
+                $('#dataId'      ).val  (res.data.id          );
             })
         });
 
@@ -117,16 +121,16 @@
             if (!submitButton.prop('disabled')) {
                 submitButton.prop('disabled', true);
                 $.ajax({
-                    data: $('#formData').serialize(),
-                    url: `${baseUrl}/api/v1/jabatan/`,
-                    type: "POST",
-                    dataType: 'json',
+                    data    : $('#formData').serialize()  ,
+                    url     : `${baseUrl}/api/v1/jabatan/`,
+                    type    : "POST"                      ,
+                    dataType: 'json'                      ,
                     success: function(result) {
                         Swal.fire({
-                            title: 'Success',
-                            text: result.message,
-                            icon: 'success',
-                            cancelButtonColor: '#d33',
+                            title            : 'Success'               ,
+                            text             : 'Data Berhasil diproses',
+                            icon             : 'success'               ,
+                            cancelButtonColor: '#d33'                  ,
                             confirmButtonText: 'Oke'
                         }).then((result) => {
                             location.reload();
@@ -154,14 +158,14 @@
             let _id = $(this).data('id');
             let url = `${baseUrl}/api/v1/jabatan/` + _id;
             Swal.fire({
-                title: 'Anda Yakin?',
-                text: "Data ini mungkin terhubung ke tabel yang lain!",
-                icon: 'warning',
-                showCancelButton: true,
+                title             : 'Anda Yakin?',
+                text              : "Data ini mungkin terhubung ke tabel yang lain!",
+                icon              : 'warning',
+                showCancelButton  : true,
                 confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Batal',
-                confirmButtonText: 'Hapus'
+                cancelButtonColor : '#d33',
+                cancelButtonText  : 'Batal',
+                confirmButtonText : 'Hapus'
             }).then((res) => {
                 if (res.isConfirmed) {
                     $.ajax({
@@ -170,10 +174,10 @@
                         success: function(result) {
                             let data = result.data;
                             Swal.fire({
-                                title: 'Success',
-                                text: 'Data Berhasil Dihapus.',
-                                icon: 'success',
-                                cancelButtonColor: '#d33',
+                                title            : 'Success'               ,
+                                text             : 'Data Berhasil Dihapus.',
+                                icon             : 'success'               ,
+                                cancelButtonColor: '#d33'                  ,
                                 confirmButtonText: 'Oke'
                             }).then((result) => {
                                 location.reload();
