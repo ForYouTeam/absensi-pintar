@@ -21,3 +21,7 @@ Route::get('/guru'        , [GuruController       ::class, 'getView'])->name('pa
 Route::get('/ketentuan'   , [KetentuanController  ::class, 'getView'])->name('pages.ketentuan');
 Route::get('/daftar_hadir', [DaftarHadirController::class, 'getView'])->name('pages.absen'    );
 
+Route::get('/dashboard', function()
+{
+  return view('web.pages.Dashboard');
+});
