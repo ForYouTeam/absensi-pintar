@@ -66,8 +66,10 @@ Route::prefix('v1/gate')->controller(GateController::class)->group(function () {
 	Route::get ('/close/{rfid}'      , 'closeGate'         );
 	Route::get ('/forceclose/{rfid}' , 'forceCloseGate'    );
 	Route::get ('/closeall'          , 'forceCloseAllGate' );
+	Route::get ('/all'               , 'getAllData'        );
 });
 
 Route::prefix('v1/present')->controller(DaftarHadirController::class)->group(function () {
-	Route::post('/start'        , 'presentStart' );
+	Route::post('/start'    , 'presentStart' );
+	Route::get('/getbyqty/{gateId}' , 'getDataByQty' );
 });

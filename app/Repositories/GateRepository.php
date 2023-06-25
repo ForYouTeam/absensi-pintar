@@ -21,6 +21,50 @@ class GateRepository implements GateInterface {
     $this->daftarHadirRepo = $daftarHadirRepo;
   }
 
+  public function getAllGate()
+  {
+    try {
+      $data = $this->gateModel->where('gate.status', 0)->joinList();
+      $payloadList = array(
+        'message' => 'success',
+        'code'    => 200,
+        'data'    => $data
+      );
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
+    }
+
+    return $payloadList;
+  }
+
+  public function getGateByRfid($section)
+  {
+    try {
+      $gateData = $this->gateModel->where('section', $section)->first();
+      if (!$gateData) {
+        return array(
+          'message' => 'gate not found',
+          'code'    => 404
+        );
+      }
+      $payloadList = array(
+        'message' => 'success',
+        'code'    => 200,
+        'data'    => $gateData
+      );
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
+    }
+
+    return $payloadList;
+  }
+
   public function checkGate($rfid)
   {
     try {

@@ -18,11 +18,11 @@ class SiswaRepository implements SiswaInterface {
   public function findByRfid($rfid)
   {
     try {
-      $payloadList = $this->siswaModel->where('rfid', $rfid)->first();
+      $payloadList = $this->siswaModel->where('rfid', $rfid)->joinList()->first();
 
       if (!$payloadList) {
         return array(
-          'message' => 'siswa not found',
+          'message' => 'siswa tidak ditemukan',
           'code'    => 404,
         );
       }

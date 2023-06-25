@@ -7,26 +7,35 @@
               <div class="card-body">
                   <form class="form-horizontal form-purchase-token row">
                       <div class="col-md-3 col-12">
-                          <select class="custom-select">
-                              <option disabled selected="">PILIH KELAS</option>
-                              <option value="1">TKJ</option>
+                          <select onchange="inputCheck()" id="kelas_id" class="custom-select input-form">
+                              <option disabled selected="" value="">PILIH KELAS</option>
+                              @foreach ($data['kelas'] as $d)
+                                  <option class="text-uppercase" value="{{ $d->id }}">{{ $d->nama_kelas }}</option>
+                              @endforeach
                           </select>
                       </div>
                       <div class="col-md-3 col-12">
-                        <select class="custom-select">
-                            <option disabled selected="">PILIH MATA PELAJARAN</option>
-                            <option value="1">TKJ</option>
+                        <select onchange="inputCheck()" id="mapel" class="custom-select input-form">
+                            <option disabled selected="" value="">PILIH MATA PELAJARAN</option>
+                            @foreach ($data['mapel'] as $d)
+                                <option class="text-uppercase" value="{{ $d->nama_mapel }}">{{ $d->nama_mapel }}</option>
+                            @endforeach
                         </select>
                       </div>
-                      <div class="col-md-1"></div>
-                      <div class="col-md-3 col-12 mb-1">
+                      <div class="col-md-2 col-12 mb-1">
                         <fieldset class="form-label-group mb-0">
-                            <input type="text" class="form-control" id="wallet-address" value="0xe834a970619218d0a7db4ee5a3c87022e71e177f" required="" autofocus="">
+                            <input type="text" class="form-control input-form" id="wallet-address" value="" required="" autofocus="">
                             <label for="wallet-address">PASSWORD</label>
                         </fieldset>
                       </div>
+                      <div class="col-md-2 col-12 mb-1">
+                        <fieldset class="form-label-group mb-0">
+                            <input type="text" class="form-control input-form" id="rfid" value="" required="" autofocus="" disabled>
+                            <label for="wallet-address">RFID</label>
+                        </fieldset>
+                      </div>
                       <div class="col-md-2 col-12 text-center">
-                          <button data-toggle="modal" data-target="#confirm-modal" type="button" class="btn-gradient-secondary">TEMPELKAN KARTU</button>
+                        <button onclick="addSection()" id="addPanel" type="button" class="btn-gradient-secondary">TAMBAH SESI</button>
                       </div>
                   </form>
               </div>
@@ -48,21 +57,11 @@
                               <th style="width: 25%;" class="border-top-0">Guru</th>
                               <th class="border-top-0">Matapelajaran</th>
                               <th class="border-top-0">Jam Dimulai</th>
-                              <th class="border-top-0">Opsi</th>
+                              <th style="width: 15%" class="border-top-0">Opsi</th>
                           </tr>
                       </thead>
-                      <tbody>
-                          <tr>
-                              <td class="text-truncate"><i class="la la-dot-circle-o success font-medium-1"></i>25062023125351_0009429291</td>
-                              <td class="text-truncate">Winda</td>
-                              <td class="text-truncate">
-                                  <a href="#" class="mb-0 btn-sm btn btn-outline-success round">Matamatika</a>
-                              </td>
-                              <td class="text-truncate">10:00</td>
-                              <td>
-                                  <a href="#" class="btn-link rounded">Buka Panel</a>
-                              </td>
-                          </tr>
+                      <tbody id="logBody">
+                          
                       </tbody>
                   </table>
               </div>
@@ -70,4 +69,136 @@
       </div>
   </div>
 </div>
+@endsection
+@section('script')
+<script>
+    let baseUrl
+
+    function addSection() {
+        $('#rfid').focus()
+        $('#addPanel').html('SCAN RFID')
+    }
+
+    function clearInput() {
+        $('.input-form' ).val ('')
+        $('#rfid').prop('disabled', true)
+    }
+
+    function openGate() {
+        let data = {
+            kelas_id : $('#kelas_id').val(),
+            mapel    : $('#mapel'   ).val(),
+            rfid     : $('#rfid'    ).val()
+        }
+
+        $.ajax({
+            type    : "POST",
+            url     : `${baseUrl}/api/v1/gate/open`,
+            data    : data,
+            success : (res) => {
+                getPanelData()
+                clearInput()
+                iziToast.success({
+                    title   : 'Pesan'               ,
+                    message : 'Sesi berhasil dibuat',
+                    position: 'topRight'
+                });
+            },
+            error   : (err) => {
+                let status = err.status
+                if (status == 404) {
+                    iziToast.warning({
+                        title   : 'Pesan',
+                        message : err.responseJSON.message,
+                        position: 'topRight'
+                    });
+                }
+                clearInput()
+            },
+            dataType: "json"
+        });
+    }
+
+    function getPanelData() {
+        $.get(`${baseUrl}/api/v1/gate/all`, function(res) {
+            $('#logBody').html('')
+            $.each(res.data, (i, d) => {
+                $('#logBody').append(`
+                <tr>
+                    <td class="text-truncate"><i class="la la-dot-circle-o success font-medium-1"></i>${d.section}</td>
+                    <td class="text-truncate text-capitalize">${d.guru}</td>
+                    <td class="text-truncate">
+                        <a href="#" class="mb-0 btn-sm btn btn-outline-success round text-capitalize">${d.mapel}</a>
+                    </td>
+                    <td class="text-truncate">${d.open}</td>
+                    <td>
+                        <a href="${baseUrl}/dashboard/${d.section}" class="btn-link rounded">Buka Panel</a>
+                        <a href="#" role="button" onClick="sectionClose(event)" data-id="${d.section.split("_")[1]}" class="btn-link text-danger rounded ml-3">Tutup Sesi</a>
+                    </td>
+                </tr>
+                `)
+            })
+        });
+    }
+
+    function inputCheck() {
+        let input1      = $("#kelas_id");
+        let input2      = $("#mapel");
+        let targetInput = $("#rfid");
+
+        input1.on("input", checkInputs);
+        input2.on("input", checkInputs);
+
+        function checkInputs() {
+            if (input1.val() && input2.val()) {
+            targetInput.prop("disabled", false);
+            targetInput.focus()
+            } else {
+            targetInput.prop("disabled", true);
+            }
+        }
+    }
+
+    function sectionClose(event) {
+        let dataId = event.target.dataset.id
+        Swal.fire({
+            title             : 'Tutup Session?',
+            text              : "Sesi ini tidak dapat dipulihkan kembali!",
+            icon              : 'question',
+            showCancelButton  : true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor : '#d33',
+            cancelButtonText  : 'Batal',
+            confirmButtonText : 'Proses'
+        }).then((res) => {
+            if (res.isConfirmed) {
+                $.get(`${baseUrl}/api/v1/gate/close/${dataId}`, function()
+                {
+                    iziToast.success({
+                        title   : 'Pesan'               ,
+                        message : 'Sesi berhasil ditutup',
+                        position: 'topRight'
+                    });
+                })
+                setTimeout(() => {
+                    getPanelData() 
+                }, 500);
+            }
+        })
+    }
+
+    $(document).ready(function (){
+        baseUrl = "{{config('app.url')}}"
+
+        $('#rfid').keydown(function(event) {
+            if (event.which === 13) {
+                $('#addPanel').html('TAMBAH SESI')
+                openGate()
+            }
+        });
+
+        getPanelData()
+    })
+
+</script>
 @endsection

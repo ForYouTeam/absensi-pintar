@@ -9,6 +9,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KetentuanController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\WebController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +23,9 @@ Route::get('/guru'        , [GuruController       ::class, 'getView'])->name('pa
 Route::get('/ketentuan'   , [KetentuanController  ::class, 'getView'])->name('pages.ketentuan');
 Route::get('/daftar_hadir', [DaftarHadirController::class, 'getView'])->name('pages.absen'    );
 
-Route::get('/dashboard', function() {
-  return view('web.pages.Dashboard');
-});
 
-Route::get('/dashboard/{id}', function($id) {
-  return view('web.pages.AbsenPanel')->with('section', $id);
+Route::prefix('dashboard')->controller(WebController::class)->group(function() 
+{
+  Route::get('/'          , 'dashboardPanel'   );
+  Route::get('/{section}', 'siswaSectionPanel');
 });

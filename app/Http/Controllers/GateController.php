@@ -56,4 +56,10 @@ class GateController extends Controller
         $gateData = $this->gateRepo->closeAllGate();
         return response()->json($gateData, $gateData['code']);
     }
+
+    public function getAllData()
+    {
+        $gateData = $this->gateRepo->getAllGate();
+        return response()->json($gateData, $gateData['code']);
+    }
 }

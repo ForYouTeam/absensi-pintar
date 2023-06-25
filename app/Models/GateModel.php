@@ -32,4 +32,19 @@ class GateModel extends Model
         ->where('tgl', Carbon::now()->format('Y-m-d'))
         ->where('status', 0);
     }
+
+    public function scopejoinList($query)
+    {
+        return $query
+            ->leftJoin('guru as model_b' , 'gate.guru_id' , '=', 'model_b.id' )
+            ->select(
+                'gate.section',
+                'model_b.nama as guru',
+                'gate.mapel',
+                'gate.open',
+            )
+            ->orderBy('gate.created_at', 'desc')
+            ->take(3)
+            ->get();
+    }
 }
