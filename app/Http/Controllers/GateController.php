@@ -31,7 +31,7 @@ class GateController extends Controller
         $gateData = array(
             'rfid'     => $request['rfid'],
             'kelas_id' => $request['kelas_id'],
-            'guru_id'  => $request['guru_id' ],
+            'guru_id'  => $checkGuru['data']['id'],
             'mapel'    => $request['mapel'   ],
         );
 
