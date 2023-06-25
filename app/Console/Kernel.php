@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $gateRepo = app(GateInterface::class);
             $gateRepo->closeAllGate();
-        })->dailyAt('08:10');
+        })->dailyAt('08:15');
     }
 
     /**
