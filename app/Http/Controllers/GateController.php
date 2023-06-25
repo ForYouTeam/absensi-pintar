@@ -50,4 +50,10 @@ class GateController extends Controller
         $gateData = $this->gateRepo->forceClose($rfid);
         return response()->json($gateData, $gateData['code']);
     }
+
+    public function forceCloseAllGate()
+    {
+        $gateData = $this->gateRepo->closeAllGate();
+        return response()->json($gateData, $gateData['code']);
+    }
 }

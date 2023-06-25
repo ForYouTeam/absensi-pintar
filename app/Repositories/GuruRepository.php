@@ -45,7 +45,7 @@ class GuruRepository implements GuruInterface {
         );
       } else {
         $payloadList = array(
-          'message' => 'not found',
+          'message' => 'guru not found',
           'code'    => 404,
         );
       }

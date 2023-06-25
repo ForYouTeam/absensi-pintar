@@ -22,8 +22,11 @@ class DaftarHadirModel extends Model
         'updated_at'
     ];
     
-    public function scopefilterData($query, $params)
+    public function scopegetByFilter($query, $params)
     {
-        
+        return $query
+            ->where('gate_id' , $params['gate_id' ])
+            ->where('siswa_id', $params['siswa_id'])
+            ->where('tgl'     , $params['tgl'     ]);
     }
 }
