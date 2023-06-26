@@ -34,6 +34,7 @@ class SiswaRepository implements SiswaInterface {
       );
     } catch (\Throwable $th) {
       $payloadList = array(
+        'from'    => 'findByRfid',
         'message' => $th->getMessage(),
         'code'    => 500
       );

@@ -36,6 +36,7 @@ class DaftarHadirRepository implements DaftarHadirInterface
       );
     } catch (\Throwable $th) {
       $payloadList = array(
+        'from'    => 'getPayloadByQty',
         'message' => $th->getMessage(),
         'code'    => 500
       );
@@ -75,6 +76,7 @@ class DaftarHadirRepository implements DaftarHadirInterface
       );
     } catch (\Throwable $th) {
       $payloadList = array(
+        'from'    => 'getPresentStudent',
         'message' => $th->getMessage(),
         'code'    => 500
       );
@@ -90,6 +92,10 @@ class DaftarHadirRepository implements DaftarHadirInterface
       $present = $this->getPresentStudent($payload);
       $siswa = $this->siswaRepo->findByRfid($payload['rfid']);
 
+      if ($siswa['code'] != 200) {
+        return $siswa;
+      }
+
       if ($siswa['data']['kelas_id'] != $payload['kelas_id']) {
         return array(
           'message' => 'kelas siswa tidak sesuai',
@@ -97,11 +103,7 @@ class DaftarHadirRepository implements DaftarHadirInterface
         );
       }
 
-      if ($siswa['code'] !== 200) {
-        return $siswa;
-      }
-
-      if ($present['code'] !== 200 && $present['code'] !== 404) {
+      if ($present['code'] != 200 && $present['code'] !== 404) {
         return $present;
       }
 
@@ -122,7 +124,7 @@ class DaftarHadirRepository implements DaftarHadirInterface
         $payloadList = array(
           'message' => 'Siswa hadir',
           'code'    => 200,
-          'data'    => $siswa
+          'data'    => $siswa['data']
         );
       } else if ($present['code'] != 404 && !$present['data']['end_tap']) {
 
@@ -145,24 +147,25 @@ class DaftarHadirRepository implements DaftarHadirInterface
           return array(
             'message' => 'Siswa pulang',
             'code'    => 200,
-            'data'    => $siswa
+            'data'    => $siswa['data']
           );
         }
 
         $payloadList = array(
           'message' => 'terlalu cepat pulang',
           'code'    => 200,
-          'data'    => $siswa
+          'data'    => $siswa['data']
         );
       } else {
         $payloadList = array(
           'message' => 'siswa telah pulang',
           'code'    => 200,
-          'data'    => $siswa
+          'data'    => $siswa['data']
         );
       }
     } catch (\Throwable $th) {
       $payloadList = array(
+        'from'    => 'setPresentStudent',
         'message' => $th->getMessage(),
         'code'    => 500
       );

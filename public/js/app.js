@@ -18868,42 +18868,155 @@ __webpack_require__.r(__webpack_exports__);
     var __expose = _ref.expose;
     __expose();
     var data = {
-      kelas: "rpl a",
-      data: [{
-        gate_id: 21,
-        siswa: "yuli",
-        status: "2",
-        tgl: "2023-06-26",
-        start_tap: "14:52:18",
-        end_tap: null
+      "siswa": [{
+        "id": 1,
+        "nisn": "35345",
+        "nama": "yuli",
+        "tmpt_lahir": "palu",
+        "tgl_lahir": "2000-01-01",
+        "alamat": "parigi",
+        "hp": "95745",
+        "sex": "wanita",
+        "agama": "hindu",
+        "kelas_id": 1,
+        "jurusan_id": 1,
+        "rfid": "0009529774",
+        "foto": "no",
+        "created_at": null,
+        "updated_at": null
       }, {
-        gate_id: 21,
-        siswa: "yuli",
-        status: "2",
-        tgl: "2023-08-26",
-        start_tap: "14:52:18",
-        end_tap: null
+        "id": 2,
+        "nisn": "26264",
+        "nama": "winda",
+        "tmpt_lahir": "palu",
+        "tgl_lahir": "2000-01-01",
+        "alamat": "palu",
+        "hp": "96856",
+        "sex": "wanita",
+        "agama": "islam",
+        "kelas_id": 1,
+        "jurusan_id": 1,
+        "rfid": "0009432065",
+        "foto": "1.png",
+        "created_at": null,
+        "updated_at": null
       }, {
-        gate_id: 21,
-        siswa: "yuli",
-        status: "2",
-        tgl: "2023-06-26",
-        start_tap: "14:52:18",
-        end_tap: null
+        "id": 3,
+        "nisn": "43534",
+        "nama": "akbar triwicaksono",
+        "tmpt_lahir": "palu",
+        "tgl_lahir": "2001-01-01",
+        "alamat": "anoa",
+        "hp": "84566",
+        "sex": "pria",
+        "agama": "islam",
+        "kelas_id": 1,
+        "jurusan_id": 1,
+        "rfid": "0016232383",
+        "foto": "no",
+        "created_at": null,
+        "updated_at": null
       }, {
-        gate_id: 21,
-        siswa: "yuli",
-        status: "2",
-        tgl: "2023-08-26",
-        start_tap: "14:52:18",
-        end_tap: null
+        "id": 4,
+        "nisn": "8686",
+        "nama": "dirga",
+        "tmpt_lahir": "palu",
+        "tgl_lahir": "1999-01-01",
+        "alamat": "palu",
+        "hp": "78898",
+        "sex": "pria",
+        "agama": "islam",
+        "kelas_id": 1,
+        "jurusan_id": 1,
+        "rfid": "0016268438",
+        "foto": "no",
+        "created_at": null,
+        "updated_at": null
+      }, {
+        "id": 5,
+        "nisn": "76877",
+        "nama": "eet elvian",
+        "tmpt_lahir": "palu",
+        "tgl_lahir": "2000-01-01",
+        "alamat": "palu",
+        "hp": "447573",
+        "sex": "pria",
+        "agama": "islam",
+        "kelas_id": 2,
+        "jurusan_id": 1,
+        "rfid": "0009384011",
+        "foto": "no",
+        "created_at": null,
+        "updated_at": null
+      }, {
+        "id": 6,
+        "nisn": "875655",
+        "nama": "ayu astuti",
+        "tmpt_lahir": "palu",
+        "tgl_lahir": "2001-01-02",
+        "alamat": "palu",
+        "hp": "342353",
+        "sex": "wanita",
+        "agama": "islam",
+        "kelas_id": 2,
+        "jurusan_id": 1,
+        "rfid": "0016268324",
+        "foto": "no",
+        "created_at": null,
+        "updated_at": null
+      }, {
+        "id": 7,
+        "nisn": "46654",
+        "nama": "nurul hudayah",
+        "tmpt_lahir": "palu",
+        "tgl_lahir": "2001-01-03",
+        "alamat": "palu",
+        "hp": "543536",
+        "sex": "wanita",
+        "agama": "islam",
+        "kelas_id": 2,
+        "jurusan_id": 1,
+        "rfid": "0009384047",
+        "foto": "no",
+        "created_at": null,
+        "updated_at": null
+      }, {
+        "id": 8,
+        "nisn": "56745",
+        "nama": "wiwin",
+        "tmpt_lahir": "palu",
+        "tgl_lahir": "2001-05-01",
+        "alamat": "palu",
+        "hp": "453454",
+        "sex": "wanita",
+        "agama": "kristen",
+        "kelas_id": 2,
+        "jurusan_id": 1,
+        "rfid": "0016268398",
+        "foto": "no",
+        "created_at": null,
+        "updated_at": null
       }]
     };
-    var exportDaftarIsi = function exportDaftarIsi() {
-      _utils_export__WEBPACK_IMPORTED_MODULE_0__["default"].generateAttendanceReport('RPL A', data);
-    };
+    var hadir = [{
+      "gate_id": 22,
+      "siswa": "dirga",
+      "status": "2",
+      "tgl": "2023-06-26",
+      "start_tap": "18:16:01",
+      "end_tap": null
+    }, {
+      "gate_id": 22,
+      "siswa": "yuli",
+      "status": "2",
+      "tgl": "2023-06-26",
+      "start_tap": "18:15:56",
+      "end_tap": null
+    }];
+    var exportDaftarIsi = function exportDaftarIsi() {};
     var __returned__ = {
       data: data,
+      hadir: hadir,
       exportDaftarIsi: exportDaftarIsi,
       get Export() {
         return _utils_export__WEBPACK_IMPORTED_MODULE_0__["default"];
@@ -19024,125 +19137,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  generateAttendanceReport: function generateAttendanceReport(kelas, payload) {
-    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var workbook, columnHeaders, monthMap, buffer, blob;
-      return _regeneratorRuntime().wrap(function _callee$(_context) {
-        while (1) switch (_context.prev = _context.next) {
-          case 0:
-            workbook = new exceljs__WEBPACK_IMPORTED_MODULE_0__.Workbook();
-            columnHeaders = [{
-              header: "Gate ID",
-              key: "gate_id"
-            }, {
-              header: "Siswa",
-              key: "siswa"
-            }, {
-              header: "Status",
-              key: "status"
-            }, {
-              header: "Tanggal",
-              key: "tgl"
-            }, {
-              header: "Jam Masuk",
-              key: "start_tap"
-            }, {
-              header: "Jam Keluar",
-              key: "end_tap"
-            }];
-            monthMap = new Map();
-            payload.data.forEach(function (item) {
-              var tgl = moment__WEBPACK_IMPORTED_MODULE_2___default()(item.tgl).format("DD MMMM YYYY");
-              if (!monthMap.has(tgl)) {
-                monthMap.set(tgl, []);
-              }
-              monthMap.get(tgl).push(item);
-            });
-            monthMap.forEach(function (data, month) {
-              var worksheet = workbook.addWorksheet("Report ".concat(kelas, " - ").concat(month));
-              worksheet.getCell("A1").value = "Kelas";
-              worksheet.getCell("B1").value = kelas;
-              worksheet.getRow(3).values = columnHeaders.map(function (column) {
-                return column.header;
-              });
-              var rowData = data.map(function (item) {
-                return columnHeaders.map(function (column) {
-                  var value = "";
-                  if (item.hasOwnProperty(column.key)) {
-                    if (column.key === "tgl") {
-                      value = moment__WEBPACK_IMPORTED_MODULE_2___default()(item[column.key]).format("DD MMMM YYYY");
-                    } else if (column.key === "status") {
-                      switch (item[column.key]) {
-                        case "0":
-                          value = "Tidak Hadir";
-                          break;
-                        case "1":
-                          value = "Hadir";
-                          break;
-                        case "2":
-                          value = "Dalam Kelas";
-                          break;
-                        case "3":
-                          value = "Bolos";
-                          break;
-                        default:
-                          value = "";
-                          break;
-                      }
-                    } else {
-                      value = item[column.key];
-                    }
-                  }
-                  return value;
-                });
-              });
-              worksheet.addRows(rowData, "A4");
-              columnHeaders.forEach(function (column, index) {
-                var values = data.map(function (item) {
-                  return (item[column.key] || "").toString();
-                });
-                var maxLength = Math.max.apply(Math, [column.header.length].concat(_toConsumableArray(values.map(function (value) {
-                  return value.length;
-                }))));
-                worksheet.getColumn(index + 1).width = maxLength + 2;
-              });
-              worksheet.eachRow({
-                includeEmpty: false
-              }, function (row) {
-                row.alignment = {
-                  horizontal: "left"
-                };
-              });
-            });
-            _context.next = 7;
-            return workbook.xlsx.writeBuffer();
-          case 7:
-            buffer = _context.sent;
-            blob = new Blob([buffer], {
-              type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            });
-            (0,file_saver__WEBPACK_IMPORTED_MODULE_1__.saveAs)(blob, "daftar-hadir-".concat(kelas, "-").concat(moment__WEBPACK_IMPORTED_MODULE_2___default()().format("DDMMYYYY"), ".xlsx"));
-          case 10:
-          case "end":
-            return _context.stop();
-        }
-      }, _callee);
-    }))();
-  }
+  test: function test() {}
 });
 
 /***/ }),
