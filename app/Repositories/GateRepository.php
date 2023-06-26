@@ -22,6 +22,24 @@ class GateRepository implements GateInterface
     $this->daftarHadirRepo = $daftarHadirRepo;
   }
 
+  public function getAllPayload()
+  {
+    try {
+      $payloadList = array(
+        'message' => 'success',
+        'code'    => 200,
+        'data'    => $this->gateModel->joinList()->all()
+      );
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
+    }
+
+    return $payloadList;
+  }
+
   public function getAllGate()
   {
     try {
@@ -112,12 +130,12 @@ class GateRepository implements GateInterface
       }
       $section = $date->format('dmYHis') . "_" . $payload['rfid'];
 
-      $payload['section'    ] = $section              ;
-      $payload['open'       ] = $time                 ;
-      $payload['tgl'        ] = $date->format('y-m-d');
-      $payload['status'     ] = 0                     ;
-      $payload['created_at' ] = $date                 ;
-      $payload['updated_at' ] = $date                 ;
+      $payload['section'] = $section;
+      $payload['open'] = $time;
+      $payload['tgl'] = $date->format('y-m-d');
+      $payload['status'] = 0;
+      $payload['created_at'] = $date;
+      $payload['updated_at'] = $date;
 
       $gateData = $this->gateModel->create($payload);
 
@@ -197,7 +215,6 @@ class GateRepository implements GateInterface
         'message'    => 'success',
         'code'       => 200,
         'data'       => $update,
-        'updated_at' => $date
       );
     } catch (\Throwable $th) {
       $payloadList = array(

@@ -1,24 +1,26 @@
 @extends('skelton.Base')
+@section('title')
+    Absensi
+@endsection
 @section('content')
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <h4 class="mt--5" style="float: left">Data Absensi</h4>
-                    <button id="createData" type="button" class="btn btn-secondary" style="float: right">Tambah Data</button>
+                    <button id="createData" type="button" class="btn btn-primary" style="float: right">Tambah Data</button>
                 </div>
                 <div class="card-body">
                     <table id="table-data" class="table table-bordered" >
                         <thead>
                             <tr>
                                 <th>N0</th>
-                                <th>nama/nip</th>
-                                <th>jenis kelamin</th>
-                                <th>agama</th>
+                                <th>gate</th>
+                                <th>siswa</th>
                                 <th>status</th>
-                                <th>jabatan</th>
-                                <th>golongan</th>
-                                <th>mapel</th>
+                                <th>tgl</th>
+                                <th>start tap</th>
+                                <th>end tap</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -27,13 +29,12 @@
                         <tfoot>
                             <tr>
                                 <th>N0</th>
-                                <th>nama/nip</th>
-                                <th>jenis kelamin</th>
-                                <th>agama</th>
+                                <th>gate</th>
+                                <th>siswa</th>
                                 <th>status</th>
-                                <th>jabatan</th>
-                                <th>golongan</th>
-                                <th>mapel</th>
+                                <th>tgl</th>
+                                <th>start tap</th>
+                                <th>end tap</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -42,6 +43,68 @@
             </div>
         </div>
     </div>
+{{-- Modal --}}
+    <div class="modal fade" id="modal-data" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+          <div class="modal-content p-3 p-md-5">
+            <div class="modal-body">
+              <div class="text-center mb-4">
+                <h3 class="modal-title">Form Tambah Data</h3>
+                <p class="text-primary"><b>ABSENSI</b></p>
+              </div>
+              <form id="formData" class="row g-3" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="id" id="id">
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="modalEditUserFirstName">Gate</label>
+                    <select id="jabatan_id" name="jabatan_id" class="form-select" aria-label="Default select example">
+                        {{-- <option value="" selected>-- Pilih --</option>
+                        @foreach ($jabatan as $d)
+                        <option value="{{$d->id}}">{{$d->nama_jabatan}}</option>
+                        @endforeach --}}
+                    </select>
+                  <span class="text-danger error-msg small" id="alert-nip"></span>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="modalEditUserLastName">siswa</label>
+                    <select id="jabatan_id" name="jabatan_id" class="form-select" aria-label="Default select example">
+                        {{-- <option value="" selected>-- Pilih --</option>
+                        @foreach ($jabatan as $d)
+                        <option value="{{$d->id}}">{{$d->nama_jabatan}}</option>
+                        @endforeach --}}
+                    </select>
+                    <span class="text-danger error-msg small" id="alert-nama"></span>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="modalEditUserStatus">status</label>
+                    <input type="text" id="agama" name="agama" class="form-control" placeholder="Masukan Agama" />
+                    <span class="text-danger error-msg small" id="alert-sex"></span>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="modalEditUserLastName">Tanggal</label>
+                  <input type="date" id="status" name="status" class="form-control" placeholder="Status" />
+                  <span class="text-danger error-msg small" id="alert-status"></span>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="modalEditUserFirstName">start tap</label>
+                  <input type="time" id="golongan" name="golongan" class="form-control" placeholder="Masukan Golongan" />
+                  <span class="text-danger error-msg small" id="alert-golongan"></span>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="modalEditUserFirstName">end tap</label>
+                    <input type="time" id="golongan" name="golongan" class="form-control mb-3" placeholder="Masukan Golongan" />
+                    <span class="text-danger error-msg small" id="alert-golongan"></span>
+                </div>
+                <div class="col-12 text-center">
+                    <button type="button" id="btn-simpan" class="btn btn-outline-primary">Submit</button>
+                    <button type="reset" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+{{-- End Modal --}}
     @section('script')
     <script>
         $(document).ready(function() {
@@ -63,7 +126,7 @@
 
         $('body').on('click', '.editItem', function () {
             var _id = $(this).data('id');
-            $.get("http://127.0.0.1:8000/api/v1/guru/" + _id, function (res) {
+            $.get("http://127.0.0.1:8000/api/v1/daftar_hadir/" + _id, function (res) {
                 $('.modal-title').html("Form Edit Data");
                 $('#btn-simpan').val("edit-user");
                 $('#modal-data').modal('show');
@@ -90,7 +153,7 @@
                 $(this).prop('disabled', true);
                 $.ajax({
                     data: $('#formData').serialize(),
-                    url: "http://127.0.0.1:8000/api/v1/guru",
+                    url: "http://127.0.0.1:8000/api/v1/daftar_hadir",
                     type: "POST",
                     dataType: 'json',
                         success: function(result) {
@@ -124,7 +187,7 @@
 
         $(document).on('click', '#btn-hapus', function() {
             let _id = $(this).data('id');
-            let url = "http://127.0.0.1:8000/api/v1/guru/" + _id;
+            let url = "http://127.0.0.1:8000/api/v1/daftar_hadir/" + _id;
             Swal.fire({
                 title: 'Anda Yakin?',
                 text: "Data ini mungkin terhubung ke tabel yang lain!",

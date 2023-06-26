@@ -47,6 +47,8 @@ class GateModel extends Model
                 'gate.mapel',
                 'gate.status',
                 'gate.open',
+                'gate.close',
+                'gate.tgl',
             )
             ->orderBy('gate.created_at', 'desc')
             ->take(3)
