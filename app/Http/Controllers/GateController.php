@@ -31,7 +31,7 @@ class GateController extends Controller
         $gateData = array(
             'rfid'     => $request['rfid'],
             'kelas_id' => $request['kelas_id'],
-            'guru_id'  => $request['guru_id' ],
+            'guru_id'  => $checkGuru['data']['id'],
             'mapel'    => $request['mapel'   ],
         );
 
@@ -54,6 +54,12 @@ class GateController extends Controller
     public function forceCloseAllGate()
     {
         $gateData = $this->gateRepo->closeAllGate();
+        return response()->json($gateData, $gateData['code']);
+    }
+
+    public function getAllData()
+    {
+        $gateData = $this->gateRepo->getAllGate();
         return response()->json($gateData, $gateData['code']);
     }
 }

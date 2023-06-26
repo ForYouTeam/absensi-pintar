@@ -19,11 +19,23 @@ class DaftarHadirController extends Controller
         return view('pages.DaftarHadir');
     }
 
+    public function getDataByQty()
+    {
+        $payload = array(
+            'gate_id'  => request('gate_id' ),
+            'kelas_id' => request('kelas_id')
+        );
+
+        $data = $this->daftarHadirRepo->getPayloadByQty($payload);
+        return response()->json($data, $data['code']);
+    }
+
     public function presentStart(Request $request)
     {
         $payload = array(
-            "rfid"    => $request['rfid'   ],
-            "gate_id" => $request['gate_id']
+            "rfid"     => $request['rfid'     ],
+            "gate_id"  => $request['gate_id'  ],
+            "kelas_id" => $request['kelas_id' ]
         );
 
         $presentData = $this->daftarHadirRepo->setPresentStudent($payload);

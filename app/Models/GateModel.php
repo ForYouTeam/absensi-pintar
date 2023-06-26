@@ -27,9 +27,29 @@ class GateModel extends Model
 
     public function scopegetSection($query, $rfid)
     {
-       return $query
-        ->whereRaw("SUBSTRING_INDEX(section, '_', -1) = ?", [$rfid])
-        ->where('tgl', Carbon::now()->format('Y-m-d'))
-        ->where('status', 0);
+        return $query
+            ->whereRaw("SUBSTRING_INDEX(section, '_', -1) = ?", [$rfid])
+            ->where('tgl', Carbon::now()->format('Y-m-d'))
+            ->where('status', 0);
+    }
+
+    public function scopejoinList($query)
+    {
+        return $query
+            ->leftJoin('kelas as model_a', 'gate.kelas_id', '=', 'model_a.id')
+            ->leftJoin('guru as model_b', 'gate.guru_id', '=', 'model_b.id')
+            ->select(
+                'gate.id',
+                'gate.section',
+                'gate.kelas_id',
+                'model_a.nama_kelas as kelas',
+                'model_b.nama as guru',
+                'gate.mapel',
+                'gate.status',
+                'gate.open',
+            )
+            ->orderBy('gate.created_at', 'desc')
+            ->take(3)
+            ->get();
     }
 }

@@ -29,4 +29,18 @@ class DaftarHadirModel extends Model
             ->where('siswa_id', $params['siswa_id'])
             ->where('tgl'     , $params['tgl'     ]);
     }
+
+    public function scopejoinList($query)
+    {
+        return $query 
+        ->leftJoin('siswa as model_a', 'daftar_hadir.siswa_id', '=', 'model_a.id')
+        ->select(
+            'daftar_hadir.gate_id',
+            'model_a.nama as siswa',
+            'daftar_hadir.status',
+            'daftar_hadir.tgl',
+            'daftar_hadir.start_tap',
+            'daftar_hadir.end_tap'
+        );
+    }
 }

@@ -10,6 +10,7 @@ use App\Interfaces\JabatanInterface;
 use App\Interfaces\JurusanInterface;
 use App\Interfaces\KelasInterface;
 use App\Interfaces\KetentuanInterface;
+use App\Interfaces\LogInterface;
 use App\Interfaces\MapelInterface;
 use App\Interfaces\SiswaInterface;
 use App\Repositories\AkunRepository;
@@ -20,6 +21,7 @@ use App\Repositories\JabatanRepository;
 use App\Repositories\JurusanRepository;
 use App\Repositories\KelasRepository;
 use App\Repositories\KetentuanRepository;
+use App\Repositories\LogRepository;
 use App\Repositories\MapelRepository;
 use App\Repositories\SiswaRepository;
 use Illuminate\Support\ServiceProvider;
@@ -60,5 +62,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(KetentuanInterface   ::class, KetentuanRepository   ::class);
         $this->app->bind(GateInterface        ::class, GateRepository        ::class);
         $this->app->bind(DaftarHadirInterface ::class, DaftarHadirRepository ::class);
+        $this->app->bind(LogInterface         ::class, LogRepository         ::class);
     }
 }

@@ -8,4 +8,6 @@ interface GateInterface {
   public function closeGateScanner($rfid);
   public function closeAllGate();
   public function forceClose($rfid);
+  public function getAllGate();
+  public function getGateByRfid($section);
 }
