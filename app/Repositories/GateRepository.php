@@ -8,8 +8,9 @@ use App\Models\GateModel;
 use App\Models\KetentuanModel;
 use Carbon\Carbon;
 
-class GateRepository implements GateInterface {
-  
+class GateRepository implements GateInterface
+{
+
   private GateModel $gateModel;
   private KetentuanModel $ktModel;
   private DaftarHadirInterface $daftarHadirRepo;
@@ -43,7 +44,7 @@ class GateRepository implements GateInterface {
   public function getGateByRfid($section)
   {
     try {
-      $gateData = $this->gateModel->where('section', $section)->first();
+      $gateData = $this->gateModel->where('section', $section)->where('close', null)->joinList()->first();
       if (!$gateData) {
         return array(
           'message' => 'gate not found',
@@ -109,11 +110,15 @@ class GateRepository implements GateInterface {
 
         return $payloadList;
       }
+      $section = $date->format('dmYHis') . "_" . $payload['rfid'];
 
-      $payload['section'] = $date->format('dmYHis') . "_" . $payload['rfid'];
-      $payload['open'   ] = $time;
-      $payload['tgl'    ] = $date->format('y-m-d');
-      $payload['status' ] = 0;
+      $payload['section'    ] = $section              ;
+      $payload['open'       ] = $time                 ;
+      $payload['tgl'        ] = $date->format('y-m-d');
+      $payload['status'     ] = 0                     ;
+      $payload['created_at' ] = $date                 ;
+      $payload['updated_at' ] = $date                 ;
+
       $gateData = $this->gateModel->create($payload);
 
       $payloadList = array(
@@ -149,10 +154,11 @@ class GateRepository implements GateInterface {
       if ($dafarHadir['code'] != 200) {
         return $dafarHadir;
       }
-      
+
       $update = $this->gateModel->whereId($gateData['id'])->update(array(
-        'status' => 1,
-        "close"  => $time
+        'status'     => 1,
+        "close"      => $time,
+        "updated_at" => $date
       ));
 
       $payloadList = array(
@@ -160,7 +166,6 @@ class GateRepository implements GateInterface {
         'code'    => 200,
         'data'    => $update
       );
-
     } catch (\Throwable $th) {
       $payloadList = array(
         'message' => $th->getMessage(),
@@ -185,15 +190,15 @@ class GateRepository implements GateInterface {
       if ($study['code'] != 200) {
         return $study;
       }
-      
-      $update = $this->gateModel->where('status', 0)->where('tgl', $date->format('Y-m-d'))->update($updateGate);
+
+      $update = $this->gateModel->where('status', 0)->update($updateGate);
 
       $payloadList = array(
-        'message' => 'success',
-        'code'    => 200,
-        'data'    => $update
+        'message'    => 'success',
+        'code'       => 200,
+        'data'       => $update,
+        'updated_at' => $date
       );
-
     } catch (\Throwable $th) {
       $payloadList = array(
         'message' => $th->getMessage(),
@@ -209,8 +214,9 @@ class GateRepository implements GateInterface {
     try {
       $date = Carbon::now();
       $updateGate = array(
-        'status' => 1,
-        'close'  => $date->format('H:i:s')
+        'status'     => 1,
+        'close'      => $date->format('H:i:s'),
+        'updated_at' => $date
       );
       $gateData = $this->gateModel->getSection($rfid);
 

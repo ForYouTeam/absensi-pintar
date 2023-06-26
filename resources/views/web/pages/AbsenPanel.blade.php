@@ -8,6 +8,8 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">tap kartu untuk melakukan absensi</a>
           </li>
+          <li class="breadcrumb-item ml-5">kelas: <span class="text-uppercase">{{ $data->kelas }}</span>
+          </li>
           <li class="ml-5">
             <fieldset class="form-label-group mb-0">
               <input type="text" class="form-control input-form" id="rfid" value="" required="" autofocus="" onblur="preventBlur()">
@@ -93,7 +95,10 @@
 @section('script')
   <script>
     let baseUrl = `{{config('app.url')}}`
-    let payload = {}
+    let payload = {
+      gate_id : `{{$data->id}}` ,
+      kelas_id: `{{$data->kelas_id}}`,
+    }
 
     function setName(data) {
       $.each(data, (i, d) => {
@@ -179,14 +184,14 @@
     }
 
     $(document).ready(function () {
-      payload.gate_id = `{{$data->id}}`
-
       $('#rfid').keydown(function(event) {
         if (event.which === 13) {
           payload.rfid = $('#rfid').val()
           absen()
         }
       });
+
+      getPayloadByQty()
     })
   </script>
 @endsection
