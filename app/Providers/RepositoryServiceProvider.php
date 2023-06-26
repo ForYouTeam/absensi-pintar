@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Interfaces\AkunInterface;
 use App\Interfaces\DaftarHadirInterface;
 use App\Interfaces\GateInterface;
 use App\Interfaces\GuruInterface;
@@ -11,6 +12,7 @@ use App\Interfaces\KelasInterface;
 use App\Interfaces\KetentuanInterface;
 use App\Interfaces\MapelInterface;
 use App\Interfaces\SiswaInterface;
+use App\Repositories\AkunRepository;
 use App\Repositories\DaftarHadirRepository;
 use App\Repositories\GateRepository;
 use App\Repositories\GuruRepository;
@@ -41,6 +43,14 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->bind(JurusanInterface   ::class, JurusanRepository   ::class);
+        $this->app->bind(MapelInterface     ::class, MapelRepository     ::class);
+        $this->app->bind(JabatanInterface   ::class, JabatanRepository   ::class);
+        $this->app->bind(KelasInterface     ::class, KelasRepository     ::class);
+        $this->app->bind(GuruInterface      ::class, GuruRepository      ::class);
+        $this->app->bind(SiswaInterface     ::class, SiswaRepository     ::class);
+        $this->app->bind(KetentuanInterface ::class, KetentuanRepository ::class);
+        $this->app->bind(AkunInterface      ::class, AkunRepository      ::class);
         $this->app->bind(JurusanInterface     ::class, JurusanRepository     ::class);
         $this->app->bind(MapelInterface       ::class, MapelRepository       ::class);
         $this->app->bind(JabatanInterface     ::class, JabatanRepository     ::class);
