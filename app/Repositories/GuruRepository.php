@@ -33,6 +33,33 @@ class GuruRepository implements GuruInterface {
     return $payloadList;
   }
 
+  public function getByRfid($rfid)
+  {
+    try {
+      $data = $this->guruModel->where('rfid', $rfid)->first();
+      if ($data) {
+        $payloadList = array(
+          'message' => 'success',
+          'code'    => 200,
+          'data'    => $data
+        );
+      } else {
+        $payloadList = array(
+          'message' => 'guru not found',
+          'code'    => 404,
+        );
+      }
+      
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
+    }
+
+    return $payloadList;
+  }
+
   public function getPayloadById($id)
   {
     try {

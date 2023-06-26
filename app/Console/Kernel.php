@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Interfaces\GateInterface;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,7 +16,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $gateRepo = app(GateInterface::class);
+            $gateRepo->closeAllGate();
+        })->dailyAt('08:15');
     }
 
     /**

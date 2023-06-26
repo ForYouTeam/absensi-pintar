@@ -18,7 +18,7 @@ class CreateDaftarHadirsTable extends Migration
             $table->foreignId('siswa_id')->constrained('siswa')->onDelete('cascade');
             $table->date('tgl');
             $table->time('start_tap');
-            $table->time('end_tap');
+            $table->time('end_tap')->nullable();
             $table->timestamps();
         });
     }
