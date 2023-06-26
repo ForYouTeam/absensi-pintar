@@ -120,6 +120,7 @@
     function getPayloadByQty() {
       $.get(`${baseUrl}/api/v1/present/getbyqty/${payload.gate_id}?gate_id={{$data->id}}&kelas_id={{$data->kelas_id}}`, (res) => {
         let data = res.data
+        console.log(data);
 
         let totalHadir = res.total_hadir
         let totalSiswa = res.total_siswa
