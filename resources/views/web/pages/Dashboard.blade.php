@@ -35,7 +35,7 @@
                         </fieldset>
                       </div>
                       <div class="col-md-2 col-12 text-center">
-                        <button onclick="addSection()" id="addPanel" type="button" class="btn-gradient-secondary">TAMBAH SESI</button>
+                        <button type="button" class="btn-gradient-secondary">TEMPELKAN KARTU</button>
                       </div>
                   </form>
               </div>
