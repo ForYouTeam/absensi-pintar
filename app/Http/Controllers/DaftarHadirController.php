@@ -16,7 +16,7 @@ class DaftarHadirController extends Controller
 
     public function getView() 
     {
-        return view('pages.DaftarHadir');
+        return view('pages.Daftar_hadir');
     }
 
     public function getDataByQty()

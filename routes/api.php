@@ -71,6 +71,7 @@ Route::prefix('v1/akun')->controller(AkunController::class)->group(function () {
 });
 
 Route::prefix('v1/gate')->controller(GateController::class)->group(function () {
+	Route::get ('/'                  , 'getPayloadData'    );
 	Route::post('/open'              , 'openGate'          );
 	Route::get ('/close/{rfid}'      , 'closeGate'         );
 	Route::get ('/forceclose/{rfid}' , 'forceCloseGate'    );
