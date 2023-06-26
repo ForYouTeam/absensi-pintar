@@ -35,8 +35,9 @@
             </div>
         </div>
     </div>
+@endsection
 
-    @section('script')
+@section('script')
     <script src="{{asset('assets/js/export.js')}}"></script>
     <script>
         let baseUrl
@@ -51,5 +52,4 @@
             });
         });
     </script>
-@endsection
 @endsection
