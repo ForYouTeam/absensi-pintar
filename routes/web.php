@@ -10,6 +10,7 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KetentuanController;
 use App\Http\Controllers\MapelController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WebController;
 use Illuminate\Http\Request;
@@ -24,12 +25,13 @@ Route::get('/siswa'        , [SiswaController       ::class, 'getView' ])->name(
 Route::get('/guru'         , [GuruController        ::class, 'getView' ])->name('pages.guru'      );
 Route::get('/ketentuan'    , [KetentuanController   ::class, 'getView' ])->name('pages.ketentuan' );
 Route::get('/daftar_hadir' , [DaftarHadirController ::class, 'getView' ])->name('pages.absen'     );
+Route::get('/report'       , [ReportController      ::class, 'getView' ])->name('pages.report'    );
 Route::get('/gate'         , [GateController        ::class, 'getView' ])->name('pages.absen'     );
 Route::get('/akun'         , [AkunController        ::class, 'getView' ])->name('Auth.Akun'       );
 
 
 Route::prefix('dashboard')->controller(WebController::class)->group(function() 
 {
-  Route::get('/'          , 'dashboardPanel'   );
-  Route::get('/{section}', 'siswaSectionPanel');
+  Route::get('/'          , 'dashboardPanel'    )->name('dashboard-panel');
+  Route::get('/{section}' , 'siswaSectionPanel' );
 });

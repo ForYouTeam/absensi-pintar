@@ -13,6 +13,13 @@
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
+        "postcss": "^8.1.14",
+        "vue-loader": "^16.8.3"
+    },
+    "dependencies": {
+        "exceljs": "^4.3.0",
+        "file-saver": "^2.0.5",
+        "moment": "^2.29.4",
+        "vue": "^3.3.4"
     }
 }
