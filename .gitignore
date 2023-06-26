@@ -16,3 +16,5 @@ yarn-error.log
 .env
 /mysql-data
 composer.lock
+/public/mix-manifest.json
+/public/js/app.js
