@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\DaftarHadirController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GateController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\JurusanController;
@@ -24,6 +26,8 @@ Route::get('/guru'         , [GuruController        ::class, 'getView' ])->name(
 Route::get('/ketentuan'    , [KetentuanController   ::class, 'getView' ])->name('pages.ketentuan' );
 Route::get('/daftar_hadir' , [DaftarHadirController ::class, 'getView' ])->name('pages.absen'     );
 Route::get('/report'       , [ReportController      ::class, 'getView' ])->name('pages.report'    );
+Route::get('/gate'         , [GateController        ::class, 'getView' ])->name('pages.absen'     );
+Route::get('/akun'         , [AkunController        ::class, 'getView' ])->name('Auth.Akun'       );
 
 
 Route::prefix('dashboard')->controller(WebController::class)->group(function() 

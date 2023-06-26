@@ -4,16 +4,40 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\GateInterface;
 use App\Interfaces\GuruInterface;
+use App\Interfaces\KelasInterface;
+use App\Interfaces\MapelInterface;
 use Illuminate\Http\Request;
 
 class GateController extends Controller
 {
     private GuruInterface $guruRepo;
     private GateInterface $gateRepo;
-    public function __construct(GateInterface $gateRepo, GuruInterface $guruRepo)
+    private MapelInterface $mapelRepo;
+    private KelasInterface $kelasRepo;
+
+    public function __construct(GateInterface $gateRepo, GuruInterface $guruRepo, MapelInterface $mapelRepo, KelasInterface $kelasRepo)
     {
         $this->guruRepo = $guruRepo;
         $this->gateRepo = $gateRepo;
+        $this->mapelRepo = $mapelRepo;
+        $this->kelasRepo = $kelasRepo;
+    }
+
+    public function getView()
+    {
+
+        $data = [
+            'gate' => $this->gateRepo->getAllPayload()['data'],
+            'mapel' => $this->mapelRepo->getAllPayload()['data'],
+            'kelas' => $this->kelasRepo->getAllPayload()['data'],
+        ];
+        return view('pages.Gate')->with('data', $data);
+    }
+
+    public function getPayloadData()
+    {
+        $payload = $this->gateRepo->getAllPayload();
+        return response()->json($payload, $payload['code']);
     }
 
     public function openGate(Request $request)
@@ -32,7 +56,7 @@ class GateController extends Controller
             'rfid'     => $request['rfid'],
             'kelas_id' => $request['kelas_id'],
             'guru_id'  => $checkGuru['data']['id'],
-            'mapel'    => $request['mapel'   ],
+            'mapel'    => $request['mapel'],
         );
 
         $openGate = $this->gateRepo->openGateScanner($gateData);

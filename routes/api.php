@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\DaftarHadirController;
 use App\Http\Controllers\GateController;
 use App\Http\Controllers\GuruController;
@@ -62,7 +63,15 @@ Route::prefix('v1/ketentuan')->controller(KetentuanController::class)->group(fun
 	Route::delete ('/{id}' , 'deletePayloadData' );
 });
 
+Route::prefix('v1/akun')->controller(AkunController::class)->group(function () {
+	Route::get    ('/'     , 'getPayloadData'    );
+	Route::get    ('/{id}' , 'getPayloadDataId'  );
+	Route::post   ('/'     , 'upsertPayloadData' );
+	Route::delete ('/{id}' , 'deletePayloadData' );
+});
+
 Route::prefix('v1/gate')->controller(GateController::class)->group(function () {
+	Route::get ('/'                  , 'getPayloadData'    );
 	Route::post('/open'              , 'openGate'          );
 	Route::get ('/close/{rfid}'      , 'closeGate'         );
 	Route::get ('/forceclose/{rfid}' , 'forceCloseGate'    );
