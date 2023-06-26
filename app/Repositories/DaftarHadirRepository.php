@@ -18,20 +18,20 @@ class DaftarHadirRepository implements DaftarHadirInterface {
     $this->siswaRepo        = $siswaRepo       ;
   }
 
-  public function getPayloadByQty($gateId)
+  public function getPayloadByQty($payload)
   {
     try {
       $data = $this->daftarHadirModel
-      ->where('daftar_hadir.gate_id', $gateId)
+      ->where('daftar_hadir.gate_id', $payload['gate_id'])
       ->joinList()
-      ->orderBy('daftar_hadir.updated_at', 'desc')
-      ->take(5)
-      ->get();
+      ->orderBy('daftar_hadir.updated_at', 'desc');
 
       $payloadList = array(
-        'message' => 'berhasil mengambil data daftar hadir',
-        'code'    => 200,
-        'data'    => $data
+        'message'     => 'berhasil mengambil data daftar hadir',
+        'code'        => 200,
+        'data'        => $data->take(5)->get(),
+        'total_hadir' => $data->get()->count(),
+        'total_siswa'=>  $this->siswaRepo->getByKelas($payload['kelas_id'])['total']
       );
 
     } catch (\Throwable $th) {

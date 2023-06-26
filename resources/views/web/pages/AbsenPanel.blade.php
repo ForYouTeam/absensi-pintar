@@ -6,12 +6,14 @@
     <div class="row breadcrumbs-top d-inline-block">
       <div class="breadcrumb-wrapper col-12">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">tap kartu untuk melakukan absensi</a>
+          <li class="breadcrumb-item h4 mt-2"><a href="#">tap kartu untuk melakukan absensi</a>
           </li>
-          <li class="breadcrumb-item ml-5">kelas: <span class="text-uppercase">{{ $data->kelas }}</span>
+          <li class="breadcrumb-item h4 mt-2 ml-5">kelas: <span class="text-uppercase">{{ $data->kelas }}</span>
+          </li>
+          <li class="breadcrumb-item h4 mt-2 ml-5">Hadir: <span class="text-uppercase" id="total"></span>
           </li>
           <li class="ml-5">
-            <fieldset class="form-label-group mb-0">
+            <fieldset class="form-label-group mt-2 mb-0">
               <input type="text" class="form-control input-form" id="rfid" value="" required="" autofocus="" onblur="preventBlur()">
               <label for="wallet-address">RFID CODE</label>
             </fieldset>
@@ -116,8 +118,16 @@
     }
 
     function getPayloadByQty() {
-      $.get(`${baseUrl}/api/v1/present/getbyqty/${payload.gate_id}`, (res) => {
+      $.get(`${baseUrl}/api/v1/present/getbyqty/${payload.gate_id}?gate_id={{$data->id}}&kelas_id={{$data->kelas_id}}`, (res) => {
         let data = res.data
+
+        let totalHadir = res.total_hadir
+        let totalSiswa = res.total_siswa
+
+        $('#total').html(`
+          ${totalHadir}/${totalSiswa}
+        `)
+
         $('#log-body').html('')
         $.each(data, (i, d) => {
           $('#log-body').append(`
@@ -135,7 +145,7 @@
                             <h5 style="margin-left: 20px">${formatDate(d.tgl)}</h5>
                           </div>
                           <div class="col-md-4 col-12 py-2 text-center">
-                            <h5>Waktu masuk ${d.start_tap}</h5>
+                            <h5>`+ (d.end_tap ? `Keluar ${d.end_tap}` : `Masuk ${d.start_tap}`) +`</h5>
                           </div>
                         </div>
                     </div>

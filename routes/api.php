@@ -7,6 +7,7 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KetentuanController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Http\Request;
@@ -72,4 +73,9 @@ Route::prefix('v1/gate')->controller(GateController::class)->group(function () {
 Route::prefix('v1/present')->controller(DaftarHadirController::class)->group(function () {
 	Route::post('/start'    , 'presentStart' );
 	Route::get('/getbyqty/{gateId}' , 'getDataByQty' );
+});
+
+Route::prefix('v1/log')->controller(LogController::class)->group(function () {
+	Route::get ('/get' , 'getAllLog' );
+	Route::post('/set' , 'postLogs'  );
 });

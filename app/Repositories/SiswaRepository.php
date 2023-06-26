@@ -42,6 +42,26 @@ class SiswaRepository implements SiswaInterface {
     return $payloadList;
   }
 
+  public function getByKelas($kelas)
+  {
+    try {
+      $data = $this->siswaModel->where('siswa.kelas_id', 'LIKE', '%'.$kelas.'%')->joinList()->get();
+      $payloadList = array(
+        'message' => 'success',
+        'code'    => 200,
+        'data'    => $data,
+        'total'   => $data->count()
+      );
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
+    }
+
+    return $payloadList;
+  }
+
   public function getAllPayload()
   {
     try {

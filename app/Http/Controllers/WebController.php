@@ -39,4 +39,4 @@ class WebController extends Controller
 
 			return view('web.pages.AbsenPanel')->with('data', $data['data']);
 		}
-}
+} 
