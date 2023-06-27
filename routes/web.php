@@ -26,7 +26,7 @@ Route::get('/guru'         , [GuruController        ::class, 'getView' ])->name(
 Route::get('/ketentuan'    , [KetentuanController   ::class, 'getView' ])->name('pages.ketentuan' );
 Route::get('/daftar_hadir' , [DaftarHadirController ::class, 'getView' ])->name('pages.absen'     );
 Route::get('/report'       , [ReportController      ::class, 'getView' ])->name('pages.report'    );
-Route::get('/gate'         , [GateController        ::class, 'getView' ])->name('pages.absen'     );
+Route::get('/gate'         , [GateController        ::class, 'getView' ])->name('pages.gate'      );
 Route::get('/akun'         , [AkunController        ::class, 'getView' ])->name('Auth.Akun'       );
 
 
