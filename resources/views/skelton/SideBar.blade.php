@@ -79,7 +79,7 @@
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Semua Data</span></li>
     <!-- Cards -->
 
-    <li class="menu-item {{Route::is('pages.guru') || Route::is('pages.guru') || Route::is('pages.siswa') || Route::is('pages.kelas') || Route::is('pages.jurusan') || Route::is('pages.jabatan') || Route::is('pages.mapel') || Route::is('pages.ketentuan') || Route::is('pages.guru')? 'active open' : ''}}">
+    <li class="menu-item {{Route::is('pages.guru') || Route::is('pages.guru') || Route::is('pages.siswa') || Route::is('pages.kelas') || Route::is('pages.jurusan') || Route::is('pages.jabatan') || Route::is('pages.mapel') || Route::is('pages') || Route::is('pages.guru')? 'active open' : ''}}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-layout"></i>
         <div data-i18n="Layouts">Tabel</div>
