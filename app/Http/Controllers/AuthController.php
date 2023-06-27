@@ -9,10 +9,14 @@ class AuthController extends Controller
 {
     public function index ()
     {
-        return view();
+        if (Auth::check()) {
+            return redirect(route('dashboard'));
+        } else {
+            return view('Auth.Login');
+        }
     }
 
-    public function Login (Request $request)
+    public function login (Request $request)
     {
         $credentials = $request->validate([
             'username' => ['required', 'min:4'],
@@ -22,7 +26,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect('/');
+            return redirect(route('dashboard'));
         }
         return back()->with('statusErr', 'Username atau password salah');
     }

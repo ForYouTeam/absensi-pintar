@@ -181,32 +181,34 @@ class DaftarHadirRepository implements DaftarHadirInterface
           'data'    => $siswa['data']
         );
       }
+
+      if ($payloadList['data']) {
+        $logpayload = array(
+          'message' => $payloadList['message'],
+          'data'    => $this->getDataAsString($payloadList['data']),
+          'code'    => $payloadList['code'   ],
+        );
+      } else {
+        $logpayload = array(
+          'message' => $payloadList['message'],
+          'data'    => 'no action',
+          'code'    => $payloadList['code'   ],
+        );
+      }
+  
+      $logs = $this->logRepo->SetLog($logpayload);
+  
+      if ($logs['code'] != 200) {
+        return $logs;
+      }
+
     } catch (\Throwable $th) {
       $payloadList = array(
         'from'    => 'setPresentStudent',
         'message' => $th->getMessage(),
-        'code'    => 500
+        'code'    => 500,
+        'from'    => 'setPresentStudent'
       );
-    }
-
-    if ($payloadList['data']) {
-      $logpayload = array(
-        'message' => $payloadList['message'],
-        'data'    => $this->getDataAsString($payloadList['data']),
-        'code'    => $payloadList['code'   ],
-      );
-    } else {
-      $logpayload = array(
-        'message' => $payloadList['message'],
-        'data'    => 'no action',
-        'code'    => $payloadList['code'   ],
-      );
-    }
-
-    $logs = $this->logRepo->SetLog($logpayload);
-
-    if ($logs['code'] != 200) {
-      return $logs;
     }
 
     return $payloadList;

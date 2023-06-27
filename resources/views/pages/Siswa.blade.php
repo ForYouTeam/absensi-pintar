@@ -49,7 +49,9 @@
                                     </td>
                                     <td style="width: 15%">
                                         <button class="editItem btn-sm btn btn-info" data-id="{{$item->id}}">Edit</button>
+                                        @hasrole('super-admin|admin')
                                         <button id="btn-hapus" class="btn-sm btn btn-danger" data-id="{{$item->id}}">Hapus</button>
+                                        @endhasrole
                                     </td>
                                 </tr>
                           @endforeach

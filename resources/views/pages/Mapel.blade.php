@@ -29,7 +29,9 @@
                                     <td style="width: 60%">{{ $item['nama_mapel'] }}</td>
                                     <td style="width: 10%">
                                         <button class="editItem btn btn-info btn-sm" data-id="{{$item->id}}">Edit</button>
+                                        @hasrole('super-admin|admin')
                                         <button id="btn-hapus" class="btn btn-danger btn-sm" data-id="{{$item->id}}">Hapus</button>
+                                        @endhasrole
                                     </td>
                                 </tr>
                           @endforeach

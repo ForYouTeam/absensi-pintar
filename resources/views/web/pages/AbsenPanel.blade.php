@@ -171,7 +171,6 @@
             });
             
             setName(res.data)
-            console.log(res);
             getPayloadByQty()
           },
           error   : (err) => {
@@ -184,6 +183,7 @@
               });
             }
             $('#rfid').val('')
+            console.log(err);
           },
           dataType: "json"
       });
