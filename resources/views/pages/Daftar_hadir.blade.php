@@ -8,33 +8,43 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="mt--5" style="float: left">Data Absensi</h4>
-                    <button id="createData" type="button" class="btn btn-primary" style="float: right">Tambah Data</button>
                 </div>
                 <div class="card-body">
                     <table id="table-data" class="table table-bordered" >
                         <thead>
                             <tr>
                                 <th>N0</th>
-                                <th>gate</th>
-                                <th>siswa</th>
-                                <th>status</th>
-                                <th>tgl</th>
-                                <th>start tap</th>
-                                <th>end tap</th>
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                                <th>Jurusan</th>
+                                <th>Mata Pelajaran</th>
+                                <th>Keterangan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($data as $d)
+                                <tr>
+                                    <td>1</td>
+                                    <td>{{$d->siswa->nama}}</td>
+                                    <td>{{$d->siswa->kelas->nama_kelas}}</td>
+                                    <td>{{$d->siswa->jurusan->nama_jurusan}}</td>
+                                    <td>{{$d->gate->mapel}}</td>
+                                    <td>{{ $d->status == 1 ? 'hadir' : ($d->status == 0 ? 'alpa' : ($d->status == 3 ? 'bolos' : 'dalam kelas'))}}</td>
+                                    <td>
+                                        <button type="button" class="editItem btn btn-info btn-sm" data-id="{{$d->id}}" data-status="{{$d->status}}">Edit</button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th>N0</th>
-                                <th>gate</th>
-                                <th>siswa</th>
-                                <th>status</th>
-                                <th>tgl</th>
-                                <th>start tap</th>
-                                <th>end tap</th>
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                                <th>Jurusan</th>
+                                <th>Mata Pelajaran</th>
+                                <th>Keterangan</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -43,61 +53,33 @@
             </div>
         </div>
     </div>
-{{-- Modal --}}
+
+    {{-- Modal --}}
     <div class="modal fade" id="modal-data" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+        <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
           <div class="modal-content p-3 p-md-5">
             <div class="modal-body">
               <div class="text-center mb-4">
-                <h3 class="modal-title">Form Tambah Data</h3>
-                <p class="text-primary"><b>ABSENSI</b></p>
+                <h3 id="#modalheader" class="modal-title"></h3>
+                <p class="text-primary"><b>JABATAN</b></p>
               </div>
-              <form id="formData" class="row g-3" enctype="multipart/form-data">
+              <form id="formData" class="row g-3" onsubmit="return false">
                 @csrf
-                <input type="hidden" name="id" id="id">
-                <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserFirstName">Gate</label>
-                    <select id="jabatan_id" name="jabatan_id" class="form-select" aria-label="Default select example">
-                        {{-- <option value="" selected>-- Pilih --</option>
-                        @foreach ($jabatan as $d)
-                        <option value="{{$d->id}}">{{$d->nama_jabatan}}</option>
-                        @endforeach --}}
+                <div class="col-12 my-4">
+                  <label class="form-label w-100" for="modalAddCard">Status</label>
+                  <div class="input-group input-group-merge mb-2">
+                    <input type="hidden" name="id" id="id">
+                    <select name="status" id="status" class="form-select">
+                        <option value="0">Alpa</option>
+                        <option value="1">Hadir</option>
+                        <option value="3">Bolos</option>
                     </select>
-                  <span class="text-danger error-msg small" id="alert-nip"></span>
-                </div>
-                <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserLastName">siswa</label>
-                    <select id="jabatan_id" name="jabatan_id" class="form-select" aria-label="Default select example">
-                        {{-- <option value="" selected>-- Pilih --</option>
-                        @foreach ($jabatan as $d)
-                        <option value="{{$d->id}}">{{$d->nama_jabatan}}</option>
-                        @endforeach --}}
-                    </select>
-                    <span class="text-danger error-msg small" id="alert-nama"></span>
-                </div>
-                <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserStatus">status</label>
-                    <input type="text" id="agama" name="agama" class="form-control" placeholder="Masukan Agama" />
-                    <span class="text-danger error-msg small" id="alert-sex"></span>
-                </div>
-                <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserLastName">Tanggal</label>
-                  <input type="date" id="status" name="status" class="form-control" placeholder="Status" />
-                  <span class="text-danger error-msg small" id="alert-status"></span>
-                </div>
-                <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserFirstName">start tap</label>
-                  <input type="time" id="golongan" name="golongan" class="form-control" placeholder="Masukan Golongan" />
-                  <span class="text-danger error-msg small" id="alert-golongan"></span>
-                </div>
-                <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserFirstName">end tap</label>
-                    <input type="time" id="golongan" name="golongan" class="form-control mb-3" placeholder="Masukan Golongan" />
-                    <span class="text-danger error-msg small" id="alert-golongan"></span>
+                  </div>
+				  <span class="text-danger small" id="nama-alert"></span>
                 </div>
                 <div class="col-12 text-center">
-                    <button type="button" id="btn-simpan" class="btn btn-outline-primary">Submit</button>
-                    <button type="reset" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                  <button type="submit" id="btn-simpan" class="btn btn-outline-primary me-sm-3 me-1 mt-3 mx-1">Submit</button>
+                  <button type="reset" class="btn btn-outline-danger btn-reset mt-3 mx-1" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                 </div>
               </form>
             </div>
@@ -107,7 +89,11 @@
 {{-- End Modal --}}
     @section('script')
     <script>
+        let baseUrl
+
         $(document).ready(function() {
+            baseUrl = "{{ config('app.url') }}"
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -116,115 +102,57 @@
             $('#table-data').DataTable();
         });
 
-        $('#createData').click(function () {
-            $('.modal-title').html("Form Tambah Data");
-            $('#btn-simpan').val("create-Item");
-            $('#id').val('');
-            $('#formData').trigger("reset");
-            $('#modal-data').modal('show');
-        });
-
         $('body').on('click', '.editItem', function () {
-            var _id = $(this).data('id');
-            $.get("http://127.0.0.1:8000/api/v1/daftar_hadir/" + _id, function (res) {
-                $('.modal-title').html("Form Edit Data");
-                $('#btn-simpan').val("edit-user");
-                $('#modal-data').modal('show');
-                $('#id').val(res.data.id);
-                $('#nip').val(res.data.nip);
-                $('#nama').val(res.data.nama);
-                $('#sex').val(res.data.sex);
-                $('#agama').val(res.data.agama);
-                $('#alamat').val(res.data.alamat);
-                $('#status').val(res.data.status);
-                $('#golongan').val(res.data.golongan);
-                $('#jabatan_id').val(res.data.jabatan_id);
-                $('#mapel_id').val(res.data.mapel_id);
-            })
+            let id = $(this).data('id')
+            let status = $(this).data('status')
+            $('#modal-data'  ).modal ('show'               );
+            $('.modal-title' ).html  ("Formulir Edit Data" );
+            $('#btn-simpan'  ).val   ("edit-user"          );
+            $('#status'      ).val   (status               );
+            $('#id'          ).val   (id                   );
         });
 
         $('#btn-simpan').click(function (e) {
-            console.log($('#formData').serialize());
             e.preventDefault();
-            $(this).html('Mengirim...');
-            let submitButton = $(this).prop('disabled')
+            let submitButton = $(this);
+            submitButton.html('Simpan');
 
-            if(!submitButton){
-                $(this).prop('disabled', true);
+            if (!submitButton.prop('disabled')) {
+                console.log($('#formData').serialize()  );
+                submitButton.prop('disabled', true);
                 $.ajax({
-                    data: $('#formData').serialize(),
-                    url: "http://127.0.0.1:8000/api/v1/daftar_hadir",
-                    type: "POST",
-                    dataType: 'json',
-                        success: function(result) {
-                            Swal.fire({
-                                title: 'Success',
-                                text: result.message,
-                                icon: 'success',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Oke'
-                            }).then((result) => {
-                                location.reload();
-                            });
-                            $('#modal-data').modal('hide');
-                        },
-                        error: function(result) {
-                            $('#btn-simpan').prop('disabled', false);
+                    data    : $('#formData').serialize()  ,
+                    url     : `${baseUrl}/api/v1/present/update`,
+                    type    : "POST"                      ,
+                    dataType: 'json'                      ,
+                    success: function(result) {
+                        console.log(result);
+                        Swal.fire({
+                            title            : 'Success'               ,
+                            text             : 'Data Berhasil diproses',
+                            icon             : 'success'               ,
+                            cancelButtonColor: '#d33'                  ,
+                            confirmButtonText: 'Oke'
+                        }).then((result) => {
+                            location.reload();
+                        });
+                        $('#modal-data').modal('hide');
+                    },
+                    error: function(result) {
+                        submitButton.prop('disabled', false);
+                        if (result.status = 422) {
                             let data = result.responseJSON
-                            let errorRes = data.errors
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: data.message,
-                            });
+                            let errorRes = data.errors;
                             if (errorRes.length >= 1) {
                                 $('#nama-alert').html(errorRes.data.nama_jabatan);
                             }
+                        } else {
+                            let msg = 'Sedang pemeliharaan server'
+                            iziToast.error(msg)
                         }
+                    }
                 });
             }
-        });
-
-        $(document).on('click', '#btn-hapus', function() {
-            let _id = $(this).data('id');
-            let url = "http://127.0.0.1:8000/api/v1/daftar_hadir/" + _id;
-            Swal.fire({
-                title: 'Anda Yakin?',
-                text: "Data ini mungkin terhubung ke tabel yang lain!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Batal',
-                confirmButtonText: 'Hapus'
-            }).then((res) => {
-                if (res.isConfirmed) {
-                    $.ajax({
-                        url: url,
-                        type: 'delete',
-                        success: function(result) {
-                            let data = result.data;
-                            Swal.fire({
-                                title: 'Success',
-                                text: result.message,
-                                icon: 'success',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Oke'
-                            }).then((result) => {
-                                location.reload();
-                            });
-                        },
-                        error: function(result) {
-                            let data = result.responseJSON
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: data.response.message,
-                            });
-                        }
-                    });
-                }
-            })
         });
     </script>
 @endsection

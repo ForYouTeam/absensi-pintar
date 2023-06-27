@@ -25,7 +25,7 @@ class DaftarHadirRepository implements DaftarHadirInterface
   public function getAllPresentData()
   {
     try {
-      $present = $this->daftarHadirModel->with('siswa.kelas', 'siswa.jurusan')->get();
+      $present = $this->daftarHadirModel->with('siswa.kelas', 'siswa.jurusan', 'gate')->get();
       $payloadList = array(
         'message' => 'success',
         'code'    => 200,
@@ -40,6 +40,28 @@ class DaftarHadirRepository implements DaftarHadirInterface
     }
 
     return $payloadList;
+  }
+
+  public function upsertPayload($id, array $payload)
+  {
+    try {
+      $date = Carbon::now();
+      $payload['updated_at'] = $date;
+
+      $payloadList = array(
+        'message' => 'success',
+        'code'    => 200,
+        'data'    => $this->daftarHadirModel->whereId($id)->update($payload)
+      );
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
+    }
+
+    return $payloadList;
+
   }
 
   public function getPayloadByQty($payload)

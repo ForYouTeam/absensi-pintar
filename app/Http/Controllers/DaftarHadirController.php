@@ -16,7 +16,18 @@ class DaftarHadirController extends Controller
 
     public function getView() 
     {
-        return view('pages.Daftar_hadir');
+        $data = $this->daftarHadirRepo->getAllPresentData();
+        return view('pages.Daftar_hadir')->with('data', $data['data']);
+    }
+
+    public function updatePayload(Request $request) 
+    {
+        $id = $request->id;
+        $payload = array(
+            'status' => $request->status
+        );
+        $data = $this->daftarHadirRepo->upsertPayload($id, $payload);
+        return response()->json($data, $data['code']);
     }
 
     public function getAllPresent()
