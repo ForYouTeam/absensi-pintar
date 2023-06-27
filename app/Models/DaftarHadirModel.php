@@ -49,4 +49,9 @@ class DaftarHadirModel extends Model
     {
         return $this->belongsTo(SiswaModel::class, 'siswa_id');
     }
+
+    public function gate()
+    {
+        return $this->belongsTo(GateModel::class, 'gate_id');
+    }
 }

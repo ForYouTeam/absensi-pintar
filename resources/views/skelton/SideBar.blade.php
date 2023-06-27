@@ -81,13 +81,20 @@
 
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Semua Data</span></li>
     
-      <li class="menu-item {{Route::is('pages.guru') || Route::is('pages.guru') || Route::is('pages.siswa') || Route::is('pages.kelas') || Route::is('pages.jurusan') || Route::is('pages.jabatan') || Route::is('pages.mapel') || Route::is('pages') || Route::is('pages.guru')? 'active open' : ''}}">
+      <li class="menu-item {{Route::is('pages.guru') || Route::is('pages.guru') || Route::is('pages.siswa') || Route::is('pages.kelas') || Route::is('pages.jurusan') || Route::is('pages.jabatan') || Route::is('pages.mapel') || Route::is('pages') || Route::is('pages.guru') || Route::is('pages.absen')? 'active open' : ''}}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-layout"></i>
           <div data-i18n="Layouts">Tabel</div>
         </a>
 
         <ul class="menu-sub">
+          @hasrole('super-admin')
+          <li class="menu-item {{Route::is('pages.absen') ? 'active' : ''}}">
+            <a href="{{route('pages.absen')}}" class="menu-link">
+              <div data-i18n="Without menu">Absensi</div>
+            </a>
+          </li>
+          @endhasrole
           @hasrole('super-admin')
           <li class="menu-item {{Route::is('pages.guru') ? 'active' : ''}}">
             <a href="{{route('pages.guru')}}" class="menu-link">
