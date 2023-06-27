@@ -48,7 +48,11 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <button role="button" onClick="sectionClose(event)" data-id="{{ explode('_', $d['section'])[1]}}" class="btn btn-danger btn-sm" type="button">Tutup</button>
+                                        @if (!$d['close'])
+                                            <button role="button" onClick="sectionClose(event)" data-id="{{ explode('_', $d['section'])[1]}}" class="btn btn-danger btn-sm" type="button">Tutup</button>
+                                        @else
+                                            Sudah Tutup
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

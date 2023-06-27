@@ -25,21 +25,17 @@
                                 $no = 1;
                             @endphp
                           @foreach ($data as $item)
+                            @if ($item['scope'] != 'super-admin')
                                 <tr>
                                     <td style="width: 5%">{{$no++}}</td>
                                     <td style="width: 50%">{{ $item['username'] }}</td>
-                                    <td>
-                                        @if ($item['scope'] == 0)
-                                            Admin
-                                        @else
-                                            Guru
-                                        @endif
-                                    </td>
+                                    <td>{{ $item['scope'] }}</td>
                                     <td style="width: 15%">
                                         <button class="editItem btn btn-sm btn-info" data-id="{{$item->id}}">Edit</button>
                                         <button id="btn-hapus" class="btn btn-sm btn-danger" data-id="{{$item->id}}">Hapus</button>
                                     </td>
                                 </tr>
+                            @endif
                           @endforeach
                         </tbody>
                         <tfoot>
@@ -82,8 +78,8 @@
                     <label class="form-label w-100" for="modalAddCard">scope</label>
                         <select id="scope" name="scope" class="form-select" aria-label="Default select example">
                             <option value="" selected disabled>-- Pilih --</option>
-                            <option value="0">Admin</option>
-                            <option value="1">Guru</option>
+                            <option value="admin">Admin</option>
+                            <option value="guru">Guru</option>
                         </select>
                         <span class="text-danger error-msg small" id="alert-password"></span>
                 </div>

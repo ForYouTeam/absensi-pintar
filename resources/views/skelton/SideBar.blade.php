@@ -76,74 +76,103 @@
     </li>
 
     <!-- Components -->
-    <li class="menu-header small text-uppercase"><span class="menu-header-text">Semua Data</span></li>
     <!-- Cards -->
+    @hasrole('super-admin|admin|guru')
 
-    <li class="menu-item {{Route::is('pages.guru') || Route::is('pages.guru') || Route::is('pages.siswa') || Route::is('pages.kelas') || Route::is('pages.jurusan') || Route::is('pages.jabatan') || Route::is('pages.mapel') || Route::is('pages') || Route::is('pages.guru')? 'active open' : ''}}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-layout"></i>
-        <div data-i18n="Layouts">Tabel</div>
-      </a>
+    <li class="menu-header small text-uppercase"><span class="menu-header-text">Semua Data</span></li>
+    
+      <li class="menu-item {{Route::is('pages.guru') || Route::is('pages.guru') || Route::is('pages.siswa') || Route::is('pages.kelas') || Route::is('pages.jurusan') || Route::is('pages.jabatan') || Route::is('pages.mapel') || Route::is('pages') || Route::is('pages.guru')? 'active open' : ''}}">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Tabel</div>
+        </a>
 
-      <ul class="menu-sub">
-        <li class="menu-item {{Route::is('pages.guru') ? 'active' : ''}}">
-          <a href="{{route('pages.guru')}}" class="menu-link">
-            <div data-i18n="Without menu">Guru</div>
-          </a>
-        </li>
-        <li class="menu-item {{Route::is('pages.siswa') ? 'active' : ''}}">
-          <a href="{{route('pages.siswa')}}" class="menu-link">
-            <div data-i18n="Without menu">Siswa</div>
-          </a>
-        </li>
-        <li class="menu-item {{Route::is('pages.kelas') ? 'active' : ''}}">
-          <a href="{{route('pages.kelas')}}" class="menu-link">
-            <div data-i18n="Without menu">Kelas</div>
-          </a>
-        </li>
-        <li class="menu-item {{Route::is('pages.jurusan') ? 'active' : ''}}">
-          <a href="{{route('pages.jurusan')}}" class="menu-link">
-            <div data-i18n="Without menu">Jurusan</div>
-          </a>
-        </li>
-        <li class="menu-item {{Route::is('pages.jabatan') ? 'active' : ''}}">
-          <a href="{{route('pages.jabatan')}}" class="menu-link">
-            <div data-i18n="Without menu">Jabatan</div>
-          </a>
-        </li>
-        <li class="menu-item {{Route::is('pages.mapel') ? 'active' : ''}}">
-          <a href="{{route('pages.mapel')}}" class="menu-link">
-            <div data-i18n="Without menu">Mata Pelajaran</div>
-          </a>
-        </li>
-      </ul>
-    </li>
+        <ul class="menu-sub">
+          @hasrole('super-admin')
+          <li class="menu-item {{Route::is('pages.guru') ? 'active' : ''}}">
+            <a href="{{route('pages.guru')}}" class="menu-link">
+              <div data-i18n="Without menu">Guru</div>
+            </a>
+          </li>
+          @endhasrole
+          @hasrole('super-admin|admin|guru')
+          <li class="menu-item {{Route::is('pages.siswa') ? 'active' : ''}}">
+            <a href="{{route('pages.siswa')}}" class="menu-link">
+              <div data-i18n="Without menu">Siswa</div>
+            </a>
+          </li>
+          @endhasrole
+          @hasrole('super-admin')
+          <li class="menu-item {{Route::is('pages.kelas') ? 'active' : ''}}">
+            <a href="{{route('pages.kelas')}}" class="menu-link">
+              <div data-i18n="Without menu">Kelas</div>
+            </a>
+          </li>
+          <li class="menu-item {{Route::is('pages.jurusan') ? 'active' : ''}}">
+            <a href="{{route('pages.jurusan')}}" class="menu-link">
+              <div data-i18n="Without menu">Jurusan</div>
+            </a>
+          </li>
+          <li class="menu-item {{Route::is('pages.jabatan') ? 'active' : ''}}">
+            <a href="{{route('pages.jabatan')}}" class="menu-link">
+              <div data-i18n="Without menu">Jabatan</div>
+            </a>
+          </li>
+          @endhasrole
+          @hasrole('super-admin|admin|guru')
+          <li class="menu-item {{Route::is('pages.mapel') ? 'active' : ''}}">
+            <a href="{{route('pages.mapel')}}" class="menu-link">
+              <div data-i18n="Without menu">Mata Pelajaran</div>
+            </a>
+          </li>
+          @endhasrole
+        </ul>
+      </li>
+      
+      <li class="menu-item {{Route::is('pages.gate') || Route::is('Auth.Akun') || Route::is('pages.ketentuan') ? 'active open' : ''}}">
+        @hasrole('super-admin')
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-cog"></i>
+          <div data-i19n="Layouts">Setup</div>
+        </a>
+        @endhasrole
+  
+        <ul class="menu-sub">
+          @hasrole('super-admin')
+          <li class="menu-item {{Route::is('Auth.Akun') ? 'active' : ''}}">
+            <a href="{{route('Auth.Akun')}}" class="menu-link">
+              <div data-i19n="Basic">Akun</div>
+            </a>
+          </li>
+          @endhasrole
+          @hasrole('super-admin')
+          <li class="menu-item {{Route::is('pages.gate') ? 'active' : ''}}">
+            <a href="{{route('pages.gate')}}" class="menu-link">
+              <div data-i19n="Basic">Gate</div>
+            </a>
+          </li>
+          <li class="menu-item {{Route::is('pages.ketentuan') ? 'active' : ''}}">
+            <a href="{{route('pages.ketentuan')}}" class="menu-link">
+              <div data-i19n="Without menu">Ketentuan</div>
+            </a>
+          </li>
+          @endhasrole
+        </ul>
+      </li>
 
-    <li class="menu-item {{Route::is('pages.gate') || Route::is('pages.ketentuan') ? 'active open' : ''}}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-cog"></i>
-        <div data-i19n="Layouts">Setup</div>
-      </a>
+      <li class="menu-item {{Route::is('pages.reportlog') ? 'active' : ''}}">
+        <a href="{{route('pages.reportlog')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-collection"></i>
+          <div data-i18n="Basic">Log & Report</div>
+        </a>
+      </li>
 
-      <ul class="menu-sub">
-        <li class="menu-item {{Route::is('pages.gate') ? 'active' : ''}}">
-          <a href="{{route('pages.gate')}}" class="menu-link">
-            <div data-i19n="Basic">Gate</div>
-          </a>
-        </li>
-        <li class="menu-item {{Route::is('pages.ketentuan') ? 'active' : ''}}">
-          <a href="{{route('pages.ketentuan')}}" class="menu-link">
-            <div data-i19n="Without menu">Ketentuan</div>
-          </a>
-        </li>
-      </ul>
-    </li>
-
-    <li class="menu-item {{Route::is('pages.report' ? 'active' : '')}}">
-      <a href="{{route('pages.report')}}" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-collection"></i>
-        <div data-i18n="Basic">Log & Report</div>
-      </a>
-    </li>
+      <li class="menu-item">
+        <a href="{{route('dashboard-panel')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-card"></i>
+          <div data-i18n="Basic">Panel Gate</div>
+        </a>
+      </li>
+    @endhasrole
   </ul>
 </aside>

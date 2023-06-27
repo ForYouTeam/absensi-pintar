@@ -44,4 +44,9 @@ class DaftarHadirModel extends Model
             'daftar_hadir.end_tap'
         );
     }
+
+    public function siswa()
+    {
+        return $this->belongsTo(SiswaModel::class, 'siswa_id');
+    }
 }

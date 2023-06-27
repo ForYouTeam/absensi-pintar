@@ -19,6 +19,12 @@ class DaftarHadirController extends Controller
         return view('pages.Daftar_hadir');
     }
 
+    public function getAllPresent()
+    {
+        $data = $this->daftarHadirRepo->getAllPresentData();
+        return response()->json($data, $data['code']);
+    }
+
     public function getDataByQty()
     {
         $payload = array(
