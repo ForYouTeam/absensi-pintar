@@ -36,6 +36,7 @@ class DaftarHadirModel extends Model
         ->leftJoin('siswa as model_a', 'daftar_hadir.siswa_id', '=', 'model_a.id')
         ->select(
             'daftar_hadir.gate_id',
+            'daftar_hadir.siswa_id',
             'model_a.nama as siswa',
             'daftar_hadir.status',
             'daftar_hadir.tgl',

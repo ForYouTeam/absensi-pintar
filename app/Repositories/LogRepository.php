@@ -42,7 +42,10 @@ class LogRepository implements LogInterface {
   public function GetLog(array $meta)
   {
     try {
-      $data = $this->logModel->withParams($meta)->get();
+      $data = $this->logModel
+      ->orderBy('created_at')
+      ->limit(50)
+      ->get();
 
       $payloadList = array(
         'message' => 'success',

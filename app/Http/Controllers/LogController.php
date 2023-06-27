@@ -32,25 +32,11 @@ class LogController extends Controller
 
     public function postLogs(Request $request)
     {
-        $date = Carbon::now();
+        // $date = Carbon::now();
         $payload = array(
-            'section'    => $request->section   ,
-            'tgl_gate'   => $request->tgl_gate  ,
-            'open'       => $request->open      ,
-            'close'      => $request->close     ,
-            'nama_guru'  => $request->nama_guru ,
-            'rfid_guru'  => $request->rfid_guru ,
-            'nama_siswa' => $request->nama_siswa,
-            'rfid_siswa' => $request->rfid_siswa,
-            'kelas'      => $request->kelas     ,
-            'level'      => $request->level     ,
-            'jurusan'    => $request->jurusan   ,
-            'status'     => $request->status    ,
-            'tgl_absen'  => $request->tgl_absen ,
-            'start_tap'  => $request->start_tap ,
-            'end_tap'    => $request->end_tap   ,
-            'created_at' => $date               ,
-            'updated_at' => $date               ,
+            'message' => $request->message ,
+            'data'    => $request->data    ,
+            'code'    => $request->code    ,
         );
 
         $data = $this->logRepo->SetLog($payload);
