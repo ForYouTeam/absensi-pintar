@@ -10,6 +10,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KetentuanController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\MapelController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -87,4 +88,8 @@ Route::prefix('v1/present')->controller(DaftarHadirController::class)->group(fun
 Route::prefix('v1/log')->controller(LogController::class)->group(function () {
 	Route::get ('/get' , 'getAllLog' );
 	Route::post('/set' , 'postLogs'  );
+});
+
+Route::prefix('v1/report')->controller(ReportController::class)->group(function () {
+	Route::get ('/daftar_hadir' , 'getAllSiswaByKelas' );
 });

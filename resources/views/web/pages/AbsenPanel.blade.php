@@ -107,8 +107,6 @@
         $(`#${i}`).html(d)
       })
 
-      console.log(data);
-
       $('#imgScan').attr('src', `{{asset('storage/siswa/${data.foto}')}}`)
     }
 
@@ -129,8 +127,6 @@
         $('#total').html(`
           ${totalHadir}/${totalSiswa}
         `)
-
-        console.log(data);
 
         $('#log-body').html('')
         $.each(data, (i, d) => {
@@ -175,6 +171,7 @@
             });
             
             setName(res.data)
+            console.log(res);
             getPayloadByQty()
           },
           error   : (err) => {

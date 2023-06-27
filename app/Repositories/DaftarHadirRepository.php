@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\DaftarHadirInterface;
+use App\Interfaces\LogInterface;
 use App\Interfaces\SiswaInterface;
 use App\Models\DaftarHadirModel;
 use Carbon\Carbon;
@@ -12,11 +13,13 @@ class DaftarHadirRepository implements DaftarHadirInterface
 
   private DaftarHadirModel $daftarHadirModel;
   private SiswaInterface   $siswaRepo;
+  private LogInterface   $logRepo;
 
-  public function __construct(DaftarHadirModel $daftarHadirModel, SiswaInterface $siswaRepo)
+  public function __construct(DaftarHadirModel $daftarHadirModel, SiswaInterface $siswaRepo, LogInterface $logRepo)
   {
     $this->daftarHadirModel = $daftarHadirModel;
     $this->siswaRepo        = $siswaRepo;
+    $this->logRepo          = $logRepo;
   }
 
   public function getPayloadByQty($payload)
@@ -84,6 +87,21 @@ class DaftarHadirRepository implements DaftarHadirInterface
 
     return $payloadList;
   }
+
+   // CHANGING DATA
+
+   function getDataAsString($data)
+   {
+    $date = Carbon::now();
+    $nama = $data['nama'];
+    $rfid = $data['rfid'];
+
+    $result = $nama . ' | ' . $rfid  . ' | ' . $date;
+
+    return $result;
+   }
+ 
+   // 
 
   public function setPresentStudent($payload)
   {
@@ -169,6 +187,26 @@ class DaftarHadirRepository implements DaftarHadirInterface
         'message' => $th->getMessage(),
         'code'    => 500
       );
+    }
+
+    if ($payloadList['data']) {
+      $logpayload = array(
+        'message' => $payloadList['message'],
+        'data'    => $this->getDataAsString($payloadList['data']),
+        'code'    => $payloadList['code'   ],
+      );
+    } else {
+      $logpayload = array(
+        'message' => $payloadList['message'],
+        'data'    => 'no action',
+        'code'    => $payloadList['code'   ],
+      );
+    }
+
+    $logs = $this->logRepo->SetLog($logpayload);
+
+    if ($logs['code'] != 200) {
+      return $logs;
     }
 
     return $payloadList;
