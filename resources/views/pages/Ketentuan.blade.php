@@ -30,7 +30,13 @@
                                     <td style="width: 5%">{{$no++}}</td>
                                     <td>{{ $item['start'] }}</td>
                                     <td>{{$item['end']}}</td>
-                                    <td>{{$item['tipe']}}</td>
+                                    <td>
+                                        @if ($item['tipe'] == 0)
+                                            Absen
+                                        @else
+                                            Istirahat
+                                        @endif
+                                    </td>
                                     <td style="width: 15%">
                                         <button class="editItem btn btn-info btn-sm" data-id="{{$item->id}}">Edit</button>
                                         <button id="btn-hapus" class="btn btn-danger btn-sm" data-id="{{$item->id}}">Hapus</button>

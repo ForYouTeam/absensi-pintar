@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GateRequest;
 use App\Interfaces\GateInterface;
 use App\Interfaces\GuruInterface;
 use App\Interfaces\KelasInterface;
@@ -40,7 +41,7 @@ class GateController extends Controller
         return response()->json($payload, $payload['code']);
     }
 
-    public function openGate(Request $request)
+    public function openGate(GateRequest $request)
     {
         $checkGuru = $this->guruRepo->getByRfid($request['rfid']);
         if ($checkGuru['code'] !== 200) {

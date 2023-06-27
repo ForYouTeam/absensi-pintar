@@ -87,7 +87,7 @@
                 <div class="col-12 col-md-12">
                     <label class="form-label" for="modalEditUserStatus">rfid</label>
                     <input type="text" id="rfid" name="rfid" class="form-control" placeholder="Masukan RFID" autofocus/>
-                    <span class="text-danger error-msg small" id="alert-sex"></span>
+                    <span class="text-danger error-msg small" id="alert-rfid"></span>
                 </div>
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="modalEditUserFirstName">kelas</label>
@@ -97,12 +97,12 @@
                         <option value="{{$d->id}}">{{$d->nama_kelas}}</option>
                         @endforeach
                     </select>
-                  <span class="text-danger error-msg small" id="alert-nip"></span>
+                  <span class="text-danger error-msg small" id="alert-kelas"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserLastName">mapel</label>
                     <input type="text" id="mapel" name="mapel" class="form-control" placeholder="Masukan mata pelajaran"/>
-                    <span class="text-danger error-msg small" id="alert-nama"></span>
+                    <span class="text-danger error-msg small" id="alert-mapel"></span>
                 </div>
                 <div class="col-12 text-center">
                     <button type="button" id="btn-simpan" class="btn btn-outline-primary">Submit</button>
@@ -146,15 +146,16 @@
             if (res.isConfirmed) {
                 $.get(`${BaseUrl}/api/v1/gate/close/${dataId}`, function()
                 {
-                    iziToast.success({
-                        title   : 'Pesan'               ,
-                        message : 'Sesi berhasil ditutup',
-                        position: 'topRight'
-                    });
+                    Swal.fire({
+                            title            : 'Success',
+                            text             : 'Sessioon telah ditutup.',
+                            icon             : 'success',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Oke'
+                        }).then((result) => {
+                            location.reload();
+                        });
                 })
-                setTimeout(() => {
-                    location.reload();
-                }, 500);
             }
         })
     }
@@ -210,15 +211,30 @@
                         $('#modal-data').modal('hide');
                     },
                     error: function(result) {
-                        console.log(result);
                         submitButton.prop('disabled', false);
-                        if (result.status = 422) {
+                        if (result.status == 422) {
                             let data = result.responseJSON
                             let errorRes = data.errors;
                             if (errorRes.length >= 1) {
                                 $('#alert-rfid').html(errorRes.data.rfid);
+                                $('#alert-kelas').html(errorRes.data.kelas);
+                                $('#alert-mapel').html(errorRes.data.mapel);
                             }
-                        } else {
+                        }
+                        else if (result.status == 404) {
+                            let data = result.responseJSON
+                            console.log(data);
+                            Swal.fire({
+                                title            : 'Error',
+                                text             : data.message,
+                                icon             : 'error',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Oke'
+                             })
+                            $('#modal-data').modal('hide');
+
+                        }
+                        else {
                             let msg = 'Sedang pemeliharaan server'
                             iziToast.error(msg)
                         }

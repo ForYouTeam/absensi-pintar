@@ -79,7 +79,7 @@
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Semua Data</span></li>
     <!-- Cards -->
 
-    <li class="menu-item open {{Route::is('pages.guru') || Route::is('pages.guru') || Route::is('pages.siswa') || Route::is('pages.kelas') || Route::is('pages.jurusan') || Route::is('pages.jabatan') || Route::is('pages.mapel') || Route::is('pages.guru')? 'active' : ''}}">
+    <li class="menu-item {{Route::is('pages.guru') || Route::is('pages.guru') || Route::is('pages.siswa') || Route::is('pages.kelas') || Route::is('pages.jurusan') || Route::is('pages.jabatan') || Route::is('pages.mapel') || Route::is('pages.guru')? 'active open' : ''}} open">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-layout"></i>
         <div data-i18n="Layouts">Tabel</div>
@@ -119,21 +119,21 @@
       </ul>
     </li>
 
-    <li class="menu-item open {{Route::is('pages.gate') || Route::is('pages.ketentuan') ? 'active' : ''}}">
+    <li class="menu-item {{Route::is('pages.gate') || Route::is('pages.ketentuan') ? 'active open' : ''}}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-cog"></i>
-        <div data-i18n="Layouts">Setup</div>
+        <div data-i19n="Layouts">Setup</div>
       </a>
 
       <ul class="menu-sub">
         <li class="menu-item {{Route::is('pages.gate') ? 'active' : ''}}">
           <a href="{{route('pages.gate')}}" class="menu-link">
-            <div data-i18n="Basic">Gate</div>
+            <div data-i19n="Basic">Gate</div>
           </a>
         </li>
         <li class="menu-item {{Route::is('pages.ketentuan') ? 'active' : ''}}">
           <a href="{{route('pages.ketentuan')}}" class="menu-link">
-            <div data-i18n="Without menu">Ketentuan</div>
+            <div data-i19n="Without menu">Ketentuan</div>
           </a>
         </li>
       </ul>
