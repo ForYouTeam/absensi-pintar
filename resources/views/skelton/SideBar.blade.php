@@ -79,7 +79,7 @@
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Semua Data</span></li>
     <!-- Cards -->
 
-    <li class="menu-item open {{Route::is('pages.guru') || Route::is('pages.guru') || Route::is('pages.siswa') || Route::is('pages.kelas') || Route::is('pages.jurusan') || Route::is('pages.jabatan') || Route::is('pages.mapel') || Route::is('pages.ketentuan') || Route::is('pages.guru')? 'active' : ''}}">
+    <li class="menu-item open {{Route::is('pages.guru') || Route::is('pages.guru') || Route::is('pages.siswa') || Route::is('pages.kelas') || Route::is('pages.jurusan') || Route::is('pages.jabatan') || Route::is('pages.mapel') || Route::is('pages.guru')? 'active' : ''}}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-layout"></i>
         <div data-i18n="Layouts">Tabel</div>
@@ -116,19 +116,27 @@
             <div data-i18n="Without menu">Mata Pelajaran</div>
           </a>
         </li>
+      </ul>
+    </li>
+
+    <li class="menu-item open {{Route::is('pages.gate') || Route::is('pages.ketentuan') ? 'active' : ''}}">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-cog"></i>
+        <div data-i18n="Layouts">Setup</div>
+      </a>
+
+      <ul class="menu-sub">
+        <li class="menu-item {{Route::is('pages.gate') ? 'active' : ''}}">
+          <a href="{{route('pages.gate')}}" class="menu-link">
+            <div data-i18n="Basic">Gate</div>
+          </a>
+        </li>
         <li class="menu-item {{Route::is('pages.ketentuan') ? 'active' : ''}}">
           <a href="{{route('pages.ketentuan')}}" class="menu-link">
             <div data-i18n="Without menu">Ketentuan</div>
           </a>
         </li>
       </ul>
-    </li>
-
-    <li class="menu-item">
-      <a href="cards-basic.html" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-terminal"></i>
-        <div data-i18n="Basic">Log</div>
-      </a>
     </li>
 
     <li class="menu-item {{Route::is('pages.report' ? 'active' : '')}}">

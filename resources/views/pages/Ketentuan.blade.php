@@ -82,7 +82,11 @@
                 <div class="col-12">
                     <label class="form-label w-100" for="modalAddCard">Tipe</label>
                     <div class="input-group input-group-merge">
-                        <input id="tipe" name="tipe" class="level form-control credit-card-mask" type="text" placeholder="Masukan jabatan" required>
+                        <select name="tipe" id="tipe" class="form-select">
+                            <option value="" selected disabled>-- Pilih --</option>
+                            <option value="0">Absen</option>
+                            <option value="1">Istirahat</option>
+                        </select>
                     </div>
                     <span class="text-danger small" id="alert-tipe"></span>
                 </div>
@@ -118,7 +122,7 @@
             $('#id'          ).val     (''                     );
             $('#formData'    ).trigger ("reset"                );
             $('#modal-data'  ).modal   ('show'                 );
-            $('#alert-strt'  ).html    (''                     );
+            $('#alert-start'  ).html   (''                     );
             $('#alert-end'   ).html    (''                     );
             $('#alert-tipe'  ).html    (''                     );
         });
@@ -128,7 +132,7 @@
             $.get(`${baseUrl}/api/v1/ketentuan/` + _id, function (res) {
                 $('.modal-title' ).html  ("Formulir Edit Data");
                 $('#btn-simpan'  ).val   ("edit-user"         );
-                $('#alert-strt'  ).html  (''                  );
+                $('#alert-start'  ).html (''                  );
                 $('#alert-end'   ).html  (''                  );
                 $('#alert-tipe'  ).html  (''                  );
                 $('#modal-data'  ).modal ('show'              );
@@ -170,8 +174,8 @@
                             let errorRes = data.errors;
                             if (errorRes.length >= 1) {
                                 $('#alert-start').html(errorRes.data.start);
-                                $('#alert-end'  ).html(errorRes.data.end  );
-                                $('#alert-tipe' ).html(errorRes.data.tipe );
+                                $('#alert-end').html(errorRes.data.end);
+                                $('#alert-tipe').html(errorRes.data.tipe);
                             }
                         } else {
                             let msg = 'Sedang pemeliharaan server'

@@ -48,7 +48,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <button class="editItem btn btn-danger btn-sm" type="button">Tutup</button>
+                                        <button role="button" onClick="sectionClose(event)" data-id="{{ explode('_', $d['section'])[1]}}" class="btn btn-danger btn-sm" type="button">Tutup</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -129,6 +129,35 @@
 
         BaseUrl = "{{config('app.url')}}"
     });
+
+    function sectionClose(event) {
+        let dataId = event.target.dataset.id
+        console.log(dataId);
+        Swal.fire({
+            title             : 'Tutup Session?',
+            text              : "Sesi ini tidak dapat dipulihkan kembali!",
+            icon              : 'question',
+            showCancelButton  : true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor : '#d33',
+            cancelButtonText  : 'Batal',
+            confirmButtonText : 'Proses'
+        }).then((res) => {
+            if (res.isConfirmed) {
+                $.get(`${BaseUrl}/api/v1/gate/close/${dataId}`, function()
+                {
+                    iziToast.success({
+                        title   : 'Pesan'               ,
+                        message : 'Sesi berhasil ditutup',
+                        position: 'topRight'
+                    });
+                })
+                setTimeout(() => {
+                    location.reload();
+                }, 500);
+            }
+        })
+    }
 
     function clearError() {
         $('.error-msg').html('')
