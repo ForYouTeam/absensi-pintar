@@ -9,15 +9,15 @@
             <div class="d-flex align-items-end row">
               <div class="col-sm-7">
                 <div class="card-body">
-                  <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
-                  <p class="mb-4">You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in your profile.</p>
+                  <h5 class="card-title text-primary" style="margin-bottom: 1.5rem">Selamat Datang (nama admin). 🎉</h5>
+                  <p class="mb-5">Selamat Datang di Aplikasi <span class="fw-bold">72%</span> more sales today. Check your new badge in your profile.</p>
       
                   <a href="javascript:;" class="btn btn-sm btn-label-primary">View Badges</a>
                 </div>
               </div>
               <div class="col-sm-5 text-center text-sm-left">
                 <div class="card-body pb-0 px-0 px-md-4">
-                  <img src="sneat/img/illustrations/man-with-laptop-light.png" height="140" alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png" data-app-light-img="illustrations/man-with-laptop-light.html">
+                  <img src="{{asset('assets/img/jadwal.svg')}}" height="190" alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png" data-app-light-img="illustrations/man-with-laptop-light.html">
                 </div>
               </div>
             </div>
@@ -27,11 +27,16 @@
           <div class="row">
             <div class="col-lg-6 col-md-12 col-6 mb-4">
               <div class="card">
-                <div class="card-body pb-0">
-                  <span class="d-block fw-semibold mb-1">Order</span>
-                  <h3 class="card-title mb-1">276k</h3>
+                <div class="card-body">
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <img src="{{asset('assets/img/icons/unicons/wallet-info.png')}}" alt="Credit Card" class="rounded">
+                    </div>
+                  </div>
+                  <span style="font-size: 14pt; font-weight: bold">Siswa</span>
+                  <h3 class="card-title text-nowrap mb-1">{{$data['siswa']}}</h3>
+                  <small class="text-primary fw-semibold"> ( TOTAL )</small>
                 </div>
-                <div id="orderChart" class="mb-3"></div>
               </div>
             </div>
             <div class="col-lg-6 col-md-12 col-6 mb-4">
@@ -39,21 +44,12 @@
                 <div class="card-body">
                   <div class="card-title d-flex align-items-start justify-content-between">
                     <div class="avatar flex-shrink-0">
-                      <img src="sneat/img/icons/unicons/wallet-info.png" alt="Credit Card" class="rounded">
-                    </div>
-                    <div class="dropdown">
-                      <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                      </div>
+                      <img src="{{asset('assets/img/icons/unicons/wallet-info.png')}}" alt="Credit Card" class="rounded">
                     </div>
                   </div>
-                  <span>Sales</span>
-                  <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                  <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +28.42%</small>
+                  <span style="font-size: 14pt; font-weight: bold">Guru</span>
+                  <h3 class="card-title text-nowrap mb-1">{{$data['siswa']}}</h3>
+                  <small class="text-primary fw-semibold"> ( TOTAL )</small>
                 </div>
               </div>
             </div>
@@ -63,48 +59,48 @@
         <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
           <div class="card">
             <div class="row row-bordered g-0">
-              <div class="col-md-8">
-                <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
-                <div id="totalRevenueChart" class="px-2"></div>
+              <div class="col-md-12">
+                <h5 class="text-primary" style="float: left; padding: 23px">Data Absensi</h5>
+                <h5 class="text-primary" style="float: right; padding: 23px">
+                  <div class="col-md-12">
+                    <select name="" id="" class="form-select">
+                      <option value="">Filter Kelas</option>
+                    </select>
+                  </div>
+                </h5>
               </div>
-              <div class="col-md-4">
-                <div class="card-body">
-                  <div class="text-center">
-                    <div class="dropdown">
-                      <button class="btn btn-sm btn-label-primary dropdown-toggle" type="button" id="growthReportId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        2022
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                        <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                        <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                        <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div id="growthChart"></div>
-                <div class="text-center fw-semibold pt-3 mb-2">62% Company Growth</div>
-      
-                <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-                  <div class="d-flex">
-                    <div class="me-2">
-                      <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
-                    </div>
-                    <div class="d-flex flex-column">
-                      <small>2022</small>
-                      <h6 class="mb-0">$32.5k</h6>
-                    </div>
-                  </div>
-                  <div class="d-flex">
-                    <div class="me-2">
-                      <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-                    </div>
-                    <div class="d-flex flex-column">
-                      <small>2021</small>
-                      <h6 class="mb-0">$41.2k</h6>
-                    </div>
-                  </div>
-                </div>
+              <div style="padding: 20px">
+                <table id="table-data" class="table table-bordered" >
+                  <thead>
+                      <tr>
+                          <th>N0</th>
+                          <th>Nama</th>
+                          <th>Kelas</th>
+                          <th>Jurusan</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      @php
+                          $no = 1;
+                      @endphp
+                      @foreach ($datas as $d)
+                          <tr>
+                              <td>{{$no++}}</td>
+                              <td>{{$d['nama_kelas']}}</td></td>
+                              <td></td>
+                              <td>{{$d['jurusan']}}</td>
+                          </tr>
+                      @endforeach
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                        <th>N0</th>
+                        <th>Nama</th>
+                        <th>Kelas</th>
+                        <th>Jurusan</th>
+                      </tr>
+                  </tfoot>
+                </table>  
               </div>
             </div>
           </div>
@@ -117,55 +113,36 @@
                 <div class="card-body">
                   <div class="card-title d-flex align-items-start justify-content-between">
                     <div class="avatar flex-shrink-0">
-                      <img src="sneat/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded">
-                    </div>
-                    <div class="dropdown">
-                      <button class="btn p-0" type="button" id="cardOpt4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                      </div>
+                      <img src="{{asset('assets/img/icons/unicons/wallet-info.png')}}" alt="Credit Card" class="rounded">
                     </div>
                   </div>
-                  <span class="d-block mb-1">Payments</span>
-                  <h3 class="card-title text-nowrap mb-2">$2,456</h3>
-                  <small class="text-danger fw-semibold"><i class='bx bx-down-arrow-alt'></i> -14.82%</small>
+                  <span class="d-block mb-1" style="font-size: 14pt; font-weight: bold">Kelas</span>
+                  <h3 class="card-title text-nowrap mb-2">{{$data['kelas']}}</h3>
+                  <small class="text-primary fw-semibold"> ( TOTAL )</small>
                 </div>
               </div>
             </div>
             <div class="col-6 mb-4">
               <div class="card">
-                <div class="card-body pb-2">
-                  <span class="d-block fw-semibold mb-1">Revenue</span>
-                  <h3 class="card-title mb-1">425k</h3>
-                  <div id="revenueChart"></div>
-                </div>
-              </div>
-            </div>
-            <!-- </div>
-          <div class="row"> -->
-            <div class="col-12 mb-4">
-              <div class="card">
                 <div class="card-body">
-                  <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                    <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                      <div class="card-title">
-                        <h5 class="text-nowrap mb-2">Profile Report</h5>
-                        <span class="badge bg-label-warning rounded-pill">Year 2021</span>
-                      </div>
-                      <div class="mt-sm-auto">
-                        <small class="text-success text-nowrap fw-semibold"><i class='bx bx-chevron-up'></i> 68.2%</small>
-                        <h3 class="mb-0">$84,686k</h3>
-                      </div>
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <img src="{{asset('assets/img/icons/unicons/wallet-info.png')}}" alt="Credit Card" class="rounded">
                     </div>
-                    <div id="profileReportChart"></div>
                   </div>
+                  <span class="d-block mb-1" style="font-size: 14pt; font-weight: bold">Jurusan</span>
+                  <h3 class="card-title text-nowrap mb-2">{{$data['jurusan']}}</h3>
+                  <small class="text-primary fw-semibold"> ( TOTAL )</small>
                 </div>
               </div>
             </div>
           </div>
     </div>
-
+@endsection
+@section('script')
+    <script>
+      $(document).ready(function() {
+        $('#table-data').DataTable();
+    });
+    </script>
 @endsection
