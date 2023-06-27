@@ -103,7 +103,13 @@
                 </div>
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="modalEditUserFirstName">Agama</label>
-                  <input type="text" id="agama" name="agama" class="form-control" placeholder="Masukan Agama" />
+                    <select name="agama" id="agama" class="form-select">
+                        <option value="Islam">Islam</option>
+                        <option value="Kristen Protestan">Kristen Protestan</option>
+                        <option value="Kristen Katolik">Kristen Katolik</option>
+                        <option value="Hinda">Hinda</option>
+                        <option value="Konghucu">Konghucu</option>
+                    </select>
                   <span class="text-danger error-msg small" id="alert-agama"></span>
                 </div>
                 <div class="col-12 col-md-6">
