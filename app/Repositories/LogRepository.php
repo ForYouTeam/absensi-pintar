@@ -32,7 +32,8 @@ class LogRepository implements LogInterface {
     } catch (\Throwable $th) {
       $payloadList = array(
         'message' => $th->getMessage(),
-        'code'    => 500
+        'code'    => 500,
+        'from'    => 'from Set Log'
       );
     }
 

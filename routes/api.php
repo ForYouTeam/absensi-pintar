@@ -81,8 +81,9 @@ Route::prefix('v1/gate')->controller(GateController::class)->group(function () {
 });
 
 Route::prefix('v1/present')->controller(DaftarHadirController::class)->group(function () {
-	Route::post('/start'    , 'presentStart' );
-	Route::get('/getbyqty/{gateId}' , 'getDataByQty' );
+	Route::post('/start'             , 'presentStart' );
+	Route::get ('/getbyqty/{gateId}' , 'getDataByQty' );
+	Route::get ('/all'               , 'getAllPresent' );
 });
 
 Route::prefix('v1/log')->controller(LogController::class)->group(function () {

@@ -80,8 +80,9 @@
     }
 
     function clearInput() {
-        $('.input-form' ).val ('')
-        $('#rfid').prop('disabled', true)
+        $('#rfid' ).val ('')
+        // $('#rfid').prop('disabled', true)
+        $('#rfid').focus()
     }
 
     function openGate() {

@@ -52,4 +52,14 @@ class SiswaModel extends Model
             'siswa.updated_at',
         );
     }
+
+    public function kelas()
+    {
+        return $this->belongsTo(KelasModel::class, 'kelas_id');
+    }
+
+    public function jurusan()
+    {
+        return $this->belongsTo(JurusanModel::class, 'jurusan_id');
+    }
 }

@@ -65,50 +65,52 @@ class AkunRepository implements  AkunInterface {
 
     public function upsertPayload($id, array $payload)
     {
-        {
-            try {
-              $dataId = $this->getPayloadById($id);
-              $encryptId = Uuid::uuid4()->toString();
-              $date = Carbon::now();
-              $hash = Hash::make($this->akunModel['password']);
-              if ($id) {
-                $status = $this->getPayloadById($id);
-                
-                if ($status['code'] == 200) {
-                  $payload['updated_at'] = $date;
-                  $payload['password'] = $hash;
-        
-                  $payloadList = array(
-                    'message' => 'success',
-                    'code'    => 200,
-                    'data'    => $this->akunModel->whereId($id)->update($payload)
-                  );
-                } else {
-                  $payloadList = $status;
-                }
-                
-              } else {
-                $payload['created_at'] = $date;
-                $payload['updated_at'] = $date;
-                $payload['password'] = $hash;
-                $dataId = crc32($encryptId);
-        
-                $payloadList = array(
-                  'message' => 'success',
-                  'code'    => 200,
-                  'data'    => $this->akunModel->create($payload, $dataId)
-                );
-              }
-              
-            } catch (\Throwable $th) {
+      {
+        try {
+          $dataId = $this->getPayloadById($id);
+          $encryptId = Uuid::uuid4()->toString();
+          $date = Carbon::now();
+          $hash = Hash::make($payload['password']);
+          if ($id) {
+            $status = $this->getPayloadById($id);
+            
+            if ($status['code'] == 200) {
+              $payload['updated_at'] = $date;
+              $payload['password'] = $hash;
+    
               $payloadList = array(
-                'message' => $th->getMessage(),
-                'code'    => 500
+                'message' => 'success',
+                'code'    => 200,
+                'data'    => $this->akunModel->whereId($id)->update($payload)
               );
+            } else {
+              $payloadList = $status;
             }
-        
-            return $payloadList;
+            
+          } else {
+            $payload['created_at'] = $date;
+            $payload['updated_at'] = $date;
+            $payload['password'] = $hash;
+            $dataId = crc32($encryptId);
+    
+            $payloadList = array(
+              'message' => 'success',
+              'code'    => 200,
+              'data'    => $this->akunModel->create($payload, $dataId)
+            );
+            $payloadList['data']->assignRole($payload['scope']);
+          }
+
+          
+        } catch (\Throwable $th) {
+          $payloadList = array(
+            'message' => $th->getMessage(),
+            'code'    => 500
+          );
         }
+    
+        return $payloadList;
+      }
     }
 
     public function deletePayload($id)

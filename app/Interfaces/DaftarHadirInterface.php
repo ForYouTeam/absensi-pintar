@@ -8,4 +8,5 @@ interface DaftarHadirInterface {
   public function setPresentStudent($rfid);
   public function forceEndStudy($gateId);
   public function forceEndAllStudy($tgl);
+  public function getAllPresentData();
 }
