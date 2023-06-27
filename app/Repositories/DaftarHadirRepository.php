@@ -22,6 +22,26 @@ class DaftarHadirRepository implements DaftarHadirInterface
     $this->logRepo          = $logRepo;
   }
 
+  public function getAllPresentData()
+  {
+    try {
+      $present = $this->daftarHadirModel->with('siswa.kelas', 'siswa.jurusan')->get();
+      $payloadList = array(
+        'message' => 'success',
+        'code'    => 200,
+        'data'    => $present
+      );
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'from'    => 'getPayloadByQty',
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
+    }
+
+    return $payloadList;
+  }
+
   public function getPayloadByQty($payload)
   {
     try {
