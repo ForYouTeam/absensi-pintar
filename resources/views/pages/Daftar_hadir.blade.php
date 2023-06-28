@@ -23,9 +23,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $no = 1;
+                            @endphp
                             @foreach ($data as $d)
                                 <tr>
-                                    <td>1</td>
+                                    <td>{{$no++}}</td>
                                     <td>{{$d->siswa->nama}}</td>
                                     <td>{{$d->siswa->kelas->nama_kelas}}</td>
                                     <td>{{$d->siswa->jurusan->nama_jurusan}}</td>
