@@ -22,9 +22,19 @@ class ReportController extends Controller
         return view('pages.Report');
     }
 
-    public function getAllDaftarHadir($kelasId)
+    public function getAllDaftarHadir($payload)
     {
-        $daftarHadir = $this->daftarHadirModel->where('kelas_id', $kelasId)->joinList()->get();
+        $payload = array(
+            "start"    => request('start'   ),
+            "end"      => request('end'     ),
+            "kelas_id" => request('kelas_id'),
+        );
+
+        $daftarHadir = $this->daftarHadirModel
+            ->where('kelas_id', $payload['kelas_id'])
+            ->whereBetween('tgl', ['2023-01-01', '2023-03-30'])
+            ->joinList()
+            ->get();
         return $daftarHadir;
     }
 

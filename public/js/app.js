@@ -18864,6 +18864,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_export__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/export */ "./resources/js/utils/export.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -18873,8 +18876,12 @@ __webpack_require__.r(__webpack_exports__);
     var __expose = _ref.expose;
     __expose();
     var baseUrl = "http://127.0.0.1:8000";
-    var kelasId = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(0);
     var kelasList = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
+    var kehadiranPayload = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+      kelas_id: 0,
+      start: '',
+      end: ''
+    });
     var getKelasList = function getKelasList() {
       axios__WEBPACK_IMPORTED_MODULE_2___default().get("".concat(baseUrl, "/api/v1/kelas")).then(function (res) {
         var item = res.data.data;
@@ -18883,15 +18890,22 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     };
+    var buttonName = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('DOWNLOAD REPORT');
     var data = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var getDataDaftarHadir = function getDataDaftarHadir() {
-      axios__WEBPACK_IMPORTED_MODULE_2___default().get("".concat(baseUrl, "/api/v1/report/daftar_hadir?kelas_id=").concat(kelasId.value)).then(function (res) {
+      console.log(kehadiranPayload);
+      axios__WEBPACK_IMPORTED_MODULE_2___default().get("".concat(baseUrl, "/api/v1/report/daftar_hadir?kelas_id=").concat(kehadiranPayload.kelas_id, "&start=").concat(kehadiranPayload.start, "&end=").concat(kehadiranPayload.end)).then(function (res) {
         var item = res.data;
-        // console.log(item);
-
-        tambahkanInformasiDaftarHadir(item.siswa, item.daftar_hadir);
-        generateDataBulan(item.siswa);
-        _utils_export__WEBPACK_IMPORTED_MODULE_1__["default"].generateExcel(data.value);
+        if (item.length >= 1) {
+          tambahkanInformasiDaftarHadir(item.siswa, item.daftar_hadir);
+          generateDataBulan(item.siswa);
+          _utils_export__WEBPACK_IMPORTED_MODULE_1__["default"].generateExcel(data.value);
+        } else {
+          buttonName.value = "DATA KOSONG !";
+          setTimeout(function () {
+            buttonName.value = "DOWNLOAD REPORT";
+          }, 1500);
+        }
       });
     };
     var tambahkanInformasiDaftarHadir = function tambahkanInformasiDaftarHadir(siswa, daftarHadir) {
@@ -18985,9 +18999,10 @@ __webpack_require__.r(__webpack_exports__);
     });
     var __returned__ = {
       baseUrl: baseUrl,
-      kelasId: kelasId,
       kelasList: kelasList,
+      kehadiranPayload: kehadiranPayload,
       getKelasList: getKelasList,
+      buttonName: buttonName,
       data: data,
       getDataDaftarHadir: getDataDaftarHadir,
       tambahkanInformasiDaftarHadir: tambahkanInformasiDaftarHadir,
@@ -18997,12 +19012,16 @@ __webpack_require__.r(__webpack_exports__);
       logs: logs,
       getLogs: getLogs,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
+      reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       get Export() {
         return _utils_export__WEBPACK_IMPORTED_MODULE_1__["default"];
       },
       get axios() {
         return (axios__WEBPACK_IMPORTED_MODULE_2___default());
+      },
+      get moment() {
+        return (moment__WEBPACK_IMPORTED_MODULE_3___default());
       }
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -19040,26 +19059,57 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "form-group text-center"
 };
-var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "form-lable mb-3"
-  }, "Pilih Kelas Kehadiran", -1 /* HOISTED */);
+var _hoisted_4 = {
+  "class": "row"
+};
+var _hoisted_5 = {
+  "class": "col-lg-6"
+};
+var _hoisted_6 = {
+  "class": "form-group"
+};
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "",
+    "class": "form-label"
+  }, "Periode Awal", -1 /* HOISTED */);
 });
-var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_8 = {
+  "class": "col-lg-6"
+};
+var _hoisted_9 = {
+  "class": "form-group"
+};
+var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "",
+    "class": "form-label"
+  }, "Periode Akhir", -1 /* HOISTED */);
+});
+var _hoisted_11 = {
+  "class": "form-group"
+};
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "",
+    "class": "form-label mt-5"
+  }, "Kelas", -1 /* HOISTED */);
+});
+var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     disabled: "",
     value: "0"
   }, "-- Pilih ---", -1 /* HOISTED */);
 });
-var _hoisted_6 = ["value"];
-var _hoisted_7 = ["disabled"];
-var _hoisted_8 = {
+var _hoisted_14 = ["value"];
+var _hoisted_15 = ["disabled"];
+var _hoisted_16 = {
   "class": "col-lg-8 px-5"
 };
-var _hoisted_9 = {
+var _hoisted_17 = {
   "class": "terminal"
 };
-var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "terminal-header"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -19070,37 +19120,52 @@ var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
     "class": "green-circle"
   })], -1 /* HOISTED */);
 });
-var _hoisted_11 = {
+var _hoisted_19 = {
   "class": "terminal-body"
 };
-var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_20 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Welcome to the Logger Terminal!", -1 /* HOISTED */);
 });
-var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Logging some messages...", -1 /* HOISTED */);
 });
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $setup.kelasId = $event;
+      return $setup.kehadiranPayload.start = $event;
+    }),
+    "class": "form-control",
+    type: "date",
+    id: "html5-month-input"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.kehadiranPayload.start]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $setup.kehadiranPayload.end = $event;
+    }),
+    "class": "form-control",
+    type: "date",
+    id: "html5-month-input"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.kehadiranPayload.end]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $setup.kehadiranPayload.kelas_id = $event;
     }),
     "class": "form-select",
     id: "exampleFormControlSelect1",
     "aria-label": "Default select example"
-  }, [_hoisted_5, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.kelasList, function (kelas, index) {
+  }, [_hoisted_13, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.kelasList, function (kelas, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
       key: index,
       value: kelas.id,
       "class": "text-capitalize"
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(kelas.nama_kelas), 9 /* TEXT, PROPS */, _hoisted_6);
-  }), 128 /* KEYED_FRAGMENT */))], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.kelasId, void 0, {
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(kelas.nama_kelas), 9 /* TEXT, PROPS */, _hoisted_14);
+  }), 128 /* KEYED_FRAGMENT */))], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.kehadiranPayload.kelas_id, void 0, {
     number: true
-  }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    disabled: $setup.kelasId ? false : true,
+  }]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    id: "btn-report",
+    disabled: $setup.kehadiranPayload.kelas_id && $setup.kehadiranPayload.start && $setup.kehadiranPayload.end ? false : true,
     onClick: $setup.getDataDaftarHadir,
     "class": "btn btn-primary btn-lg mt-4"
-  }, "DOWNLOAD REPORT", 8 /* PROPS */, _hoisted_7)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, _hoisted_13, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.logs, function (log, index) {
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.buttonName), 9 /* TEXT, PROPS */, _hoisted_15)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, _hoisted_21, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.logs, function (log, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
       key: index,
       "class": "log"

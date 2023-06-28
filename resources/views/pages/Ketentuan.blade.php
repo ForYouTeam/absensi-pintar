@@ -162,9 +162,10 @@
                     type    : "POST"                        ,
                     dataType: 'json'                        ,
                     success: function(result) {
+                        let message = result.message
                         Swal.fire({
-                            title            : 'Success'                ,
-                            text             : 'Data Berhasil diproses.',
+                            title            : 'success'                ,
+                            text             :  message,
                             icon             : 'success'                ,
                             cancelButtonColor: '#d33'                   ,
                             confirmButtonText: 'Oke'

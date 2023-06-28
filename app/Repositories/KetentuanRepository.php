@@ -60,6 +60,32 @@ class KetentuanRepository implements KetentuanInterface {
     return $payloadList;
   }
 
+  public function checkPayload($tipe)
+  {
+    try {
+      $data = $this->ketentuanModel->where('tipe', $tipe)->first();
+      if ($data) {
+        return array(
+          'message' => 'ketentuan hanya boleh dibuat 1 pada setiap tipe',
+          'code'    => 200,
+          'data'    => $data
+        );
+      }
+
+      $payloadList = array(
+        'message' => 'not found',
+        'code'    => 404,
+      );
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
+    }
+
+    return $payloadList;
+  }
+
   public function upsertPayload($id, array $payload)
   {
     try {
@@ -71,7 +97,7 @@ class KetentuanRepository implements KetentuanInterface {
           $payload['updated_at'] = $date;
 
           $payloadList = array(
-            'message' => 'success',
+            'message' => 'Data Berhasil diproses.',
             'code'    => 200,
             'data'    => $this->ketentuanModel->whereId($id)->update($payload)
           );
@@ -84,7 +110,7 @@ class KetentuanRepository implements KetentuanInterface {
         $payload['updated_at'] = $date;
 
         $payloadList = array(
-          'message' => 'success',
+          'message' => 'Data Berhasil diproses.',
           'code'    => 200,
           'data'    => $this->ketentuanModel->create($payload)
         );

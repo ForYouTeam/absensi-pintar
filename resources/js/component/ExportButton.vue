@@ -2,12 +2,28 @@
   <div class="row">
     <div class="col-lg-4">
       <div class="form-group text-center">
-        <div class="form-lable mb-3">Pilih Kelas Kehadiran</div>
-        <select v-model.number="kelasId" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-          <option disabled value="0">-- Pilih ---</option>
-          <option v-for="(kelas, index) in kelasList" :key="index" :value="kelas.id" class="text-capitalize">{{ kelas.nama_kelas }}</option>
-        </select>
-        <button :disabled="kelasId ? false : true" @click="getDataDaftarHadir" class="btn btn-primary btn-lg mt-4">DOWNLOAD REPORT</button>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="" class="form-label">Periode Awal</label>
+              <input v-model="kehadiranPayload.start" class="form-control" type="date" id="html5-month-input">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="" class="form-label">Periode Akhir</label>
+              <input v-model="kehadiranPayload.end" class="form-control" type="date" id="html5-month-input">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="" class="form-label mt-5">Kelas</label>
+          <select v-model.number="kehadiranPayload.kelas_id" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+            <option disabled value="0">-- Pilih ---</option>
+            <option v-for="(kelas, index) in kelasList" :key="index" :value="kelas.id" class="text-capitalize">{{ kelas.nama_kelas }}</option>
+          </select>
+        </div>
+        <button id="btn-report" :disabled="kehadiranPayload.kelas_id && kehadiranPayload.start && kehadiranPayload.end ? false : true" @click="getDataDaftarHadir" class="btn btn-primary btn-lg mt-4">{{ buttonName }}</button>
       </div>
     </div>
     <div class="col-lg-8 px-5">
@@ -84,15 +100,20 @@
 
 </style>
 <script setup>
-  import { onMounted, ref } from 'vue';
+  import { onMounted, reactive, ref } from 'vue';
   import Export from '../utils/export'
   import axios from 'axios'
+  import moment from 'moment';
 
   const baseUrl = process.env.VUE_APP_API_URL
 
-  const kelasId = ref(0)
-
   const kelasList = ref()
+
+  const kehadiranPayload = reactive({
+    kelas_id: 0,
+    start   : '',
+    end     : ''
+  })
 
   const getKelasList = () => {
     axios.get(`${baseUrl}/api/v1/kelas`)
@@ -106,18 +127,26 @@
     })
   }
 
+  const buttonName = ref('DOWNLOAD REPORT')
+
   const data = ref()
   const getDataDaftarHadir = () => {
-    axios.get(`${baseUrl}/api/v1/report/daftar_hadir?kelas_id=${kelasId.value}`)
+    console.log(kehadiranPayload);
+
+    axios.get(`${baseUrl}/api/v1/report/daftar_hadir?kelas_id=${kehadiranPayload.kelas_id}&start=${kehadiranPayload.start}&end=${kehadiranPayload.end}`)
     .then((res) => {
       let item = res.data
-      // console.log(item);
-
-      tambahkanInformasiDaftarHadir(item.siswa, item.daftar_hadir)
-
-      generateDataBulan(item.siswa)
-
-      Export.generateExcel(data.value)
+      
+      if (item.length >= 1) {
+        tambahkanInformasiDaftarHadir(item.siswa, item.daftar_hadir)
+        generateDataBulan(item.siswa)
+        Export.generateExcel(data.value)
+      } else {
+        buttonName.value = "DATA KOSONG !"
+        setTimeout(() => {
+          buttonName.value = "DOWNLOAD REPORT"
+        }, 1500);
+      }
     })
   }
 

@@ -37,6 +37,11 @@ class KetentuanController extends Controller
 	public function upsertPayloadData(KetentuanRequest $request)
 	{
 		$id = $request->id | null;
+		$checKPayload = $this->ketentuanRepo->checkPayload($request->tipe);
+
+		if ($checKPayload['code'] != 404) {
+			return response()->json($checKPayload, $checKPayload['code']);
+		}
 		$payload = $this->ketentuanRepo->upsertPayload($id, $request->except('_token'));
 
 		return response()->json($payload, $payload['code']);
