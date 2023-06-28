@@ -74,14 +74,14 @@
                   <input type="hidden" name="id" id="dataId">
                   <label class="form-label w-100" for="modalAddCard">Start</label>
                   <div class="input-group input-group-merge">
-                    <input id="start" name="start" class="form-control credit-card-mask" type="time" placeholder="Masukan jabatan" required>
+                    <input id="start" name="start" class="form-control credit-card-mask" type="time" placeholder="Input disini" required>
                 </div>
                 <span class="text-danger small" id="alert-start"></span>
                 </div>
                 <div class="col-12">
                     <label class="form-label w-100" for="modalAddCard">End</label>
                     <div class="input-group input-group-merge">
-                        <input id="end" name="end" class="form-control credit-card-mask" type="time" placeholder="Masukan jabatan" required>
+                        <input id="end" name="end" class="form-control credit-card-mask" type="time" placeholder="Input disini" required>
                     </div>
                     <span class="text-danger small" id="alert-end"></span>
                 </div>
@@ -97,8 +97,8 @@
                     <span class="text-danger small" id="alert-tipe"></span>
                 </div>
                 <div class="col-12 text-center">
-                  <button type="submit" id="btn-simpan" class="btn btn-outline-primary mt-3">Submit</button>
-                  <button type="reset" class="btn btn-outline-danger mt-3" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                    <button type="submit" id="btn-simpan" class="btn btn-outline-primary mt-3" style="margin-right: 0.5rem">Submit</button>
+                    <button type="reset" class="btn btn-outline-danger mt-3" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                 </div>
               </form>
             </div>

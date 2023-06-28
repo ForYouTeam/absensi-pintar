@@ -58,17 +58,17 @@
               </div>
               <form id="formData" class="row g-3" onsubmit="return false">
                 @csrf
-                <div class="col-12 my-4">
+                <div class="col-12">
+                  <input type="hidden" name="id" id="dataId">
                   <label class="form-label w-100" for="modalAddCard">Nama Jabatan</label>
-                  <div class="input-group input-group-merge mb-2">
-                    <input type="hidden" name="id" id="dataId">
-                    <input id="nama_jabatan" name="nama_jabatan" class="nama_jabatan form-control credit-card-mask" type="text" placeholder="Masukan jabatan" required>
+                  <div class="input-group input-group-merge">
+                    <input id="nama_jabatan" name="nama_jabatan" class="form-control credit-card-mask" type="text" placeholder="Input disini" required>
                   </div>
 				  <span class="text-danger small" id="nama-alert"></span>
                 </div>
                 <div class="col-12 text-center">
-                  <button type="submit" id="btn-simpan" class="btn btn-outline-primary me-sm-3 me-1 mt-3 mx-1">Submit</button>
-                  <button type="reset" class="btn btn-outline-danger btn-reset mt-3 mx-1" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                    <button type="submit" id="btn-simpan" class="btn btn-outline-primary mt-1" style="margin-right: 0.5rem">Submit</button>
+                    <button type="reset" class="btn btn-outline-danger mt-1" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                 </div>
               </form>
             </div>

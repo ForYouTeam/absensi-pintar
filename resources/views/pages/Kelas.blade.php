@@ -68,14 +68,14 @@
                   <input type="hidden" name="id" id="dataId">
                   <label class="form-label w-100" for="modalAddCard">Nama Kelas</label>
                   <div class="input-group input-group-merge">
-                    <input id="nama_kelas" name="nama_kelas" class="nama_kelas form-control credit-card-mask" type="text" placeholder="Masukan jabatan" required>
+                    <input id="nama_kelas" name="nama_kelas" class="nama_kelas form-control credit-card-mask" type="text" placeholder="Input disini" required>
                   </div>
                    <span class="text-danger" id="alert-kelas"></span>
                 </div>
                 <div class="col-12">
                     <label class="form-label w-100" for="modalAddCard">Level</label>
                     <div class="input-group input-group-merge">
-                        <input id="level" name="level" class="level form-control credit-card-mask" type="text" placeholder="Masukan jabatan" required>
+                        <input id="level" name="level" class="level form-control credit-card-mask" type="text" placeholder="Input disini" required>
                     </div>
                     <span class="text-danger" id="alert-level"></span>
                 </div>
