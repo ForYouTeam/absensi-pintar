@@ -36,7 +36,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                             @php
                                 $no = 1;
                             @endphp
@@ -143,6 +143,7 @@
             $.get(`${baseUrl}/api/v1/present/allbyparams?kelas_id=${payload.kelasId}&guru_id=${payload.guruId}`, function(res)
             {
                 let data = res.data
+                console.log(data);
 
                 $('#tbody').html('')
                 $.each(data, (i ,d ) => {
@@ -185,6 +186,9 @@
             $('#btn-simpan').val("edit-user");
             $('#status').val(status);
             $('#id').val(id);
+
+            let idData =    $('#id').val();
+            console.log(idData);
         }
 
         $('#btn-simpan').click(function (e) {
@@ -193,7 +197,6 @@
             submitButton.html('Simpan');
 
             if (!submitButton.prop('disabled')) {
-                console.log($('#formData').serialize()  );
                 submitButton.prop('disabled', true);
                 $.ajax({
                     data    : $('#formData').serialize()  ,

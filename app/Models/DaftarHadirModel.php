@@ -66,14 +66,24 @@ class DaftarHadirModel extends Model
             ->leftJoin('gate as model_b'   , 'daftar_hadir.gate_id' , '=', 'model_b.id')
             ->leftJoin('kelas as model_c'  , 'model_b.kelas_id'     , '=', 'model_c.id')
             ->leftJoin('jurusan as model_d', 'model_a.jurusan_id'   , '=', 'model_d.id')
-            ->select('daftar_hadir.*', 'model_a.*', 'model_c.nama_kelas', 'model_d.nama_jurusan', 'model_b.kelas_id','model_b.mapel')
+
+            ->select(
+                'daftar_hadir.id'      ,
+                'daftar_hadir.status'  ,
+                'daftar_hadir.siswa_id',
+                'model_a.nama'            ,
+                'model_c.nama_kelas'   ,
+                'model_d.nama_jurusan' ,
+                'model_b.kelas_id'     ,
+                'model_b.mapel'       
+                )
+
             ->when(isset($payload['kelas_id']) && $payload['kelas_id'] != 0, function ($query) use ($payload) {
                 return $query->where('model_b.kelas_id', $payload['kelas_id']);
             })
             ->when(isset($payload['guru_id']) && $payload['guru_id'] != 0, function ($query) use ($payload) {
                 return $query->where('model_b.guru_id', $payload['guru_id']);
-            })
-            ->orderBy('daftar_hadir.created_at', 'desc');
+            });
     }
 
     public function siswa()
