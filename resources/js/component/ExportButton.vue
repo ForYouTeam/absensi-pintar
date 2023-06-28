@@ -16,14 +16,27 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
-          <label for="" class="form-label mt-5">Kelas</label>
-          <select v-model.number="kehadiranPayload.kelas_id" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-            <option disabled value="0">-- Pilih ---</option>
-            <option v-for="(kelas, index) in kelasList" :key="index" :value="kelas.id" class="text-capitalize">{{ kelas.nama_kelas }}</option>
-          </select>
+        <div class="row mt-3 mb-3">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="" class="form-label">Kelas</label>
+              <select v-model.number="kehadiranPayload.kelas_id" class="form-select" >
+                <option disabled value="0">-- Pilih ---</option>
+                <option v-for="(kelas, index) in kelasList" :key="index" :value="kelas.id" class="text-capitalize">{{ kelas.nama_kelas }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="" class="form-label">Guru</label>
+              <select v-model.number="kehadiranPayload.guru_id" class="form-select" >
+                <option disabled value="0">-- Pilih ---</option>
+                <option v-for="(guru, index) in guruList" :key="index" :value="guru.id" class="text-capitalize">{{ guru.nama }}</option>
+              </select>
+            </div>
+          </div>
         </div>
-        <button id="btn-report" :disabled="kehadiranPayload.kelas_id && kehadiranPayload.start && kehadiranPayload.end ? false : true" @click="getDataDaftarHadir" class="btn btn-primary btn-lg mt-4">{{ buttonName }}</button>
+        <button id="btn-report" :disabled="kehadiranPayload.kelas_id && kehadiranPayload.guru_id && kehadiranPayload.start && kehadiranPayload.end ? false : true" @click="getDataDaftarHadir" class="btn btn-primary btn-lg mt-4">{{ buttonName }}</button>
       </div>
     </div>
     <div class="col-lg-8 px-5">
@@ -103,16 +116,17 @@
   import { onMounted, reactive, ref } from 'vue';
   import Export from '../utils/export'
   import axios from 'axios'
-  import moment from 'moment';
 
   const baseUrl = process.env.VUE_APP_API_URL
 
   const kelasList = ref()
+  const guruList = ref()
 
   const kehadiranPayload = reactive({
-    kelas_id: 0,
-    start   : '',
-    end     : ''
+    kelas_id : 0,
+    guru_id  : 0,
+    start    : '',
+    end      : ''
   })
 
   const getKelasList = () => {
@@ -127,17 +141,29 @@
     })
   }
 
+  const getGuruLust = () => {
+    axios.get(`${baseUrl}/api/v1/guru`)
+    .then((res) => {
+      let item = res.data.data
+
+      guruList.value = item
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
   const buttonName = ref('DOWNLOAD REPORT')
 
   const data = ref()
   const getDataDaftarHadir = () => {
     console.log(kehadiranPayload);
 
-    axios.get(`${baseUrl}/api/v1/report/daftar_hadir?kelas_id=${kehadiranPayload.kelas_id}&start=${kehadiranPayload.start}&end=${kehadiranPayload.end}`)
+    axios.get(`${baseUrl}/api/v1/report/daftar_hadir?kelas_id=${kehadiranPayload.kelas_id}&guru_id=${kehadiranPayload.guru_id}&start=${kehadiranPayload.start}&end=${kehadiranPayload.end}`)
     .then((res) => {
       let item = res.data
-      
-      if (item.length >= 1) {
+      console.log(item);
+      if (item.daftar_hadir.length >= 1) {
         tambahkanInformasiDaftarHadir(item.siswa, item.daftar_hadir)
         generateDataBulan(item.siswa)
         Export.generateExcel(data.value)
@@ -246,6 +272,7 @@
 
   onMounted(() => {
     getKelasList()
+    getGuruLust()
     getLogs()
   })
 </script>
