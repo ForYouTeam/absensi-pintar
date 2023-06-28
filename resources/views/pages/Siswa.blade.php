@@ -91,32 +91,32 @@
                 <input type="hidden" name="id" id="id">
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="modalEditUserFirstName">nisn</label>
-                  <input type="text" id="nisn" name="nisn" class="form-control" placeholder="Masukan Nisn" />
+                  <input type="text" id="nisn" name="nisn" class="form-control" placeholder="Input disini" />
                   <span class="text-danger error-msg small" id="alert-nisn"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserLastName">nama</label>
-                    <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukan Nama" />
+                    <input type="text" id="nama" name="nama" class="form-control" placeholder="Input disini" />
                     <span class="text-danger error-msg small" id="alert-nama"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserFirstName">tmpt lahir</label>
-                    <input type="text" id="tmpt_lahir" name="tmpt_lahir" class="form-control" placeholder="Tempat Lahir" />
+                    <input type="text" id="tmpt_lahir" name="tmpt_lahir" class="form-control" placeholder="Input disini" />
                     <span class="text-danger error-msg small" id="alert-lahir"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserLastName">tgl lahir</label>
-                    <input type="date" id="tgl_lahir" name="tgl_lahir" class="form-control" placeholder="Tanggal Lahir" />
+                    <input type="date" id="tgl_lahir" name="tgl_lahir" class="form-control" placeholder="input disini" />
                     <span class="text-danger error-msg small" id="alert-tgl"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserFirstName">alamat</label>
-                    <input type="text" id="alamat" name="alamat" class="form-control" placeholder="Masukan Alamat" />
+                    <input type="text" id="alamat" name="alamat" class="form-control" placeholder="Input disini" />
                     <span class="text-danger error-msg small" id="alert-alamat"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserLastName">no hp</label>
-                    <input type="text" id="hp" name="hp" class="form-control" placeholder="No Handpohone" />
+                    <input type="text" id="hp" name="hp" class="form-control" placeholder="Input disini" />
                     <span class="text-danger error-msg small" id="alert-hp"></span>
                 </div>
                 <div class="col-12 col-md-6">
@@ -134,7 +134,7 @@
                         <option value="Islam">Islam</option>
                         <option value="Kristen Protestan">Kristen Protestan</option>
                         <option value="Kristen Katolik">Kristen Katolik</option>
-                        <option value="Hinda">Hinda</option>
+                        <option value="Hinda">Hindu</option>
                         <option value="Konghucu">Konghucu</option>
                     </select>
                     <span class="text-danger error-msg small" id="alert-agama"></span>
@@ -161,12 +161,12 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserLastName">rfid</label>
-                    <input type="text" id="rfid" name="rfid" class="form-control" placeholder="Contoh: 41564724827562" />
+                    <input type="text" id="rfid" name="rfid" class="form-control" placeholder="Input disini" />
                     <span class="text-danger error-msg small" id="alert-rfid"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserFirstName">Foto</label>
-                    <input type="file" id="foto" name="foto" class="form-control" placeholder="Format foto" />
+                    <input type="file" id="foto" name="foto" class="form-control" placeholder="Pilih file" />
                 </div>
                 <div class="col-12 text-center">
                   <button type="button" id="btn-simpan" class="btn btn-outline-primary my-3">Submit</button>
