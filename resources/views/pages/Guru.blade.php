@@ -84,12 +84,12 @@
                 <input type="hidden" name="id" id="id">
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="modalEditUserFirstName">nip</label>
-                  <input type="text" id="nip" name="nip" class="form-control" placeholder="Masukan Nip" />
+                  <input type="text" id="nip" name="nip" class="form-control" placeholder="Input disini" />
                   <span class="text-danger error-msg small" id="alert-nip"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserLastName">nama</label>
-                    <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukan Nama" />
+                    <input type="text" id="nama" name="nama" class="form-control" placeholder="Input disini" />
                     <span class="text-danger error-msg small" id="alert-nama"></span>
                 </div>
                 <div class="col-12 col-md-6">
@@ -107,19 +107,22 @@
                         <option value="Islam">Islam</option>
                         <option value="Kristen Protestan">Kristen Protestan</option>
                         <option value="Kristen Katolik">Kristen Katolik</option>
-                        <option value="Hinda">Hinda</option>
+                        <option value="Hinda">Hindu</option>
                         <option value="Konghucu">Konghucu</option>
                     </select>
                   <span class="text-danger error-msg small" id="alert-agama"></span>
                 </div>
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="modalEditUserLastName">Status</label>
-                  <input type="text" id="status" name="status" class="form-control" placeholder="Status" />
+                  <select name="status" id="status" class="form-select">
+                    <option value="honor">Honor</option>
+                    <option value="pns">PNS</option>
+                  </select>
                   <span class="text-danger error-msg small" id="alert-status"></span>
                 </div>
                 <div class="col-12 col-md-6">
                   <label class="form-label" for="modalEditUserFirstName">golongan</label>
-                  <input type="text" id="golongan" name="golongan" class="form-control" placeholder="Masukan Golongan" />
+                  <input type="text" id="golongan" name="golongan" class="form-control" placeholder="Input disini" />
                   <span class="text-danger error-msg small" id="alert-golongan"></span>
                 </div>
                 <div class="col-12 col-md-6">
@@ -145,12 +148,12 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserFirstName">rfid</label>
-                    <input type="text" id="rfid" name="rfid" class="form-control mb-2" placeholder="Masukan Golongan" />
+                    <input type="text" id="rfid" name="rfid" class="form-control mb-2" placeholder="Input disini" />
                     <span class="text-danger error-msg small" id="alert-rfid"></span>
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserFirstName">Foto</label>
-                    <input type="file" id="foto" name="foto" class="form-control mb-1" placeholder="Masukan Golongan" />
+                    <input type="file" id="foto" name="foto" class="form-control mb-1" placeholder="Input disini" />
                 </div>
                 <div class="col-12 text-center">
                     <button type="button" id="btn-simpan" class="btn btn-outline-primary">Submit</button>

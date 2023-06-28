@@ -20,4 +20,10 @@
 <script src="{{asset('app-assets/js/scripts/pages/dashboard-ico.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/izitoast/js/iziToast.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js" integrity="sha256-2Dbg51yxfa7qZ8CSKqsNxHtph8UHdgbzxXF9ANtyJHo=" crossorigin="anonymous"></script>
+<script src="{{ asset('assets/js/initial.min.js')}}"></script>
+    <script>
+      $(document).ready(function() {
+          $('.profile').initial();
+      });
+    </script>
 <!-- END PAGE LEVEL JS-->

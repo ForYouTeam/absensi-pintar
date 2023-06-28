@@ -61,15 +61,15 @@
               <form id="formData" class="row g-3" onsubmit="return false">
                 @csrf
                 <div class="col-12">
+                  <input type="hidden" name="id" id="dataId">
                   <label class="form-label w-100" for="modalAddCard">Nama Mapel</label>
                   <div class="input-group input-group-merge">
-                    <input type="hidden" name="id" id="dataId">
-                    <input id="nama_mapel" name="nama_mapel" class="nama_mapel form-control credit-card-mask" type="text" placeholder="Masukan Mapel" required>
+                    <input id="nama_mapel" name="nama_mapel" class="nama_mapel form-control credit-card-mask" type="text" placeholder="Input disini" required>
                 </div>
                 <span class="text-danger small" id="alert-mapel"></span>
                 </div>
                 <div class="col-12 text-center">
-                  <button type="submit" id="btn-simpan" class="btn btn-outline-primary mt-3">Submit</button>
+                  <button type="submit" id="btn-simpan" class="btn btn-outline-primary mt-3" style="margin-right: 0.5rem">Submit</button>
                   <button type="reset" class="btn btn-outline-danger mt-3" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                 </div>
               </form>

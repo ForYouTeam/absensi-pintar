@@ -18,8 +18,8 @@
         <ul class="nav navbar-nav float-right">
           <li class="dropdown dropdown-user nav-item">
             <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-            <span class="avatar avatar-online"><img src="../../../app-assets/images/portrait/small/avatar-s-1.png" alt="avatar"></span></a>
-            <div class="dropdown-menu dropdown-menu-right">             <a class="dropdown-item" href="account-profile.html"><i class="ft-award"></i>John Doe</a>
+            <span class="avatar avatar-online"><img data-name="{{ Auth::user()->username }}" class="profile" alt="avatar"></span></a>
+            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="account-profile.html"><i class="ft-award"></i>John Doe</a>
               <div class="dropdown-divider"></div><a class="dropdown-item" href="account-profile.html"><i class="ft-user"></i> Profile</a><a class="dropdown-item" href="wallet.html"><i class="icon-wallet"></i> My Wallet</a><a class="dropdown-item" href="transactions.html"><i class="ft-check-square"></i> Transactions              </a>
               <div class="dropdown-divider"></div><a class="dropdown-item" href="account-login.html"><i class="ft-power"></i> Logout</a>
             </div>
