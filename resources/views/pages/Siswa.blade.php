@@ -90,37 +90,37 @@
               <form id="formData" class="row g-3" onsubmit="return false" enctype="multipart/form-data">
                 <input type="hidden" name="id" id="id">
                 <div class="col-12 col-md-6">
-                  <label class="form-label" for="modalEditUserFirstName">nisn</label>
+                  <label class="form-label text-capitalize" for="modalEditUserFirstName">nisn</label>
                   <input type="text" id="nisn" name="nisn" class="form-control" placeholder="Input disini" />
                   <span class="text-danger error-msg small" id="alert-nisn"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserLastName">nama</label>
+                    <label class="form-label text-capitalize" for="modalEditUserLastName">nama</label>
                     <input type="text" id="nama" name="nama" class="form-control" placeholder="Input disini" />
                     <span class="text-danger error-msg small" id="alert-nama"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserFirstName">tmpt lahir</label>
+                    <label class="form-label text-capitalize" for="modalEditUserFirstName">tempat lahir</label>
                     <input type="text" id="tmpt_lahir" name="tmpt_lahir" class="form-control" placeholder="Input disini" />
                     <span class="text-danger error-msg small" id="alert-lahir"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserLastName">tgl lahir</label>
+                    <label class="form-label text-capitalize" for="modalEditUserLastName">tgl lahir</label>
                     <input type="date" id="tgl_lahir" name="tgl_lahir" class="form-control" placeholder="input disini" />
                     <span class="text-danger error-msg small" id="alert-tgl"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserFirstName">alamat</label>
+                    <label class="form-label text-capitalize" for="modalEditUserFirstName">alamat</label>
                     <input type="text" id="alamat" name="alamat" class="form-control" placeholder="Input disini" />
                     <span class="text-danger error-msg small" id="alert-alamat"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserLastName">no hp</label>
+                    <label class="form-label text-capitalize" for="modalEditUserLastName">no hp</label>
                     <input type="text" id="hp" name="hp" class="form-control" placeholder="Input disini" />
                     <span class="text-danger error-msg small" id="alert-hp"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserStatus">Jenis Kelamin</label>
+                    <label class="form-label text-capitalize" for="modalEditUserStatus">Jenis Kelamin</label>
                     <select id="sex" name="sex" class="form-select" aria-label="Default select example">
                         <option value="" selected disabled>-- Pilih --</option>
                         <option value="Wanita">Perempuan</option>
@@ -129,7 +129,7 @@
                     <span class="text-danger error-msg small" id="alert-sex"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserLastName">agama</label>
+                    <label class="form-label text-capitalize" for="modalEditUserLastName">agama</label>
                     <select name="agama" id="agama" class="form-select">
                         <option value="Islam">Islam</option>
                         <option value="Kristen Protestan">Kristen Protestan</option>
@@ -140,7 +140,7 @@
                     <span class="text-danger error-msg small" id="alert-agama"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserStatus">kelas</label>
+                    <label class="form-label text-capitalize" for="modalEditUserStatus">kelas</label>
                     <select id="kelas_id" name="kelas_id" class="form-select" aria-label="Default select example">
                         <option value="" selected disabled>-- Pilih --</option>
                         @foreach ($kelas as $d)
@@ -150,7 +150,7 @@
                     <span class="text-danger error-msg small" id="alert-kelas"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                   <label class="form-label" for="modalEditUserStatus">jurusan</label>
+                   <label class="form-label text-capitalize" for="modalEditUserStatus">jurusan</label>
                    <select id="jurusan_id" name="jurusan_id" class="form-select" aria-label="Default select example">
                         <option value="" selected disabled>-- Pilih --</option>
                         @foreach ($jurusan as $d)
@@ -160,12 +160,12 @@
                     <span class="text-danger error-msg small" id="alert-jurusan"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserLastName">rfid</label>
+                    <label class="form-label text-capitalize" for="modalEditUserLastName">rfid</label>
                     <input type="text" id="rfid" name="rfid" class="form-control" placeholder="Input disini" />
                     <span class="text-danger error-msg small" id="alert-rfid"></span>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label class="form-label" for="modalEditUserFirstName">Foto</label>
+                    <label class="form-label text-capitalize" for="modalEditUserFirstName">Foto</label>
                     <input type="file" id="foto" name="foto" class="form-control" placeholder="Pilih file" />
                 </div>
                 <div class="col-12 text-center">

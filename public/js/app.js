@@ -18872,7 +18872,7 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var __expose = _ref.expose;
     __expose();
-    var baseUrl = "http://127.0.0.1:8000";
+    var baseUrl = "http://192.168.1.10:8081";
     var kelasList = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var guruList = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var kehadiranPayload = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({

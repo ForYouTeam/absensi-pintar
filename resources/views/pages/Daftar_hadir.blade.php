@@ -32,6 +32,7 @@
                                 <th>Kelas</th>
                                 <th>Jurusan</th>
                                 <th>Mata Pelajaran</th>
+                                <th>Tgl</th>
                                 <th>Keterangan</th>
                                 <th>Action</th>
                             </tr>
@@ -47,6 +48,7 @@
                                     <td>{{$d->siswa->kelas->nama_kelas}}</td>
                                     <td>{{$d->siswa->jurusan->nama_jurusan}}</td>
                                     <td>{{$d->gate->mapel}}</td>
+                                    <td>{{$d->tgl}} | {{$d->start_tap}}</td>
                                     <td>{{ $d->status == 1 ? 'hadir' : ($d->status == 0 ? 'alpa' : ($d->status == 3 ? 'bolos' : 'dalam kelas'))}}</td>
                                     <td>
                                         <button type="button" onclick="editPayload(event)" class=" btn btn-info btn-sm" data-id="{{$d->id}}" data-status="{{$d->status}}">Edit</button>
@@ -61,6 +63,7 @@
                                 <th>Kelas</th>
                                 <th>Jurusan</th>
                                 <th>Mata Pelajaran</th>
+                                <th>Tgl</th>
                                 <th>Keterangan</th>
                                 <th>Action</th>
                             </tr>
@@ -154,6 +157,7 @@
                         <td>${d.nama_kelas}</td>
                         <td>${d.nama_jurusan}</td>
                         <td>${d.mapel}</td>
+                        <td>${d.tgl} | ${d.start_tap}</td>
                         <td>${d.status == 0 ? 'alpa' : (d.status == 1 ? 'hadir' : (d.status == 3 ? 'bolos' : 'dalam kelas'))}</td>
                         <td>
                             <button type="button" onclick="editPayload(event)" class="btn btn-info btn-sm" data-id="${d.id}" data-status="${d.status}">Edit</button>

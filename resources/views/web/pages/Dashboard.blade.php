@@ -6,7 +6,7 @@
           <div class="card-content collapse show">
               <div class="card-body">
                   <form class="form-horizontal form-purchase-token row">
-                      <div class="col-md-3 col-12">
+                      <div class="col-md-4 col-12">
                           <select onchange="inputCheck()" id="kelas_id" class="custom-select input-form">
                               <option disabled selected="" value="">PILIH KELAS</option>
                               @foreach ($data['kelas'] as $d)
@@ -14,19 +14,13 @@
                               @endforeach
                           </select>
                       </div>
-                      <div class="col-md-3 col-12">
+                      <div class="col-md-4 col-12">
                         <select onchange="inputCheck()" id="mapel" class="custom-select input-form">
                             <option disabled selected="" value="">PILIH MATA PELAJARAN</option>
                             @foreach ($data['mapel'] as $d)
                                 <option class="text-uppercase" value="{{ $d->nama_mapel }}">{{ $d->nama_mapel }}</option>
                             @endforeach
                         </select>
-                      </div>
-                      <div class="col-md-2 col-12 mb-1">
-                        <fieldset class="form-label-group mb-0">
-                            <input type="text" class="form-control input-form" id="wallet-address" value="" required="" autofocus="">
-                            <label for="wallet-address">PASSWORD</label>
-                        </fieldset>
                       </div>
                       <div class="col-md-2 col-12 mb-1">
                         <fieldset class="form-label-group mb-0">

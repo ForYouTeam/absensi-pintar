@@ -90,7 +90,7 @@
         </a>
 
         <ul class="menu-sub">
-          @hasrole('super-admin')
+          @hasrole('super-admin|admin|guru')
           <li class="menu-item {{Route::is('pages.absen') ? 'active' : ''}}">
             <a href="{{route('pages.absen')}}" class="menu-link">
               <div data-i18n="Without menu">Absensi</div>

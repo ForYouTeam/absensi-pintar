@@ -127,6 +127,7 @@
     guru_id  : 0,
     start    : '',
     end      : ''
+    
   })
 
   const getKelasList = () => {
