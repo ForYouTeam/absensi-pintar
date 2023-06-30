@@ -24,28 +24,28 @@ class ReportController extends Controller
 
     public function getAllDaftarHadir($payload)
     {
-        $payload = array(
-            "start"    => request('start'   ),
-            "end"      => request('end'     ),
-            "kelas_id" => request('kelas_id'),
-        );
-
         $daftarHadir = $this->daftarHadirModel
-            ->where('kelas_id', $payload['kelas_id'])
-            ->whereBetween('tgl', ['2023-01-01', '2023-03-30'])
-            ->joinList()
+            ->getByKelasGuru($payload)
             ->get();
         return $daftarHadir;
     }
 
     public function getAllSiswaByKelas()
     {
-        $hadir = $this->getAllDaftarHadir(request('kelas_id'));
+        $payload = array(
+            "start"    => request('start'    ),
+            "end"      => request('end'      ),
+            "kelas_id" => request('kelas_id' ),
+            "guru_id"  => request('guru_id'  ),
+        );
+
+        $hadir = $this->getAllDaftarHadir($payload);
         $allSiswa = $this->siswaModel->where('kelas_id', request('kelas_id'))->joinList()->get();
 
         return response()->json([
-            "siswa" => $allSiswa,
-            "daftar_hadir" => $hadir,
+            "payload"      => $payload ,
+            "siswa"        => $allSiswa,
+            "daftar_hadir" => $hadir   ,
         ], 200);
     }
 }

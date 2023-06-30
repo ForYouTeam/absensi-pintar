@@ -8,6 +8,20 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="mt--5" style="float: left">Data Absensi</h4>
+                    <div class="float-end">
+                        <button onclick="getDataByParams()" class="btn btn-primary" style="margin-top: 28px; margin-left: 40px">Filter</button>
+                    </div>
+                    <div class="float-end">
+                        <label for="defaultSelect" class="form-label">Pilih Kelas</label>
+                        <select style="width: 200px;" id="kelasSelect" class="form-select">
+                        </select>
+                    </div>
+                    <div class="float-end me-5">
+                        <label for="defaultSelect" class="form-label">Pilih Guru</label>
+                        <select style="width: 200px;" id="guruSelect" class="form-select">
+                        </select>
+                    </div>
+                   
                 </div>
                 <div class="card-body">
                     <table id="table-data" class="table table-bordered" >
@@ -18,11 +32,12 @@
                                 <th>Kelas</th>
                                 <th>Jurusan</th>
                                 <th>Mata Pelajaran</th>
+                                <th>Tgl</th>
                                 <th>Keterangan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                             @php
                                 $no = 1;
                             @endphp
@@ -33,9 +48,10 @@
                                     <td>{{$d->siswa->kelas->nama_kelas}}</td>
                                     <td>{{$d->siswa->jurusan->nama_jurusan}}</td>
                                     <td>{{$d->gate->mapel}}</td>
+                                    <td>{{$d->tgl}} | {{$d->start_tap}}</td>
                                     <td>{{ $d->status == 1 ? 'hadir' : ($d->status == 0 ? 'alpa' : ($d->status == 3 ? 'bolos' : 'dalam kelas'))}}</td>
                                     <td>
-                                        <button type="button" class="editItem btn btn-info btn-sm" data-id="{{$d->id}}" data-status="{{$d->status}}">Edit</button>
+                                        <button type="button" onclick="editPayload(event)" class=" btn btn-info btn-sm" data-id="{{$d->id}}" data-status="{{$d->status}}">Edit</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -47,6 +63,7 @@
                                 <th>Kelas</th>
                                 <th>Jurusan</th>
                                 <th>Mata Pelajaran</th>
+                                <th>Tgl</th>
                                 <th>Keterangan</th>
                                 <th>Action</th>
                             </tr>
@@ -94,6 +111,63 @@
     <script>
         let baseUrl
 
+        function getKelas() {
+            $.get(`${baseUrl}/api/v1/kelas`, function(res) {
+                let item = res.data
+                $('#kelasSelect').html(`<option value="0">-- Semua --</option>`)
+
+                $.each(item, (i, d) => {
+                    $('#kelasSelect').append(`
+                        <option value="${d.id}">${d.nama_kelas}</option>
+                    `)
+                })
+            })
+        }
+
+        function getGuru() {
+            $.get(`${baseUrl}/api/v1/guru`, function(res) {
+                let item = res.data
+                $('#guruSelect').html(`<option value="0">-- Semua --</option>`)
+
+                $.each(item, (i, d) => {
+                    $('#guruSelect').append(`
+                        <option value="${d.id}">${d.nama}</option>
+                    `)
+                })
+            })
+        }
+
+        function getDataByParams() {
+            let payload = {
+                kelasId: $('#kelasSelect').val(),
+                guruId: $('#guruSelect').val()
+            }
+
+            $.get(`${baseUrl}/api/v1/present/allbyparams?kelas_id=${payload.kelasId}&guru_id=${payload.guruId}`, function(res)
+            {
+                let data = res.data
+                console.log(data);
+
+                $('#tbody').html('')
+                $.each(data, (i ,d ) => {
+                    $('#tbody').append(`
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${d.nama}</td>
+                        <td>${d.nama_kelas}</td>
+                        <td>${d.nama_jurusan}</td>
+                        <td>${d.mapel}</td>
+                        <td>${d.tgl} | ${d.start_tap}</td>
+                        <td>${d.status == 0 ? 'alpa' : (d.status == 1 ? 'hadir' : (d.status == 3 ? 'bolos' : 'dalam kelas'))}</td>
+                        <td>
+                            <button type="button" onclick="editPayload(event)" class="btn btn-info btn-sm" data-id="${d.id}" data-status="${d.status}">Edit</button>
+                        </td>
+                    </tr>
+                    `)
+                })
+            })
+        }
+
         $(document).ready(function() {
             baseUrl = "{{ config('app.url') }}"
 
@@ -103,17 +177,23 @@
                 }
             });
             $('#table-data').DataTable();
+
+            getKelas()
+            getGuru()
         });
 
-        $('body').on('click', '.editItem', function () {
-            let id = $(this).data('id')
-            let status = $(this).data('status')
-            $('#modal-data'  ).modal ('show'               );
-            $('.modal-title' ).html  ("Formulir Edit Data" );
-            $('#btn-simpan'  ).val   ("edit-user"          );
-            $('#status'      ).val   (status               );
-            $('#id'          ).val   (id                   );
-        });
+        function editPayload(event) {
+            let id = $(event.target).data('id');
+            let status = $(event.target).data('status');
+            $('#modal-data').modal('show');
+            $('.modal-title').html("Formulir Edit Data");
+            $('#btn-simpan').val("edit-user");
+            $('#status').val(status);
+            $('#id').val(id);
+
+            let idData =    $('#id').val();
+            console.log(idData);
+        }
 
         $('#btn-simpan').click(function (e) {
             e.preventDefault();
@@ -121,7 +201,6 @@
             submitButton.html('Simpan');
 
             if (!submitButton.prop('disabled')) {
-                console.log($('#formData').serialize()  );
                 submitButton.prop('disabled', true);
                 $.ajax({
                     data    : $('#formData').serialize()  ,
@@ -157,6 +236,8 @@
                 });
             }
         });
+
+
     </script>
 @endsection
 @endsection

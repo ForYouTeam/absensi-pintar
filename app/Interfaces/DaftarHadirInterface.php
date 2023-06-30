@@ -10,4 +10,5 @@ interface DaftarHadirInterface {
   public function forceEndStudy($gateId);
   public function forceEndAllStudy($tgl);
   public function getAllPresentData();
+  public function getAllByParams(array $payload);
 }

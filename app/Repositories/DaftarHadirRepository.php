@@ -25,7 +25,27 @@ class DaftarHadirRepository implements DaftarHadirInterface
   public function getAllPresentData()
   {
     try {
-      $present = $this->daftarHadirModel->with('siswa.kelas', 'siswa.jurusan', 'gate')->get();
+      $present = $this->daftarHadirModel->with('siswa.kelas', 'siswa.jurusan', 'gate')->orderBy('created_at', 'desc')->get();
+      $payloadList = array(
+        'message' => 'success',
+        'code'    => 200,
+        'data'    => $present
+      );
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'from'    => 'getPayloadByQty',
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
+    }
+
+    return $payloadList;
+  }
+
+  public function getAllByParams(array $payload)
+  {
+    try {
+      $present = $this->daftarHadirModel->getWithParams($payload)->get();
       $payloadList = array(
         'message' => 'success',
         'code'    => 200,
@@ -224,26 +244,6 @@ class DaftarHadirRepository implements DaftarHadirInterface
         );
       }
 
-      if ($payloadList['data']) {
-        $logpayload = array(
-          'message' => $payloadList['message'],
-          'data'    => $this->getDataAsString($payloadList['data']),
-          'code'    => $payloadList['code'   ],
-        );
-      } else {
-        $logpayload = array(
-          'message' => $payloadList['message'],
-          'data'    => 'no action',
-          'code'    => $payloadList['code'   ],
-        );
-      }
-  
-      $logs = $this->logRepo->SetLog($logpayload);
-  
-      if ($logs['code'] != 200) {
-        return $logs;
-      }
-
     } catch (\Throwable $th) {
       $payloadList = array(
         'from'    => 'setPresentStudent',
@@ -251,6 +251,26 @@ class DaftarHadirRepository implements DaftarHadirInterface
         'code'    => 500,
         'from'    => 'setPresentStudent'
       );
+    }
+
+    if ($payloadList['data']) {
+      $logpayload = array(
+        'message' => $payloadList['message'],
+        'data'    => $this->getDataAsString($payloadList['data']),
+        'code'    => $payloadList['code'   ],
+      );
+    } else {
+      $logpayload = array(
+        'message' => $payloadList['message'],
+        'data'    => 'no action',
+        'code'    => $payloadList['code'   ],
+      );
+    }
+
+    $logs = $this->logRepo->SetLog($logpayload);
+
+    if ($logs['code'] != 200) {
+      return $logs;
     }
 
     return $payloadList;

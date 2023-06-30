@@ -36,6 +36,17 @@ class DaftarHadirController extends Controller
         return response()->json($data, $data['code']);
     }
 
+    public function getWithParams()
+    {
+        $payload = array(
+            'guru_id'  => request('guru_id' ),
+            'kelas_id' => request('kelas_id')
+        );
+
+        $data = $this->daftarHadirRepo->getAllByParams($payload);
+        return response()->json($data, $data['code']);
+    }
+
     public function getDataByQty()
     {
         $payload = array(
