@@ -21,8 +21,25 @@ class DaftarHadirController extends Controller
 
     public function getView()
     {
-        $data = $this->daftarHadirRepo->getAllPresentData();
-        return view('pages.Daftar_hadir')->with('data', $data['data']);
+        if (Auth::user()->scope == "guru") {
+            $guru = $this->guruModel->where('account', Auth::user()->id)->first();
+            $guruId = $guru['id'];
+
+            $payload = array(
+                'guru_id'  => $guruId,
+                'kelas_id' => request('kelas_id')
+            );
+
+            $data = $this->daftarHadirRepo->getAllByParams($payload);
+
+            return view('pages.Daftar_hadir')->with('data', $data['data']);
+        } else {
+            $data = $this->daftarHadirRepo->getAllPresentData();
+            if ($data['code'] !== 200) {
+                return response()->json($data, $data['code']);
+            }
+            return view('pages.Daftar_hadir')->with('data', $data['data']);
+        }
     }
 
     public function updatePayload(Request $request)
@@ -43,12 +60,13 @@ class DaftarHadirController extends Controller
 
     public function getWithParams()
     {
-        if (Auth::user()->scope == 'guru') {
-            $guru = $this->guruModel->where('guru_id', Auth::user()->id)->first();
+        if (request('accountid') != "null") {
+            $guru = $this->guruModel->where('account', request('accountid'))->first();
             $guruId = $guru['id'];
         } else {
             $guruId = request('guru_id');
         }
+
         $payload = array(
             'guru_id'  => $guruId,
             'kelas_id' => request('kelas_id')

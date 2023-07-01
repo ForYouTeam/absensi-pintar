@@ -24,8 +24,12 @@ class DaftarHadirRepository implements DaftarHadirInterface
 
   public function getAllPresentData()
   {
+    $payload = array(
+      'kelas_id' => 0,
+      'guru_id' => 0
+    );
     try {
-      $present = $this->daftarHadirModel->with('siswa.kelas', 'siswa.jurusan', 'gate')->orderBy('created_at', 'desc')->get();
+      $present = $this->daftarHadirModel->getWithParams($payload)->orderBy('daftar_hadir.created_at', 'desc')->get();
       $payloadList = array(
         'message' => 'success',
         'code'    => 200,
@@ -81,7 +85,6 @@ class DaftarHadirRepository implements DaftarHadirInterface
     }
 
     return $payloadList;
-
   }
 
   public function getPayloadByQty($payload)
@@ -150,10 +153,10 @@ class DaftarHadirRepository implements DaftarHadirInterface
     return $payloadList;
   }
 
-   // CHANGING DATA
+  // CHANGING DATA
 
-   function getDataAsString($data)
-   {
+  function getDataAsString($data)
+  {
     $date = Carbon::now();
     $nama = $data['nama'];
     $rfid = $data['rfid'];
@@ -161,9 +164,9 @@ class DaftarHadirRepository implements DaftarHadirInterface
     $result = $nama . ' | ' . $rfid  . ' | ' . $date;
 
     return $result;
-   }
- 
-   // 
+  }
+
+  // 
 
   public function setPresentStudent($payload)
   {
@@ -243,7 +246,6 @@ class DaftarHadirRepository implements DaftarHadirInterface
           'data'    => $siswa['data']
         );
       }
-
     } catch (\Throwable $th) {
       $payloadList = array(
         'from'    => 'setPresentStudent',
@@ -257,13 +259,13 @@ class DaftarHadirRepository implements DaftarHadirInterface
       $logpayload = array(
         'message' => $payloadList['message'],
         'data'    => $this->getDataAsString($payloadList['data']),
-        'code'    => $payloadList['code'   ],
+        'code'    => $payloadList['code'],
       );
     } else {
       $logpayload = array(
         'message' => $payloadList['message'],
         'data'    => 'no action',
-        'code'    => $payloadList['code'   ],
+        'code'    => $payloadList['code'],
       );
     }
 

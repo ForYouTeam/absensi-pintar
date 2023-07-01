@@ -68,15 +68,15 @@ class DaftarHadirModel extends Model
             ->leftJoin('jurusan as model_d', 'model_a.jurusan_id'   , '=', 'model_d.id')
 
             ->select(
-                'daftar_hadir.id'      ,
-                'daftar_hadir.status'  ,
-                'daftar_hadir.siswa_id',
-                'daftar_hadir.tgl'     ,
-                'daftar_hadir.start_tap'     ,
-                'model_a.nama'         ,
-                'model_c.nama_kelas'   ,
-                'model_d.nama_jurusan' ,
-                'model_b.kelas_id'     ,
+                'daftar_hadir.id'        ,
+                'daftar_hadir.status'    ,
+                'daftar_hadir.siswa_id'  ,
+                'daftar_hadir.tgl'       ,
+                'daftar_hadir.start_tap' ,
+                'model_a.nama'           ,
+                'model_c.nama_kelas'     ,
+                'model_d.nama_jurusan'   ,
+                'model_b.kelas_id'       ,
                 'model_b.mapel'       
                 )
 
