@@ -16,7 +16,7 @@ class UpdateGurusTable extends Migration
         Schema::table('guru', function (Blueprint $table) {
             $table->string('foto')->after('mapel_id');
             $table->string('rfid')->after('foto');
-            $table->foreignId('account')->after('rfid')->nullable()->constrained('users');
+            $table->foreignId('account')->after('rfid')->nullable()->constrained('users')->onDelete('set null');
         });
     }
 

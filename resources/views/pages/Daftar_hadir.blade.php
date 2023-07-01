@@ -16,11 +16,13 @@
                         <select style="width: 200px;" id="kelasSelect" class="form-select">
                         </select>
                     </div>
+                    @hasrole('super-admin|admin')
                     <div class="float-end me-5">
                         <label for="defaultSelect" class="form-label">Pilih Guru</label>
                         <select style="width: 200px;" id="guruSelect" class="form-select">
                         </select>
                     </div>
+                    @endhasrole
                    
                 </div>
                 <div class="card-body">

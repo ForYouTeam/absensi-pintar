@@ -20,6 +20,7 @@ class GuruModel extends Model
         'jabatan_id',
         'golongan',
         'rfid',
+        'account',
         'mapel_id',
         'foto',
         'created_at',
@@ -29,24 +30,25 @@ class GuruModel extends Model
     public function scopejoinList($query)
     {
         return $query
-        ->leftJoin('jabatan as model_a', 'guru.jabatan_id', '=', 'model_a.id')
-        ->leftJoin('mapel as model_b', 'guru.mapel_id', '=', 'model_b.id')
-        ->select(
-            'guru.id',
-            'guru.nip',
-            'guru.nama',
-            'guru.sex',
-            'guru.agama',
-            'guru.status',
-            'guru.jabatan_id',
-            'guru.golongan',
-            'guru.rfid',
-            'guru.foto',
-            'model_a.nama_jabatan as jabatan',
-            'guru.mapel_id',
-            'model_b.nama_mapel as mapel',
-            'guru.created_at',
-            'guru.updated_at',
-        );
+            ->leftJoin('jabatan as model_a', 'guru.jabatan_id', '=', 'model_a.id')
+            ->leftJoin('mapel as model_b', 'guru.mapel_id', '=', 'model_b.id')
+            ->select(
+                'guru.id',
+                'guru.nip',
+                'guru.nama',
+                'guru.sex',
+                'guru.agama',
+                'guru.status',
+                'guru.jabatan_id',
+                'guru.golongan',
+                'guru.rfid',
+                'guru.foto',
+                'guru.account',
+                'model_a.nama_jabatan as jabatan',
+                'guru.mapel_id',
+                'model_b.nama_mapel as mapel',
+                'guru.created_at',
+                'guru.updated_at',
+            );
     }
 }

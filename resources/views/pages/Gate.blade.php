@@ -38,7 +38,9 @@
                                     <td>{{$d['guru']}}</td>
                                     <td>{{$d['mapel']}}</td>
                                     <td>{{$d['tgl']}}</td>
-                                    <td>{{$d['status']}}</td>
+                                    <td>
+                                        {{$d['status'] == 0 ? 'Open' : 'Close'}}
+                                    </td>
                                     <td>{{$d['open']}}</td>
                                     <td>
                                         @if ($d['close'] == null)
@@ -105,7 +107,12 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <label class="form-label" for="modalEditUserLastName">mapel</label>
-                    <input type="text" id="mapel" name="mapel" class="form-control" placeholder="Masukan mata pelajaran"/>
+                    <select id="mapel" name="mapel" class="form-select" aria-label="Default select example">
+                        <option value="" selected>-- Pilih --</option>
+                        @foreach ($data['mapel'] as $d)
+                        <option value="{{$d->nama_mapel}}">{{$d->nama_mapel}}</option>
+                        @endforeach
+                    </select>
                     <span class="text-danger error-msg small" id="alert-mapel"></span>
                 </div>
                 <div class="col-12 text-center">

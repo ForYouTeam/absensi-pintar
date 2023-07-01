@@ -3,24 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\DaftarHadirInterface;
+use App\Interfaces\GuruInterface;
+use App\Models\GuruModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DaftarHadirController extends Controller
 {
     private DaftarHadirInterface $daftarHadirRepo;
+    private GuruModel $guruModel;
 
-    public function __construct(DaftarHadirInterface $daftarHadirRepo)
+    public function __construct(DaftarHadirInterface $daftarHadirRepo, GuruModel $guruModel)
     {
         $this->daftarHadirRepo = $daftarHadirRepo;
+        $this->guruModel       = $guruModel;
     }
 
-    public function getView() 
+    public function getView()
     {
         $data = $this->daftarHadirRepo->getAllPresentData();
         return view('pages.Daftar_hadir')->with('data', $data['data']);
     }
 
-    public function updatePayload(Request $request) 
+    public function updatePayload(Request $request)
     {
         $id = $request->id;
         $payload = array(
@@ -38,8 +43,14 @@ class DaftarHadirController extends Controller
 
     public function getWithParams()
     {
+        if (Auth::user()->scope == 'guru') {
+            $guru = $this->guruModel->where('guru_id', Auth::user()->id)->first();
+            $guruId = $guru['id'];
+        } else {
+            $guruId = request('guru_id');
+        }
         $payload = array(
-            'guru_id'  => request('guru_id' ),
+            'guru_id'  => $guruId,
             'kelas_id' => request('kelas_id')
         );
 
@@ -50,7 +61,7 @@ class DaftarHadirController extends Controller
     public function getDataByQty()
     {
         $payload = array(
-            'gate_id'  => request('gate_id' ),
+            'gate_id'  => request('gate_id'),
             'kelas_id' => request('kelas_id')
         );
 
@@ -61,9 +72,9 @@ class DaftarHadirController extends Controller
     public function presentStart(Request $request)
     {
         $payload = array(
-            "rfid"     => $request['rfid'     ],
-            "gate_id"  => $request['gate_id'  ],
-            "kelas_id" => $request['kelas_id' ]
+            "rfid"     => $request['rfid'],
+            "gate_id"  => $request['gate_id'],
+            "kelas_id" => $request['kelas_id']
         );
 
         $presentData = $this->daftarHadirRepo->setPresentStudent($payload);

@@ -18,10 +18,9 @@
                                 <th>nama/nip</th>
                                 <th>jenis kelamin</th>
                                 <th>agama</th>
-                                <th>status</th>
                                 <th>jabatan</th>
-                                <th>golongan</th>
                                 <th>mapel</th>
+                                <th>rfid</th>
                                 <th>Foto</th>
                                 <th>Action</th>
                             </tr>
@@ -33,13 +32,12 @@
                           @foreach ($guru as $item)
                                 <tr>
                                     <td style="width: 5%">{{$no++}}</td>
-                                    <td>{{$item['nama']}} <br> {{$item['nip']}}</td>
+                                    <td class="text-uppercase">{{$item['nip']}} <br> {{$item['nama']}}</td>
                                     <td>{{$item['sex']}}</td>
                                     <td>{{$item['agama']}}</td>
-                                    <td>{{$item['status']}}</td>
                                     <td>{{$item['jabatan']}}</td>
-                                    <td>{{$item['golongan']}}</td>
                                     <td>{{$item['mapel']}}</td>
+                                    <td>{{$item['rfid']}}</td>
                                     <td style="width: 10%">
                                         <img src="{{ asset('storage/guru/' . $item['foto']) }}" style="width: 70%">
                                     </td>
@@ -56,10 +54,9 @@
                                 <th>nama/nip</th>
                                 <th>jenis kelamin</th>
                                 <th>agama</th>
-                                <th>status</th>
                                 <th>jabatan</th>
-                                <th>golongan</th>
                                 <th>mapel</th>
+                                <th>rfid</th>
                                 <th>Foto</th>
                                 <th>Action</th>
                             </tr>

@@ -14,13 +14,13 @@
                         {{ Auth::user()->username }}. 🎉
                     {{-- @endauth.  --}}
                   </h5>
-                  <p class="mb-5">Selamat Datang di Aplikasi Absensi Pada Sekolah SMA K GPID SUMBERSARI, Silahkan klik dibawah ini untuk pergi ke halaman dashboard Absensi .<a href="{{route('dashboard-panel')}}" class="btn btn-primary btn-md mt-3"> Halaman Presensi </a></p>
+                  <p class="mb-5">Selamat Datang di Aplikasi Absensi Pada Sekolah SMA K GPID SUMBERSARI, Silahkan klik dibawah ini untuk pergi ke halaman dashboard Absensi . <br><a href="{{route('dashboard-panel')}}" class="btn btn-primary btn-md mt-3"> Halaman Presensi </a></p>
     
                 </div>
               </div>
               <div class="col-sm-5 text-center text-sm-left">
                 <div class="card-body pb-0 px-0 px-md-4">
-                  <img src="{{asset('assets/img/jadwal.svg')}}" height="190" alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png" data-app-light-img="illustrations/man-with-laptop-light.html">
+                  <img src="{{asset('assets/img/jadwal.svg')}}" width="100%" alt="View Badge User" class="mb-4">
                 </div>
               </div>
             </div>

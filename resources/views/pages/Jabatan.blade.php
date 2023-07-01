@@ -119,7 +119,6 @@
             submitButton.html('Simpan');
 
             if (!submitButton.prop('disabled')) {
-                submitButton.prop('disabled', true);
                 $.ajax({
                     data    : $('#formData').serialize()  ,
                     url     : `${baseUrl}/api/v1/jabatan/`,

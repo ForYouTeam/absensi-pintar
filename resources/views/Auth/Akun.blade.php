@@ -24,7 +24,7 @@
                             @php
                                 $no = 1;
                             @endphp
-                          @foreach ($data as $item)
+                          @foreach ($data['akun'] as $item)
                             @if ($item['scope'] != 'super-admin')
                                 <tr>
                                     <td style="width: 5%">{{$no++}}</td>
@@ -74,12 +74,22 @@
                       <input id="password" name="password" class="form-control credit-card-mask" type="password" placeholder="password" required>
                     <span class="text-danger small" id="alert-password"></span>
                 </div>
-                <div class="col-12 my-2">
+                <div class="col-12 my-2 scope">
                     <label class="form-label w-100" for="modalAddCard">scope</label>
                         <select id="scope" name="scope" class="form-select" aria-label="Default select example">
                             <option value="" selected disabled>-- Pilih --</option>
                             <option value="admin">Admin</option>
                             <option value="guru">Guru</option>
+                        </select>
+                        <span class="text-danger error-msg small" id="alert-password"></span>
+                </div>
+                <div class="col-12 my-2 guru">
+                    <label class="form-label w-100" for="modalAddCard">Guru</label>
+                        <select id="guru_id" name="guru_id" class="form-select" aria-label="Default select example">
+                            <option value="" selected disabled>-- Pilih --</option>
+                            @foreach ($data['guru'] as $i)
+                                <option value="{{$i->id}}">{{$i->nama}}</option>
+                            @endforeach
                         </select>
                         <span class="text-danger error-msg small" id="alert-password"></span>
                 </div>
@@ -111,13 +121,21 @@
         
 
         $('#createData').click(function () {
-            $('.modal-title').html   ("Formulir Tambah Data");
-            $('#btn-simpan' ).val    ("create-Item"         );
-            $('#id'         ).val    (''                    );
-            $('#formData'   ).trigger("reset"               );
-            $('#modal-data' ).modal  ('show'                );
-            $('#nama-alert' ).html   (''                    );
+            $('.modal-title' ).html    ("Formulir Tambah Data");
+            $('#btn-simpan'  ).val     ("create-Item"         );
+            $('#id'          ).val     (''                    );
+            $('#formData'    ).trigger ("reset"               );
+            $('#modal-data'  ).modal   ('show'                );
+            $('.guru'     ).hide    (                      );
+            $('#nama-alert'  ).html    (''                    );
         });
+
+        $('#scope').change( function () {
+            let scope = $('#scope').val();
+            if (scope == 'guru') {
+                $('.guru').show();
+            }
+        })
 
         $('body').on('click', '.editItem', function () {
             var _id = $(this).data('id');
@@ -126,12 +144,15 @@
                 $('#btn-simpan'  ).val   ("edit-user"                           );
                 $('#password'    ).attr  ('placeholder', 'Masukan password baru');
                 $('#modal-data'  ).modal ('show'                                );
+                $('.scope'       ).hide  (                                      );
+                $('.guru'        ).hide  (                                      );
                 $('#username'    ).val   (res.data.username                     );
                 $('#password'    ).val   (res.data.password                     );
-                $('#scope'       ).val   (res.data.scope                        );
                 $('#dataId'      ).val   (res.data.id                           );
             })
         });
+
+        
 
         $('#btn-simpan').click(function (e) {
             e.preventDefault();
