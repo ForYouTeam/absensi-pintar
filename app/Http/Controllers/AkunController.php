@@ -4,22 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AkunRequest;
 use App\Interfaces\AkunInterface;
+use App\Interfaces\GuruInterface;
 use Illuminate\Http\Request;
 
 class AkunController extends Controller
 {
 	private AkunInterface $akunRepo;
+	private GuruInterface $guruRepo;
 
-	public function __construct(AkunInterface $akunRepo)
+	public function __construct(AkunInterface $akunRepo, GuruInterface $guruRepo)
 	{
 		$this->akunRepo = $akunRepo;
+		$this->guruRepo = $guruRepo;
 	}
 
 	public function getView()
 	{
-		
-		$data = $this->akunRepo->getAllPayload();
-		return view('Auth.Akun')->with('data', $data['data']);
+		$data = [
+			'akun' => $this->akunRepo->getAllPayload()['data'],
+			'guru' => $this->guruRepo->getAllPayload()['data']
+		];
+		return view('Auth.Akun')->with('data', $data);
 	}
 
 	public function getPayloadData()

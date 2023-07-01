@@ -11,68 +11,64 @@
                     <button id="createData" type="button" class="btn btn-primary" style="float: right">Tambah Data</button>
                 </div>
                 <div class="card-body">
-                    <table id="table-data" class="table table-bordered" >
-                        <thead>
-                            <tr>
-                                <th>N0</th>
-                                <th>nama/nip</th>
-                                <th>ttl</th>
-                                <th>alamat</th>
-                                <th>hp</th>
-                                <th>Jenis Kelamin</th>
-                                <th>agama</th>
-                                <th>kelas</th>
-                                <th>jurusan</th>
-                                <th>rfid</th>
-                                <th>foto</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $no = 1;
-                            @endphp
-                          @foreach ($siswa as $item)
+                    <div class="table-responsive">
+                        <table id="table-data" class="table table-bordered" >
+                            <thead>
                                 <tr>
-                                    <td style="width: 5%">{{$no++}}</td>
-                                    <td>{{$item['nisn']}} <br> {{$item['nama']}}</td>
-                                    <td>{{$item['tmpt_lahir']}} <br> {{$item['tgl_lahir']}}</td>
-                                    <td>{{$item['alamat']}}</td>
-                                    <td>{{$item['hp']}}</td>
-                                    <td>{{$item['sex']}}</td>
-                                    <td>{{$item['agama']}}</td>
-                                    <td>{{$item['kelas']}}</td>
-                                    <td>{{$item['jurusan']}}</td>
-                                    <td>{{$item['rfid']}}</td>
-                                    <td style="width: 10%">
-                                        <img src="{{ asset('storage/siswa/' . $item['foto']) }}" style="width: 70%">
-                                    </td>
-                                    <td style="width: 15%">
-                                        <button class="editItem btn-sm btn btn-info" data-id="{{$item->id}}">Edit</button>
-                                        @hasrole('super-admin|admin')
-                                        <button id="btn-hapus" class="btn-sm btn btn-danger" data-id="{{$item->id}}">Hapus</button>
-                                        @endhasrole
-                                    </td>
+                                    <th>N0</th>
+                                    <th>nama/nip</th>
+                                    <th>alamat</th>
+                                    <th>hp</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>agama</th>
+                                    <th>Kelas&nbsp;/&nbsp;Jurusan</th>
+                                    <th>rfid</th>
+                                    <th>foto</th>
+                                    <th>Action</th>
                                 </tr>
-                          @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>N0</th>
-                                <th>nama/nip</th>
-                                <th>ttl</th>
-                                <th>alamat</th>
-                                <th>hp</th>
-                                <th>Jenis Kelamin</th>
-                                <th>agama</th>
-                                <th>kelas</th>
-                                <th>jurusan</th>
-                                <th>rfid</th>
-                                <th>foto</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
-                    </table>    
+                            </thead>
+                            <tbody>
+                                @php
+                                    $no = 1;
+                                @endphp
+                              @foreach ($siswa as $item)
+                                    <tr>
+                                        <td style="width: 5%">{{$no++}}</td>
+                                        <td>{{$item['nisn']}} <br> {{$item['nama']}}</td>
+                                        <td>{{$item['alamat']}}</td>
+                                        <td>{{$item['hp']}}</td>
+                                        <td>{{$item['sex']}}</td>
+                                        <td>{{$item['agama']}}</td>
+                                        <td>{{$item['kelas']}} / {{$item['jurusan']}}</td>
+                                        <td>{{$item['rfid']}}</td>
+                                        <td style="width: 10%">
+                                            <img src="{{ asset('storage/siswa/' . $item['foto']) }}" style="width: 70%">
+                                        </td>
+                                        <td style="width: 15%">
+                                            <button class="editItem btn-sm btn btn-info" data-id="{{$item->id}}">Edit</button>
+                                            @hasrole('super-admin|admin')
+                                            <button id="btn-hapus" class="btn-sm btn btn-danger" data-id="{{$item->id}}">Hapus</button>
+                                            @endhasrole
+                                        </td>
+                                    </tr>
+                              @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>N0</th>
+                                    <th>nama/nip</th>
+                                    <th>alamat</th>
+                                    <th>hp</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>agama</th>
+                                    <th>Jurusan&nbsp;/&nbsp;Kelas</th>
+                                    <th>rfid</th>
+                                    <th>foto</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>  
+                    </div>   
                 </div>
             </div>
         </div>

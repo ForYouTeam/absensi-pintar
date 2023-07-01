@@ -38,7 +38,6 @@
                                         @endif
                                     </td>
                                     <td style="width: 15%">
-                                        <button class="editItem btn btn-info btn-sm" data-id="{{$item->id}}">Edit</button>
                                         <button id="btn-hapus" class="btn btn-danger btn-sm" data-id="{{$item->id}}">Hapus</button>
                                     </td>
                                 </tr>
@@ -131,22 +130,6 @@
             $('#alert-start'  ).html   (''                     );
             $('#alert-end'   ).html    (''                     );
             $('#alert-tipe'  ).html    (''                     );
-        });
-
-        $('body').on('click', '.editItem', function () {
-            var _id = $(this).data('id');
-            $.get(`${baseUrl}/api/v1/ketentuan/` + _id, function (res) {
-                $('.modal-title' ).html  ("Formulir Edit Data");
-                $('#btn-simpan'  ).val   ("edit-user"         );
-                $('#alert-start'  ).html (''                  );
-                $('#alert-end'   ).html  (''                  );
-                $('#alert-tipe'  ).html  (''                  );
-                $('#modal-data'  ).modal ('show'              );
-                $('#start'       ).val   (res.data.start      );
-                $('#end'         ).val   (res.data.end        );
-                $('#tipe'        ).val   (res.data.tipe       );
-                $('#dataId'      ).val   (res.data.id         );
-            })
         });
 
         $('#btn-simpan').click(function (e) {

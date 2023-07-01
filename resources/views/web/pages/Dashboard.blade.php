@@ -5,7 +5,7 @@
       <div class="card pull-up">
           <div class="card-content collapse show">
               <div class="card-body">
-                  <form class="form-horizontal form-purchase-token row">
+                  <div class="form-horizontal form-purchase-token row">
                       <div class="col-md-4 col-12">
                           <select onchange="inputCheck()" id="kelas_id" class="custom-select input-form">
                               <option disabled selected="" value="">PILIH KELAS</option>
@@ -24,14 +24,14 @@
                       </div>
                       <div class="col-md-2 col-12 mb-1">
                         <fieldset class="form-label-group mb-0">
-                            <input type="text" class="form-control input-form" id="rfid" value="" required="" autofocus="" disabled>
+                            <input type="text" class="form-control input-form" id="rfid" value="" required="" autofocus="" onblur="preventBlur()" disabled>
                             <label for="wallet-address">RFID</label>
                         </fieldset>
                       </div>
                       <div class="col-md-2 col-12 text-center">
                         <button type="button" class="btn-gradient-secondary">TEMPELKAN KARTU</button>
                       </div>
-                  </form>
+                  </div>
               </div>
           </div>
       </div>
@@ -67,6 +67,11 @@
 @section('script')
 <script>
     let baseUrl
+
+    function preventBlur() {
+      let input = document.getElementById("rfid");
+      input.focus();
+    }
 
     function addSection() {
         $('#rfid').focus()

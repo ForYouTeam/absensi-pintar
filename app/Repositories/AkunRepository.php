@@ -4,137 +4,148 @@ namespace App\Repositories;
 
 use App\Http\Requests\AkunRequest;
 use App\Interfaces\AkunInterface;
+use App\Models\GuruModel;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Ramsey\Uuid\Uuid;
 
-class AkunRepository implements  AkunInterface {
-  
-  private User $akunModel;
+class AkunRepository implements AkunInterface
+{
 
-  public function __construct(User $akunModel)
+  private User $akunModel;
+  private GuruModel $guruModel;
+
+  public function __construct(User $akunModel, GuruModel $guruModel)
   {
     $this->akunModel = $akunModel;
+    $this->guruModel = $guruModel;
   }
 
-    public function getAllPayload()
-    {
-        try {
-            $payloadList = array(
-              'message' => 'success',
-              'code'    => 200,
-              'data'    => $this->akunModel->get()
-            );
-          } catch (\Throwable $th) {
-            $payloadList = array(
-              'message' => $th->getMessage(),
-              'code'    => 500
-            );
-          }
-
-          return $payloadList;
+  public function getAllPayload()
+  {
+    try {
+      $payloadList = array(
+        'message' => 'success',
+        'code'    => 200,
+        'data'    => $this->akunModel->get()
+      );
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
     }
 
-    public function getPayloadById($id)
-    {
-        try {
-            $data = $this->akunModel->whereId($id)->first();
-      
-            if ($data) {
-              $payloadList = array(
-                'message' => 'success',
-                'code'    => 200,
-                'data'    => $data
-              );
-            } else {
-              $payloadList = array(
-                'message' => 'not found',
-                'code'    => 404,
-              );
-            }
-          } catch (\Throwable $th) {
-            $payloadList = array(
-              'message' => $th->getMessage(),
-              'code'    => 500
-            );
-          }
-      
-        return $payloadList;
-    }
+    return $payloadList;
+  }
 
-    public function upsertPayload($id, array $payload)
-    {
-      {
-        try {
-          $dataId = $this->getPayloadById($id);
-          $encryptId = Uuid::uuid4()->toString();
-          $date = Carbon::now();
-          $hash = Hash::make($payload['password']);
-          if ($id) {
-            $status = $this->getPayloadById($id);
-            
-            if ($status['code'] == 200) {
-              $payload['updated_at'] = $date;
-              $payload['password'] = $hash;
-    
-              $payloadList = array(
-                'message' => 'success',
-                'code'    => 200,
-                'data'    => $this->akunModel->whereId($id)->update($payload)
-              );
-            } else {
-              $payloadList = $status;
-            }
-            
-          } else {
-            $payload['created_at'] = $date;
-            $payload['updated_at'] = $date;
-            $payload['password'] = $hash;
-            $dataId = crc32($encryptId);
-    
-            $payloadList = array(
-              'message' => 'success',
-              'code'    => 200,
-              'data'    => $this->akunModel->create($payload, $dataId)
-            );
-            $payloadList['data']->assignRole($payload['scope']);
-          }
+  public function getPayloadById($id)
+  {
+    try {
+      $data = $this->akunModel->whereId($id)->first();
 
-          
-        } catch (\Throwable $th) {
-          $payloadList = array(
-            'message' => $th->getMessage(),
-            'code'    => 500
-          );
-        }
-    
-        return $payloadList;
+      if ($data) {
+        $payloadList = array(
+          'message' => 'success',
+          'code'    => 200,
+          'data'    => $data
+        );
+      } else {
+        $payloadList = array(
+          'message' => 'not found',
+          'code'    => 404,
+        );
       }
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
     }
 
-    public function deletePayload($id)
-    {
-        try {
-        
-        $data = $this->getPayloadById($id);
-        if ($data['code'] == 200) {
+    return $payloadList;
+  }
+
+  public function upsertPayload($id, array $payload)
+  { {
+      try {
+        $date = Carbon::now();
+        $hash = Hash::make($payload['password']);
+        if ($id) {
+          $status = $this->getPayloadById($id);
+
+          if ($status['code'] == 200) {
+            $newPayload = array(
+              'username'   => $payload['username'],
+              'password'   => $hash,
+              'updated_at' => $date
+            );
+
             $payloadList = array(
+              'message' => 'success',
+              'code'    => 200,
+              'data'    => $this->akunModel->whereId($id)->update($newPayload)
+            );
+          } else {
+            return $status;
+          }
+        } else {
+          $newPayload = array(
+            'username'   => $payload['username'],
+            'password'   => $hash,
+            'scope'      => $payload['scope'],
+            'created_at' => $date,
+            'updated_at' => $date
+          );
+
+          $payloadList = array(
             'message' => 'success',
             'code'    => 200,
-            'data'    => $this->akunModel->whereId($id)->delete()
-            );
-        } else {
-            $payloadList = $data;
+            'data'    => $this->akunModel->create($newPayload)
+          );
+          $payloadList['data']->assignRole($payload['scope']);
+
+          if ($payload['scope'] == 'guru') {
+            $this->guruModel->whereId($payload['guru_id'])->update([
+              "account" => $payloadList['data']['id'],
+              "created_at" => $date
+            ]);
+          }
         }
-        
-        } catch (\Throwable $th) {
+      } catch (\Throwable $th) {
         $payloadList = array(
-            'message' => $th->getMessage(),
-            'code'    => 500
+          'message' => $th->getMessage(),
+          'code'    => 500
         );
-        }
-        
-        return $payloadList;
+      }
+
+      return $payloadList;
     }
+  }
+
+  public function deletePayload($id)
+  {
+    try {
+      $acount = $this->guruModel->where('account');
+      $data = $this->getPayloadById($id);
+      if ($data['code'] == 200) {
+        $payloadList = array(
+          'message' => 'success',
+          'code'    => 200,
+          'data'    => $this->akunModel->whereId($id)->delete($acount)
+        );
+        
+      } else {
+        $payloadList = $data;
+      }
+    } catch (\Throwable $th) {
+      $payloadList = array(
+        'message' => $th->getMessage(),
+        'code'    => 500
+      );
+    }
+
+    return $payloadList;
+  }
 }

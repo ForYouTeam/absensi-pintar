@@ -16,11 +16,13 @@
                         <select style="width: 200px;" id="kelasSelect" class="form-select">
                         </select>
                     </div>
+                    @hasrole('super-admin|admin')
                     <div class="float-end me-5">
                         <label for="defaultSelect" class="form-label">Pilih Guru</label>
                         <select style="width: 200px;" id="guruSelect" class="form-select">
                         </select>
                     </div>
+                    @endhasrole
                    
                 </div>
                 <div class="card-body">
@@ -47,7 +49,7 @@
                                     <td>{{$d->siswa->nama}}</td>
                                     <td>{{$d->siswa->kelas->nama_kelas}}</td>
                                     <td>{{$d->siswa->jurusan->nama_jurusan}}</td>
-                                    <td>{{$d->gate->mapel}}</td>
+                                    <td>{{$d->mapel}}</td>
                                     <td>{{$d->tgl}} | {{$d->start_tap}}</td>
                                     <td>{{ $d->status == 1 ? 'hadir' : ($d->status == 0 ? 'alpa' : ($d->status == 3 ? 'bolos' : 'dalam kelas'))}}</td>
                                     <td>
@@ -138,12 +140,19 @@
         }
 
         function getDataByParams() {
+            let accountId
+            if (`{{ Auth::user()->scope }}` == "guru") {
+                accountId = `{{ Auth::user()->id }}`
+            } else {
+                accountId = null
+            }
             let payload = {
                 kelasId: $('#kelasSelect').val(),
-                guruId: $('#guruSelect').val()
+                guruId : $('#guruSelect' ).val(),
+                accountid: accountId
             }
 
-            $.get(`${baseUrl}/api/v1/present/allbyparams?kelas_id=${payload.kelasId}&guru_id=${payload.guruId}`, function(res)
+            $.get(`${baseUrl}/api/v1/present/allbyparams?kelas_id=${payload.kelasId}&guru_id=${payload.guruId}&accountid=${payload.accountid}`, function(res)
             {
                 let data = res.data
                 console.log(data);
