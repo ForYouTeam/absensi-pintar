@@ -26,7 +26,10 @@ class GuruRequest extends FormRequest
     public function rules()
     {
         return [
-            'nip' => 'required',
+            'nip' => [
+                'required',
+                'unique:guru,nip,' . $this->id
+            ],
             'nama' => 'required',
             'agama' => 'required',
             'sex' => 'required',
@@ -34,7 +37,10 @@ class GuruRequest extends FormRequest
             'golongan' => 'required',
             'jabatan_id' => 'required',
             'mapel_id' => 'required',
-            'rfid' => 'required',
+            'rfid' => [
+                'required',
+                'unique:guru,rfid,' . $this->id
+            ],
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\SiswaModel;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -26,7 +27,10 @@ class SiswaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nisn' => 'required',
+            'nisn' => [
+                'required',
+                'unique:siswa,nisn,' . $this->id
+            ],
             'nama' => 'required',
             'tmpt_lahir' => 'required',
             'tgl_lahir' => 'required',
@@ -36,7 +40,10 @@ class SiswaRequest extends FormRequest
             'sex' => 'required',
             'jurusan_id' => 'required',
             'kelas_id' => 'required',
-            'rfid' => 'required',
+            'rfid' => [
+                'required',
+                'unique:siswa,rfid,' . $this->id
+            ],
         ];
     }
 
