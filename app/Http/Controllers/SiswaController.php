@@ -57,6 +57,9 @@ class SiswaController extends Controller
 		$data['foto'] = $nameFile;
 
 		$id = $request->id | null;
+		$request->validate([
+			'nisn' => 'required|unique:siswa,nisn,' . $id
+		]);
 		$payload = $this->siswaRepo->upsertPayload($id, $data);
 
 		if ($payload) {
