@@ -80,7 +80,7 @@
           <div class="modal-content p-3 p-md-5">
             <div class="modal-body">
               <div class="text-center mb-4">
-                <h3>Form Tambah Data</h3>
+                <h3 class="modal-title">Form Tambah Data</h3>
                 <p class="text-primary"><b>SISWA</b></p>
               </div>
               <form id="formData" class="row g-3" onsubmit="return false" enctype="multipart/form-data">
@@ -207,7 +207,7 @@
         $('body').on('click', '.editItem', function () {
             var _id = $(this).data('id');
             $.get(`${baseUrl}/api/v1/siswa/` + _id, function (res) {
-                $('.modal-title').html("Form Edit Data");
+                $('.modal-title').html("Formulir Edit Data");
                 $('#btn-simpan' ).val ("edit-user"     );
                 clearError()
                 $('#modal-data').modal('show'             );

@@ -183,7 +183,7 @@
         }
 
         $('#createData').click(function () {
-            $('.modal-title').html   ("Form Tambah Data");
+            $('.modal-title').html   ("Formulir Tambah Data");
             $('#btn-simpan' ).val    ("create-Item"     );
             $('#id'         ).val    (''                );
             $('#formData'   ).trigger("reset"           );
@@ -194,7 +194,7 @@
         $('body').on('click', '.editItem', function () {
             var _id = $(this).data('id');
             $.get( BaseUrl + "/api/v1/guru/" + _id, function (res) {
-                $('.modal-title').html("Form Edit Data"   );
+                $('.modal-title').html("Formulir Edit Data"   );
                 $('#btn-simpan' ).val ("edit-user"        );
                 clearError()
                 $('#modal-data').modal('show'             );
