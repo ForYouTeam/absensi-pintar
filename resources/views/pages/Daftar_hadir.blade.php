@@ -45,12 +45,12 @@
                             @endphp
                             @foreach ($data as $d)
                                 <tr>
-                                    <td>{{$no++}}</td>
-                                    <td>{{$d->siswa->nama}}</td>
-                                    <td>{{$d->siswa->kelas->nama_kelas}}</td>
-                                    <td>{{$d->siswa->jurusan->nama_jurusan}}</td>
-                                    <td>{{$d->mapel}}</td>
-                                    <td>{{$d->tgl}} | {{$d->start_tap}}</td>
+                                    <td>{{$no++                            }}</td>
+                                    <td>{{$d ->siswa->nama                 }}</td>
+                                    <td>{{$d ->siswa->kelas->nama_kelas    }}</td>
+                                    <td>{{$d ->siswa->jurusan->nama_jurusan}}</td>
+                                    <td>{{$d ->mapel                       }}</td>
+                                    <td>{{$d ->tgl                         }}</td>
                                     <td>{{ $d->status == 1 ? 'hadir' : ($d->status == 0 ? 'alpa' : ($d->status == 3 ? 'bolos' : 'dalam kelas'))}}</td>
                                     <td>
                                         <button type="button" onclick="editPayload(event)" class=" btn btn-info btn-sm" data-id="{{$d->id}}" data-status="{{$d->status}}">Edit</button>
@@ -161,12 +161,12 @@
                 $.each(data, (i ,d ) => {
                     $('#tbody').append(`
                     <tr>
-                        <td>${i + 1}</td>
-                        <td>${d.nama}</td>
-                        <td>${d.nama_kelas}</td>
+                        <td>${i + 1         }</td>
+                        <td>${d.nama        }</td>
+                        <td>${d.nama_kelas  }</td>
                         <td>${d.nama_jurusan}</td>
-                        <td>${d.mapel}</td>
-                        <td>${d.tgl} | ${d.start_tap}</td>
+                        <td>${d.mapel       }</td>
+                        <td>${d.tgl         }</td>
                         <td>${d.status == 0 ? 'alpa' : (d.status == 1 ? 'hadir' : (d.status == 3 ? 'bolos' : 'dalam kelas'))}</td>
                         <td>
                             <button type="button" onclick="editPayload(event)" class="btn btn-info btn-sm" data-id="${d.id}" data-status="${d.status}">Edit</button>

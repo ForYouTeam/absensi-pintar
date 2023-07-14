@@ -179,6 +179,8 @@
                         message : 'Sesi berhasil ditutup',
                         position: 'topRight'
                     });
+                }).fail((err) => {
+                    console.log(err);
                 })
                 setTimeout(() => {
                     getPanelData() 

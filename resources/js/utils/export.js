@@ -24,11 +24,11 @@ export default {
  
    // Header kolom
    const columnHeaders = [
-     { header: 'Siswa', key: 'nama' },
-     { header: 'Hadir', key: 'statusObj.hadir' },
-     { header: 'Alfa', key: 'statusObj.alfa' },
+     { header: 'Siswa'      , key: 'nama'                  },
+     { header: 'Hadir'      , key: 'statusObj.hadir'       },
+     { header: 'Alfa'       , key: 'statusObj.alfa'        },
      { header: 'Dalam Kelas', key: 'statusObj.dalam_kelas' },
-     { header: 'Bolos', key: 'statusObj.bolos' }
+     { header: 'Bolos'      , key: 'statusObj.bolos'       }
    ];
  
    columnHeaders.forEach((column, index) => {

@@ -163,7 +163,7 @@
     axios.get(`${baseUrl}/api/v1/report/daftar_hadir?kelas_id=${kehadiranPayload.kelas_id}&guru_id=${kehadiranPayload.guru_id}&start=${kehadiranPayload.start}&end=${kehadiranPayload.end}`)
     .then((res) => {
       let item = res.data
-      console.log(item);
+      console.log('data get', item);
       if (item.daftar_hadir.length >= 1) {
         tambahkanInformasiDaftarHadir(item.siswa, item.daftar_hadir)
         generateDataBulan(item.siswa)
@@ -179,7 +179,6 @@
 
   const tambahkanInformasiDaftarHadir = (siswa, daftarHadir) => {
     siswa.forEach(siswaItem => {
-      let found = false; // Indikator untuk menandai apakah ada kecocokan data
       let statusObj = { hadir: 0, alfa: 0, dalam_kelas: 0, bolos: 0 }; // Objek untuk menyimpan jumlah daftar hadir
 
       daftarHadir.forEach(daftarHadirItem => {
@@ -190,6 +189,9 @@
 
           // Menambahkan jumlah daftar hadir berdasarkan status
           switch (daftarHadirItem.status) {
+            case "0":
+              statusObj.alfa++;
+              break;
             case "1":
               statusObj.hadir++;
               break;
@@ -203,17 +205,12 @@
               break;
           }
 
-          found = true; // Data cocok ditemukan
+          console.log('status', daftarHadirItem.status);
         }
       });
 
-      // Jika tidak ada kecocokan data, tambahkan status alfa
-      if (!found) {
-        // siswaItem.status = "alfa";
-        statusObj.alfa++;
-      }
-
       siswaItem.statusObj = statusObj; // Tambahkan objek status ke dalam objek siswa
+      console.log('Ini Count', statusObj);
     });
 
     data.value = siswa

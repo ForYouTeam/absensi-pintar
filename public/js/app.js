@@ -18872,7 +18872,7 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var __expose = _ref.expose;
     __expose();
-    var baseUrl = "http://192.168.1.10:8081";
+    var baseUrl = "http://127.0.0.1:8000";
     var kelasList = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var guruList = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var kehadiranPayload = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
@@ -18903,7 +18903,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(kehadiranPayload);
       axios__WEBPACK_IMPORTED_MODULE_2___default().get("".concat(baseUrl, "/api/v1/report/daftar_hadir?kelas_id=").concat(kehadiranPayload.kelas_id, "&guru_id=").concat(kehadiranPayload.guru_id, "&start=").concat(kehadiranPayload.start, "&end=").concat(kehadiranPayload.end)).then(function (res) {
         var item = res.data;
-        console.log(item);
+        console.log('data get', item);
         if (item.daftar_hadir.length >= 1) {
           tambahkanInformasiDaftarHadir(item.siswa, item.daftar_hadir);
           generateDataBulan(item.siswa);
@@ -18918,7 +18918,6 @@ __webpack_require__.r(__webpack_exports__);
     };
     var tambahkanInformasiDaftarHadir = function tambahkanInformasiDaftarHadir(siswa, daftarHadir) {
       siswa.forEach(function (siswaItem) {
-        var found = false; // Indikator untuk menandai apakah ada kecocokan data
         var statusObj = {
           hadir: 0,
           alfa: 0,
@@ -18934,6 +18933,9 @@ __webpack_require__.r(__webpack_exports__);
 
             // Menambahkan jumlah daftar hadir berdasarkan status
             switch (daftarHadirItem.status) {
+              case "0":
+                statusObj.alfa++;
+                break;
               case "1":
                 statusObj.hadir++;
                 break;
@@ -18946,18 +18948,12 @@ __webpack_require__.r(__webpack_exports__);
               default:
                 break;
             }
-            found = true; // Data cocok ditemukan
+            console.log('status', daftarHadirItem.status);
           }
         });
-
-        // Jika tidak ada kecocokan data, tambahkan status alfa
-        if (!found) {
-          // siswaItem.status = "alfa";
-          statusObj.alfa++;
-        }
         siswaItem.statusObj = statusObj; // Tambahkan objek status ke dalam objek siswa
+        console.log('Ini Count', statusObj);
       });
-
       data.value = siswa;
     };
     var getNamaBulan = function getNamaBulan(bulan) {

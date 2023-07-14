@@ -53,10 +53,20 @@ class DaftarHadirModel extends Model
         return $query
         ->leftJoin('siswa as model_a', 'daftar_hadir.siswa_id', '=', 'model_a.id')
         ->leftJoin('gate as model_b' , 'daftar_hadir.gate_id' , '=', 'model_b.id')
-        ->select('*')
         ->where('model_b.kelas_id', $payload['kelas_id'])
         ->where('model_b.guru_id' , $payload['guru_id' ])
-        ->whereBetween('daftar_hadir.tgl', [$payload['start'], $payload['end']]);
+        ->whereBetween('daftar_hadir.tgl', [$payload['start'], $payload['end']])
+        ->select(
+            'daftar_hadir.gate_id'         ,
+            'model_b.guru_id as guru_id'   ,
+            'model_a.kelas_id as kelas_id' ,
+            'daftar_hadir.siswa_id'        ,
+            'model_a.nama as siswa'        ,
+            'daftar_hadir.status'          ,
+            'daftar_hadir.tgl'             ,
+            'daftar_hadir.start_tap'       ,
+            'daftar_hadir.end_tap'
+        );
     }
 
     public function scopegetWithParams($query, $payload)

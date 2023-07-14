@@ -6,6 +6,8 @@ use App\Interfaces\DaftarHadirInterface;
 use App\Interfaces\LogInterface;
 use App\Interfaces\SiswaInterface;
 use App\Models\DaftarHadirModel;
+use App\Models\GateModel;
+use App\Models\SiswaModel;
 use Carbon\Carbon;
 
 class DaftarHadirRepository implements DaftarHadirInterface
@@ -219,7 +221,7 @@ class DaftarHadirRepository implements DaftarHadirInterface
         // Hitung selisih waktu antara $start_tap dan waktu sekarang dalam menit
         $diff_minutes = $start_tap_time->diffInMinutes($current_time);
 
-        if ($diff_minutes >= 5) {
+        if ($diff_minutes >= 1) {
 
           $this->daftarHadirModel->whereId($present['data']['id'])->update(array(
             'status'     => 1,
@@ -282,17 +284,43 @@ class DaftarHadirRepository implements DaftarHadirInterface
   {
     try {
       $date = Carbon::now();
-      $data = $this->daftarHadirModel->where('gate_id', $gateId)->where('end_tap', null)->update(array(
+      $payload = $this->daftarHadirModel->where('gate_id', $gateId);
+
+      $update = array(
         'end_tap'    => Carbon::now()->format('H:i:s'),
         'status'     => 1,
         'updated_at' => $date
-      ));
+      );
+      $data = $payload->where('end_tap', null)->update($update);
 
       $payloadList = array(
         'message' => 'siswa telah pulang',
         'code'    => 200,
         'data'    => $data
       );
+
+      $kelasId = GateModel::whereId($gateId)->pluck('kelas_id')->first();
+      $siswa = SiswaModel::where('kelas_id', $kelasId)->get();
+      $kehadiran = $this->daftarHadirModel->where('gate_id', $gateId)->whereIn('siswa_id', $siswa->pluck('id')->toArray())->pluck('siswa_id')->toArray();
+      // return array(
+      // 'message' => 'siswa telah pulang',
+      // 'code'    => 400,
+      // 'data'    => $kehadiran
+      // );
+      foreach ($siswa as $siswa) {
+        $siswaId = $siswa->id;
+        if (!in_array($siswaId, $kehadiran)) {
+          $insert_data = [
+            'gate_id' => $gateId,
+            'status' => 0,
+            'siswa_id' => $siswaId,
+            'tgl' => $date,
+            'created_at' => $date,
+            'updated_at' => $date
+          ];
+          $this->daftarHadirModel->insert($insert_data);
+        }
+      }
     } catch (\Throwable $th) {
       $payloadList = array(
         'message' => $th->getMessage(),
