@@ -141,7 +141,7 @@
                 submitButton.prop('disabled', true);
                 $.ajax({
                     data    : $('#formData').serialize()    ,
-                    url     : `${baseUrl}/api/v1/ketentuan/`,
+                    url     : `${baseUrl}/api/v1/ketentuan`,
                     type    : "POST"                        ,
                     dataType: 'json'                        ,
                     success: function(result) {

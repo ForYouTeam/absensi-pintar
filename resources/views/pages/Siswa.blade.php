@@ -236,7 +236,7 @@
                 let foto = $('#foto').prop('files')[0]
                 let data = new FormData($('#formData')[0]);
                 $.ajax({
-                    url        : `${baseUrl}/api/v1/siswa/`,
+                    url        : `${baseUrl}/api/v1/siswa`,
                     method     : "POST"                    ,
                     data       : data                      ,
                     cache      : false                     ,

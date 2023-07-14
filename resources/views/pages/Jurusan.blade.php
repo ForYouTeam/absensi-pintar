@@ -122,7 +122,7 @@
                 submitButton.prop('disabled', true);
                 $.ajax({
                     data    : $('#formData').serialize()  ,
-                    url     : `${baseUrl}/api/v1/jurusan/`,
+                    url     : `${baseUrl}/api/v1/jurusan`,
                     type    : "POST"                      ,
                     dataType: 'json'                      ,
                     success: function(result) {

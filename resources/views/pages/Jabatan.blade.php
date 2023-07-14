@@ -121,7 +121,7 @@
             if (!submitButton.prop('disabled')) {
                 $.ajax({
                     data    : $('#formData').serialize()  ,
-                    url     : `${baseUrl}/api/v1/jabatan/`,
+                    url     : `${baseUrl}/api/v1/jabatan`,
                     type    : "POST"                      ,
                     dataType: 'json'                      ,
                     success: function(result) {

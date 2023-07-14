@@ -222,7 +222,7 @@
                 let foto = $('#foto').prop('files')[0]
                 let data = new FormData($('#formData')[0]);
                 $.ajax({
-                    url        : `${BaseUrl}/api/v1/guru/`,
+                    url        : `${BaseUrl}/api/v1/guru`,
                     method     : "POST"                   ,
                     data       : data                     ,
                     cache      : false                    ,

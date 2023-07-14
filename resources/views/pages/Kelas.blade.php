@@ -151,7 +151,7 @@
                 submitButton.prop('disabled', true);
                 $.ajax({
                     data    : $('#formData').serialize(),
-                    url     : `${baseUrl}/api/v1/kelas/`,
+                    url     : `${baseUrl}/api/v1/kelas`,
                     type    : "POST"                    ,
                     dataType: 'json'                    ,
                     success: function(result) {
