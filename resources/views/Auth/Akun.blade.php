@@ -163,7 +163,7 @@
                 submitButton.prop('disabled', true);
                 $.ajax({
                     data    : $('#formData').serialize()  ,
-                    url     : `${baseUrl}/api/v1/akun/`,
+                    url     : `${baseUrl}/api/v1/akun`,
                     type    : "POST"                      ,
                     dataType: 'json'                      ,
                     success: function(result) {
