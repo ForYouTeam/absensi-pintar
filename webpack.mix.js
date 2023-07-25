@@ -1,3 +1,6 @@
+require('dotenv').config();
+const path = require('path')
+const webpack = require('webpack');
 const mix = require('laravel-mix');
 
 /*
@@ -12,6 +15,24 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .vue()
+    .webpackConfig({
+        // Konfigurasi lainnya...
+
+        // Menggunakan variabel lingkungan
+        resolve: {
+            alias: {
+                '@': path.resolve(__dirname, 'src'),
+            },
+        },
+        plugins: [
+            new webpack.DefinePlugin({
+                'process.env': {
+                    VUE_APP_API_URL: JSON.stringify(process.env.VUE_APP_API_URL),
+                },
+            }),
+        ],
+    })
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
